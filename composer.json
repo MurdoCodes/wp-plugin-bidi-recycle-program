@@ -1,0 +1,17 @@
+{
+    "name": "murdo/bidi-recylce-program",
+    "description": "Bidi Recycle Plugin - Wordpress Plugin that customers can get rewards if they return old products",
+    "type": "wp-project",
+    "license": "GPL",
+    "authors": [
+        {
+            "name": "Lidel Kim Daddie",
+            "email": "murdoc21daddie@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {},
+    "autoload": {
+        "psr-4": {"Includes\\": "./includes"}
+    }
+}

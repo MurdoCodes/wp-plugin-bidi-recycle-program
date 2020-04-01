@@ -1,0 +1,49 @@
+/*** GENERAL ***/
+/* buttons */
+.btn-circle.btn-xl {width: 70px !important;height: 70px !important;padding: 10px 16px !important;border-radius: 35px !important;font-size: 24px !important;line-height: 1.33 !important;}
+.btn-circle {width: 30px !important;height: 30px !important;padding: 6px 0px !important;border-radius: 15px !important;text-align: center !important;font-size: 12px !important;line-height: 1.42857 !important;}
+.default-container-border{border:1px solid #ccc !important;border-radius:5px !important;padding:1em !important;}
+header h1{margin:0 !important;font-size:7rem !important;}
+/*** GENERAL ***/
+
+
+/* PRODUCT LIST */
+.product-list #buttonModal{height: 3em !important;margin-top: -1% !important;}
+.product-list, .user-details {max-height: 54em !important;height: 54em !important;}
+.product-list header{padding:2% !important;display: flex !important;	justify-content: space-between !important;}
+.product-list .content{max-height: 45em !important;height: 45em !important;overflow: scroll !important;overflow-x: hidden !important;padding: 1em !important;}
+.product-list .single-product{margin-bottom:.5em !important;}
+.product-list .flex{display: flex !important;justify-content: flex-start !important;}
+.product-list img{width: 25% !important;padding: .1em !important;border: .01em solid #ccc !important;}
+.product-list .product-details{padding:1em !important;}
+.product-list .product-details h4{font-size: 3rem !important;margin: 0 !important;line-height: 1;}
+.product-list .single-product p{font-size: 2rem !important;margin: 0 !important;}
+.product-list .product-qty{padding:1em !important;display: flex !important;justify-content: flex-end !important;}
+.product-list input{width: 35% !important;margin-right: 0.5em !important;padding: 7% !important;}
+.product-list .product-qty button{margin-top: 4% !important;}
+
+
+/* USER DETAILS */
+.user-details header{padding:2% !important;margin:0 !important;}
+/*.user-details .content{}*/
+.user-details input::placeholder{font-weight: bold !important;}
+
+/* MODAL CONTENT */
+.modal .modal-product{margin-bottom:.5em !important;}
+.modal .modal-product .flex{display: flex !important;justify-content: flex-start !important;}
+.modal .modal-product .content{padding-left:1em !important;padding-right:1em !important;}
+.modal .modal-product img{max-width: 25% !important;padding: .1em !important;border: .01em solid #ccc !important;}
+.modal .modal-product .product-details{padding: .555em; !important;}
+.modal .modal-product .product-details h4{font-size: 2.5rem !important;margin: 0 !important;line-height: 1 !important;font-weight: bold !important;}
+.modal .modal-product .single-product p{font-size: 2rem !important;margin: 0 !important;}
+.modal .modal-product .product-qty{padding-top: 5% !important;display: flex !important;justify-content: flex-end !important;}
+.modal .modal-product input{width: 35% !important;margin-right: 0.5em !important;padding: 7% !important;}
+.modal-body {height: 400px !important;overflow: scroll !important;overflow-x: hidden !important;}
+.modal-body .modalButton{margin-top: 4% !important;}
+
+/* MAIL RETURN */
+.mail-return h3{margin: 0 !important;}
+
+/*SHIPPING DETAILS*/
+.shipping-details .shippingfee{display: flex !important;justify-content: space-between !important;}
+.shipping-details h3,h5,p{margin:0 !important;}
