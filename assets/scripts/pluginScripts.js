@@ -70,19 +70,19 @@ function appendSingleProduct(id, modal_product_order_id, modal_product_order_ite
 		'<div class="row single-product single-product-'+id+'">'+
 			'<div class="col-md-8">'+
 				'<div class="product-info flex">'+
-					'<input type="hidden" name="order_id" id="order_id_'+id+'" value="'+ modal_product_order_id +'">'+
-					'<input type="hidden" name="order_item_id" id="order_item_id_'+id+'" value="'+ modal_product_order_item_id +'">'+
-					'<img src="' + modal_product_imgSrc + '" alt="' + modal_product_name + '" id="product_img_'+id+'" name="product_img">'+
-					'<input type="text" value="' + modal_product_imgSrc + '" name="product_img" hidden>'+
+					'<input type="hidden" name="order_id[]" id="order_id_'+id+'" value="'+ modal_product_order_id +'">'+
+					'<input type="hidden" name="order_item_id[]" id="order_item_id_'+id+'" value="'+ modal_product_order_item_id +'">'+
+					'<img src="' + modal_product_imgSrc + '" alt="' + modal_product_name + '" id="product_img_'+id+'">'+
+					'<input type="text" value="' + modal_product_imgSrc + '" name="product_img[]" hidden>'+
 					'<div class="product-details">'+
 						'<h4 name="product_name" id="product_name_'+id+'">' + modal_product_name + '</h4>'+
-						'<input type="text" name="product_name" id="product_name_'+id+'" value="' + modal_product_name + '" hidden>'+
+						'<input type="text" name="product_name[]" id="product_name_'+id+'" value="' + modal_product_name + '" hidden>'+
 				'</div>'+
 			'</div>'+
 		'</div>'+
 		'<div class="col-md-4">'+
 			'<div class="product-qty">'+
-				'<input type="number" class="product-quantity form-control" id="productQty_'+id+'" name="productQty" data-toggle="tooltip" title="Add Quantity" value="' + modal_product_productQty + '" placeholder="' + modal_product_productQty + '" readonly>'+
+				'<input type="number" class="product-quantity form-control" id="productQty_'+id+'" name="productQty[]" data-toggle="tooltip" title="Add Quantity" value="' + modal_product_productQty + '" placeholder="' + modal_product_productQty + '" readonly>'+
 				'<button type="button" class="btn btn-danger btn-circle" data-toggle="tooltip" title="Delete Product" id="buttonDelete_'+id+'" value="'+id+'">'+
 					'<i class="fa fa-times"></i>'+
 				'</button>'+
@@ -131,27 +131,50 @@ function appendModalProduct(id, product_order_id, product_order_item_id, product
 
 $(function () {
 
-    $('#form-recycle').on('submit', function (e) {
-      e.preventDefault();
+ //    $('#form-recycle').on('submit', function (e) {
+ //      e.preventDefault();
+ //      console.log(my_ajax_object.ajax_url);
+ //      var datastring = $('#form-recycle').serialize()
 
-      var datastring = $('#form-recycle').serialize()
+ //      console.log(datastring);
 
-      console.log(datastring);
+ //     $.ajax({
+	//     type: "POST",
+	//     url: my_ajax_object.ajax_url,
+	//     data: datastring,
+	//     dataType: "json",
+	//     success: function(data) {
+	//         var obj = jQuery.parseJSON(data);
+	//         console.log(data);
+	//         console.log(obj);
+	//     },
+	//     error: function(jqXHR, textStatus, errorThrown) {
+ //           console.log(textStatus, errorThrown);
+ //        }
+	// });
+ 
+ //    });
 
-     $.ajax({
-	    type: "POST",
-	    url: "your url.php",
-	    data: datastring,
-	    dataType: "json",
-	    success: function(data) {
-	        //var obj = jQuery.parseJSON(data); if the dataType is not specified as json uncomment this
-	        // do what ever you want with the server response
-	    },
-	    error: function() {
-	        alert('error handling here');
-	    }
-	});
-
-    });
+    // click on button submit
+    // $("#form-recycle").on('submit', function(e){
+    // 	e.preventDefault();
+    // 	console.log(my_ajax_object.ajax_url);
+    //   	var datastring = $('#form-recycle').serialize()
+    //     // send ajax
+    //     $.ajax({
+    //         url: my_ajax_object.ajax_url, // url where to submit the request
+    //         type : "POST", // type of action POST || GET
+    //         dataType : 'json', // data type
+    //         data : datastring, // post data || get data
+    //         success : function(result) {
+    //             // you can see the result from the console
+    //             // tab of the developer tools
+    //             console.log(result);
+    //         },
+    //         error: function(xhr, resp, text) {
+    //             console.log(xhr, resp, text);
+    //         }
+    //     })
+    // });
 
 });

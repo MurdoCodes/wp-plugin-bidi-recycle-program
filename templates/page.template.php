@@ -18,7 +18,9 @@ use \Includes\Base\BaseController;
 	        'post_type'   => wc_get_order_types(),
 	        'post_status' => 'wc-completed',
 	    ) );
-    
+
+    if($customerOrderDetails){
+
     // Text for our "thanks for loyalty" message
     $notice_text = sprintf( 'Hey %1$s &#x1f600; We noticed you\'ve placed more than %2$s orders with us – thanks for being a loyal customer!', $customer->display_name, $loyal_count );
 
@@ -34,7 +36,7 @@ use \Includes\Base\BaseController;
 	
 ?>
 
-<form id="form-recycle">
+<form id="form-recycle" action="<?php echo $this->plugin_url . 'includes/Pages/RecycleSubmit.php'; ?>" method="POST">
 	<input type="text" name="return_code" value="<?php echo $random_hash; ?>" hidden>
 	<div class="container">
 		<div class="row">
@@ -262,3 +264,9 @@ use \Includes\Base\BaseController;
 
   </div>
 </div>
+
+<?php 
+	}else{
+		echo "User doesnt have orders that are completed";
+	}
+?>
