@@ -16,11 +16,12 @@ final class Init {
 	 */
 	public static function get_services(){
 		return [
-			Pages\Admin::class,
+			Pages\Admin::class,			
 			Base\Enqueue::class,
 			Base\Settings::class,
 			Base\Shortcode::class,
-			Base\CustomerOrder::class
+			Base\CustomerOrder::class,
+			Base\SubmitModel::class
 		];
 	}
 

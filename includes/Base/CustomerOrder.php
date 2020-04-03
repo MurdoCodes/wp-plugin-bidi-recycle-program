@@ -8,9 +8,7 @@
 
 namespace Includes\Base;
 
-use \Includes\Base\BaseController;
-
-class CustomerOrder extends BaseController{
+class CustomerOrder{
 
     	private $customer_orders;
 

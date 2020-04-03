@@ -4,13 +4,23 @@ use \Includes\Base\BaseController;
 ?>
 
 <?php 
-	// Declare variable that contains current user details from wp_user table
+
+	// $SubmitModel = new SubmitModel();
+	// $current_date = date('Y-m-d h:i:sa', strtotime("now"));
+	// $return_status = "PENDING";
+
+	// $insertReturnInformation = $SubmitModel->insertReturnInformation('6dbdefc02ba6e7ee', 10, '2020-04-03 08:37:48am', 'PENDING', 18);
+
+	// var_dump($insertReturnInformation);
+
+
+	// // Declare variable that contains current user details from wp_user table
 	$customer = wp_get_current_user();
 
 	// Order count for a "loyal" customer
     $loyal_count = 5;
 
-    // Get Customer Orders and its Details
+    // Get Customer Orders and its Details if post status is completed
     $customerOrderDetails = get_posts( array(
 	        'numberposts' => -1,
 	        'meta_key'    => '_customer_user',
@@ -36,8 +46,9 @@ use \Includes\Base\BaseController;
 	
 ?>
 
-<form id="form-recycle" action="<?php echo $this->plugin_url . 'includes/Pages/RecycleSubmit.php'; ?>" method="POST">
+<form id="form-recycle" action="<?php echo $this->plugin_url . 'templates/submit.template.php'; ?>" method="POST">
 	<input type="text" name="return_code" value="<?php echo $random_hash; ?>" hidden>
+	<input type="text" name="current_user_id" value="<?php echo get_current_user_id(); ?>" hidden>
 	<div class="container">
 		<div class="row">
 			<div class="row">

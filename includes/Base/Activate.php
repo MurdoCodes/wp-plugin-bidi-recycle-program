@@ -11,14 +11,14 @@ namespace Includes\Base;
 class Activate {
 
 	public function activate(){
-		flush_rewrite_rules();
 		self::createTableReturnInformation();
 		self::createTableReturnProductInfo();
 		self::createTableReturnTransaction();
 		self::createTableReturnShipping();
 		self::createTableReturnCoupon();
-		self::createTableRecycleAPISignature();
 		self::createTableReturnRetailerSetting();
+		self::createTableRecycleAPISignature();
+		
 		flush_rewrite_rules();
 	}	
 
@@ -37,9 +37,7 @@ class Activate {
 						return_date DATETIME DEFAULT '0000-00-00 00:00:00' NOT NULL,
 						return_item_status TEXT NOT NULL,
 						customer_id INT(11) NOT NULL,
-						product_info_id INT(11) NOT NULL,
-						PRIMARY KEY  ( return_id, return_code ),
-						FOREIGN KEY ('product_info_id') REFERENCES wp_return_product_info ('product_info_id')
+						PRIMARY KEY ( return_id, return_code )
 					) {$charset_collate}";
 
 			require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
@@ -50,7 +48,7 @@ class Activate {
 
 	private function createTableReturnProductInfo(){
 		global $wpdb;
-		$return_product_info = $wpdb->prefix . 'return_product_info';
+		$return_product_info = $wpdb->prefix . 'bidi_return_product_info';
 		$charset_collate = $wpdb->get_charset_collate();
 
 		if($wpdb->get_var( "show tables like '$return_product_info'" ) != $return_product_info ){
@@ -64,9 +62,8 @@ class Activate {
 						product_return_date DATETIME DEFAULT '0000-00-00 00:00:00' NOT NULL,
 						return_id INT(11) NOT NULL,
 						return_code VARCHAR(50) NOT NULL,
-						PRIMARY KEY  ( product_info_id ),
-						FOREIGN KEY ('return_id') REFERENCES wp_bidi_return_information ('return_id'),
-						FOREIGN KEY ('return_code') REFERENCES wp_bidi_return_information ('return_code')
+						PRIMARY KEY ( product_info_id ),
+						FOREIGN KEY ( return_id, return_code ) REFERENCES wp_bidi_return_information ( return_id, return_code )
 					) {$charset_collate}";
 
 			require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
@@ -92,8 +89,7 @@ class Activate {
 						return_code VARCHAR(50) NOT NULL,
 						shipping_id INT(11) NOT NULL,
 						PRIMARY KEY  ( transaction_id ),
-						FOREIGN KEY ( return_id ) REFERENCES wp_bidi_return_information ( return_id ),
-						FOREIGN KEY ( return_code ) REFERENCES wp_bidi_return_information ( return_code ),
+						FOREIGN KEY ( return_id, return_code ) REFERENCES wp_bidi_return_information ( return_id, return_code ),
 						FOREIGN KEY ( shipping_id ) REFERENCES wp_bidi_return_shipping_info ( shipping_id )
 					) {$charset_collate}";
 
@@ -122,8 +118,7 @@ class Activate {
 						return_id INT(11) NOT NULL,
 						return_code VARCHAR(50) NOT NULL,
 						PRIMARY KEY  ( shipping_id ),
-						FOREIGN KEY ( return_id ) REFERENCES wp_bidi_return_information ( return_id ),
-						FOREIGN KEY ( return_code ) REFERENCES wp_bidi_return_information ( return_code )
+						FOREIGN KEY ( return_id, return_code ) REFERENCES wp_bidi_return_information ( return_id, return_code )
 					) {$charset_collate}";
 
 			require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
@@ -160,7 +155,7 @@ class Activate {
 
 	private function createTableReturnRetailerSetting(){
 		global $wpdb;
-		$return_retailer_setting = $wpdb->prefix . 'return_retailer_setting';
+		$return_retailer_setting = $wpdb->prefix . 'bidi_return_retailer_setting';
 		$charset_collate = $wpdb->get_charset_collate();
 
 		if($wpdb->get_var( "show tables like '$return_retailer_setting'" ) != $return_retailer_setting ){
@@ -170,8 +165,7 @@ class Activate {
 						recycle_key VARCHAR(50) NOT NULL,
 						recycle_description TEXT NOT NULL,
 						recycle_value TEXT NOT NULL,
-						PRIMARY KEY  ( recycle_id ),
-						FOREIGN KEY ( transaction_id ) REFERENCES wp_bidi_return_transaction ( transaction_id )
+						PRIMARY KEY  ( recycle_id )
 					) {$charset_collate}";
 
 			require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
@@ -182,7 +176,7 @@ class Activate {
 
 	private function createTableRecycleAPISignature(){
 		global $wpdb;
-		$recycle_api_signature = $wpdb->prefix . 'recycle_api_signature';
+		$recycle_api_signature = $wpdb->prefix . 'bidi_recycle_api_signature';
 		$charset_collate = $wpdb->get_charset_collate();
 
 		if($wpdb->get_var( "show tables like '$recycle_api_signature'" ) != $recycle_api_signature ){
@@ -191,8 +185,7 @@ class Activate {
 						api_id INT(11) NOT NULL AUTO_INCREMENT,
 						api_key VARCHAR(255) NOT NULL,
 						api_value VARCHAR(255) NOT NULL,
-						PRIMARY KEY  ( api_id ),
-						FOREIGN KEY ( transaction_id ) REFERENCES wp_bidi_return_transaction ( transaction_id )
+						PRIMARY KEY  ( api_id )
 					) {$charset_collate}";
 
 			require_once(ABSPATH . 'wp-admin/includes/upgrade.php');

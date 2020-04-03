@@ -82,7 +82,7 @@ function appendSingleProduct(id, modal_product_order_id, modal_product_order_ite
 		'</div>'+
 		'<div class="col-md-4">'+
 			'<div class="product-qty">'+
-				'<input type="number" class="product-quantity form-control" id="productQty_'+id+'" name="productQty[]" data-toggle="tooltip" title="Add Quantity" value="' + modal_product_productQty + '" placeholder="' + modal_product_productQty + '" readonly>'+
+				'<input type="number" class="product-quantity form-control" id="productQty_'+id+'" name="product_qty[]" data-toggle="tooltip" title="Add Quantity" value="' + modal_product_productQty + '" placeholder="' + modal_product_productQty + '" readonly>'+
 				'<button type="button" class="btn btn-danger btn-circle" data-toggle="tooltip" title="Delete Product" id="buttonDelete_'+id+'" value="'+id+'">'+
 					'<i class="fa fa-times"></i>'+
 				'</button>'+
