@@ -1,18 +1,6 @@
 <?php 
 namespace Includes\Base;
 use \Includes\Base\BaseController;
-?>
-
-<?php 
-
-	// $SubmitModel = new SubmitModel();
-	// $current_date = date('Y-m-d h:i:sa', strtotime("now"));
-	// $return_status = "PENDING";
-
-	// $insertReturnInformation = $SubmitModel->insertReturnInformation('6dbdefc02ba6e7ee', 10, '2020-04-03 08:37:48am', 'PENDING', 18);
-
-	// var_dump($insertReturnInformation);
-
 
 	// // Declare variable that contains current user details from wp_user table
 	$customer = wp_get_current_user();

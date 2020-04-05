@@ -21,7 +21,7 @@ final class Init {
 			Base\Settings::class,
 			Base\Shortcode::class,
 			Base\CustomerOrder::class,
-			Base\SubmitModel::class
+			Base\DBModel::class
 		];
 	}
 

@@ -47,3 +47,12 @@ header h1{margin:0 !important;font-size:7rem !important;}
 /*SHIPPING DETAILS*/
 .shipping-details .shippingfee{display: flex !important;justify-content: space-between !important;}
 .shipping-details h3,h5,p{margin:0 !important;}
+
+/*RECYCLE LIST*/
+.recycle-list-data .search{display: flex !important;justify-content: flex-start !important;display: block;}
+
+/*CUSTOMER DETAILS*/
+.return-product-data .customerDetails{border: 1px solid #ccd0d4;box-shadow: 0 1px 1px rgba(0,0,0,.04);padding:1em !important;margin-bottom: 1em;}
+.return-product-data .customerDetails .details{display: flex !important;justify-content: space-between !important;display: block;}
+.return-product-data .customerDetails .details .general, .billing, .shipping{padding:1em !important;}
+.return-product-data .customerDetails #setting-error-tgmpa{display: none !important;}

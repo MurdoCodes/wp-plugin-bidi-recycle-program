@@ -17,7 +17,7 @@ class Admin extends BaseController {
 	}
 
 	public function add_admin_pages() {
-		add_menu_page( 'Bidi Recyle', 'Bidi Recycle', 'manage_options', 'bidi_recycle_program', array( $this, 'admin_index' ), 'dashicons-admin-tools', 110 );
+		add_menu_page( 'Bidi Recyle', 'Bidi Recycle', 'manage_options', 'bidi_recycle_program', array( $this, 'admin_index' ), 'dashicons-admin-tools', 110 );		
 	}
 
 	public function admin_index(){
