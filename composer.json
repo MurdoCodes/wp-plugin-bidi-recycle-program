@@ -9,7 +9,7 @@
             "email": "murdoc21daddie@gmail.com"
         }
     ],
-    "minimum-stability": "dev",
+    "minimum-stability": "stable",
     "require": {},
     "autoload": {
         "psr-4": {"Includes\\": "./includes"}

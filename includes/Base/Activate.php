@@ -1,7 +1,5 @@
 <?php
 /**
-* Trigger this file on Plugin uninstall
-*
 * @package Bidi Recycle Program
 */
 namespace Includes\Base;

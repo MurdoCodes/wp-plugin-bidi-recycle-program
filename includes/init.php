@@ -1,8 +1,6 @@
 <?php
 /**
-* Trigger this file on Plugin uninstall
-*
-* @package Kim Test Plugin
+* @package Bidi Recycle Program
 */
 namespace Includes;
 
@@ -16,13 +14,12 @@ final class Init {
 		return [
 			Pages\Admin::class,			
 			Base\Enqueue::class,
-			Base\Settings::class,
+			Base\SettingsLinks::class,
 			Base\Shortcode::class,
 			Base\CustomerOrder::class,
 			Base\DBModel::class
 		];
 	}
-
 
 	/**
 	 * Loop through the classes, initialize them, and call the register() method if it exist
@@ -38,7 +35,6 @@ final class Init {
 		}
 	}
 
-
 	/**
 	 * Initialize the class
 	 * @param class $class class from the services array
@@ -46,7 +42,7 @@ final class Init {
 	 */
 	private static function instantiate( $class ){
 		$service = new $class();
-		return  $service;
+		return $service;
 	}
 
 }

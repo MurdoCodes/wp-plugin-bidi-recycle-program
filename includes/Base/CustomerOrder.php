@@ -1,7 +1,5 @@
 <?php
 /**
-* Trigger this file on Plugin uninstall
-*
 * @package Bidi Recycle Program
 */
 namespace Includes\Base;
@@ -9,6 +7,10 @@ namespace Includes\Base;
 class CustomerOrder{
 
     	private $customer_orders;
+
+    	function register() {
+		
+		}
 
 	 	function return(){
 	 		$this->getOrderID();

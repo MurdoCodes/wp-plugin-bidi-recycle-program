@@ -1,7 +1,5 @@
 <?php
 /**
-* Trigger this file on Plugin uninstall
-*
 * @package Bidi Recycle Program
 */
 namespace Includes\Base;
@@ -9,6 +7,10 @@ namespace Includes\Base;
 class DBModel{
 
 	private $wpdb;
+
+	function register() {
+		
+	}
 
 	public function __construct( ){
 		global $wpdb;
@@ -40,8 +42,7 @@ class DBModel{
 			values
 			(%d, %s, %d, %d, %s, %s, %d, %s)",
 			NULL, $product_name, $product_order_id, $product_item_id, $product_image, $current_date, $return_id, $return_code
- 		); 		
-
+ 		);
 		if($this->wpdb->query($sql)){
 			return "Success";
 		}
@@ -54,13 +55,14 @@ class DBModel{
 		$table2 = $this->wpdb->prefix . 'users';
 
 		$sql = "SELECT *
-				FROM ".$table." wp_bidi_return_information
+				FROM ".$table." " . $table ."
 				INNER JOIN ". $table2 ." ON ".$table.".customer_id = ".$table2.".ID
 				";
         $result = $this->wpdb->get_results($sql);
         if($result){
 			return $result;
 		}
+
 	}
 
 	function getReturnProductData($param){

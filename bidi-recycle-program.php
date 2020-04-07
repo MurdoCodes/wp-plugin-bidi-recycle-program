@@ -30,15 +30,12 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
 
 Copyright 2005-2015 Automatic, Inc.
 */
-if ( ! defined( 'ABSPATH' ) ) {
-	exit; // Exit if accessed directly
-}
+defined( 'ABSPATH' ) or die( 'Hey, what are you doing here?' );
 
 // Load Composer Vendor Autoload
 if ( file_exists( dirname( __FILE__ ) . '/vendor/autoload.php' ) ){
 	require_once dirname( __FILE__ ) . '/vendor/autoload.php';
 }
-
 
 // Initialize Activation, The code that runs during plugin activation
 function activate_bidi_recycle_plugin(){
@@ -51,7 +48,6 @@ function deactivate_bidi_recycle_plugin(){
 	Includes\Base\Deactivate::deactivate();
 }
 register_deactivation_hook( __FILE__, 'deactivate_bidi_recycle_plugin' );
-
 
 // Include the Init folder, Initialize all the core classes of the plugin
 if ( class_exists( 'Includes\\Init' ) ) {

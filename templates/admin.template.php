@@ -93,7 +93,7 @@ if(isset($_GET['return_id'])){
 </div>
 
 <?php
-	}else if(!empty($getReturnProductData)){
+	}else if(empty($getReturnProductData)){
 ?>
 
 <div class="wrap">

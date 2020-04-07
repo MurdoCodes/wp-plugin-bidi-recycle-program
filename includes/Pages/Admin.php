@@ -1,7 +1,5 @@
 <?php
 /**
-* Trigger this file on Plugin uninstall
-*
 * @package Bidi Recycle Program
 */
 namespace Includes\Pages;
@@ -18,8 +16,7 @@ class Admin extends BaseController {
 	}
 
 	public function admin_index(){
-		// require admin template
-		require_once $this->plugin_path . 'templates\admin.template.php';				
+		require_once $this->plugin_path . 'templates/admin.template.php';
 	}
 
 }

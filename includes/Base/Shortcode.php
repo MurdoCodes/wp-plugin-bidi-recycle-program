@@ -1,7 +1,5 @@
-<?php 
+<?php
 /**
-* Trigger this file on Plugin uninstall
-*
 * @package Bidi Recycle Program
 */
 namespace Includes\Base;
@@ -17,7 +15,7 @@ class Shortcode extends BaseController{
 		// require admin template
 		if ( is_user_logged_in() ) {
 
-		   require_once $this->plugin_path . 'templates\page.template.php';	
+		   require_once $this->plugin_path . 'templates/page.template.php';	
 
 		} else {
 
