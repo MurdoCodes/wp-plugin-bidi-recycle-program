@@ -1,18 +1,12 @@
-<?php 
-
+<?php
 /**
 * Trigger this file on Plugin uninstall
 *
-* @package Kim Test Plugin
+* @package Bidi Recycle Program
 */
-
 if( !defined( 'WP_UNINSTALL_PLUGIN' ) ){
 	die;
 }
-
-
-
-
 // Access the database via SQL
 global $wpdb;
 $wpdb->query( "DROP TABLE IF EXISTS wp_bidi_return_information" );

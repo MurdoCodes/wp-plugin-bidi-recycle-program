@@ -1,4 +1,4 @@
-<?php 
+<?php
 /**
 * @package Bidi Recycle Program
 */
@@ -30,7 +30,6 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
 
 Copyright 2005-2015 Automatic, Inc.
 */
-
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
 }

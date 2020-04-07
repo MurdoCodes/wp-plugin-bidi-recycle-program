@@ -1,16 +1,14 @@
-<?php 
-
+<?php
 /**
 * Trigger this file on Plugin uninstall
 *
 * @package Bidi Recycle Program
 */
-
 namespace Includes\Base;
 
 class Activate {
 
-	public function activate(){
+	public static function activate(){
 		self::createTableReturnInformation();
 		self::createTableReturnProductInfo();
 		self::createTableReturnTransaction();
@@ -22,7 +20,7 @@ class Activate {
 		flush_rewrite_rules();
 	}	
 
-	private function createTableReturnInformation(){
+	private static function createTableReturnInformation(){
 
 		global $wpdb;
 		$bidi_return_information = $wpdb->prefix . 'bidi_return_information';
@@ -46,7 +44,7 @@ class Activate {
 		}
 	}
 
-	private function createTableReturnProductInfo(){
+	private static function createTableReturnProductInfo(){
 		global $wpdb;
 		$return_product_info = $wpdb->prefix . 'bidi_return_product_info';
 		$charset_collate = $wpdb->get_charset_collate();
@@ -72,7 +70,7 @@ class Activate {
 		}
 	}
 
-	private function createTableReturnTransaction(){
+	private static function createTableReturnTransaction(){
 
 		global $wpdb;
 		$bidi_return_transaction = $wpdb->prefix . 'bidi_return_transaction';
@@ -99,7 +97,7 @@ class Activate {
 		}
 	}
 
-	private function createTableReturnShipping(){
+	private static function createTableReturnShipping(){
 
 		global $wpdb;
 		$bidi_return_shipping_info = $wpdb->prefix . 'bidi_return_shipping_info';
@@ -127,7 +125,7 @@ class Activate {
 		}
 	}
 
-	private function createTableReturnCoupon(){
+	private static function createTableReturnCoupon(){
 
 		global $wpdb;
 		$bidi_return_coupon = $wpdb->prefix . 'bidi_return_coupon';
@@ -153,7 +151,7 @@ class Activate {
 
 	}
 
-	private function createTableReturnRetailerSetting(){
+	private static function createTableReturnRetailerSetting(){
 		global $wpdb;
 		$return_retailer_setting = $wpdb->prefix . 'bidi_return_retailer_setting';
 		$charset_collate = $wpdb->get_charset_collate();
@@ -174,7 +172,7 @@ class Activate {
 		}
 	}
 
-	private function createTableRecycleAPISignature(){
+	private static function createTableRecycleAPISignature(){
 		global $wpdb;
 		$recycle_api_signature = $wpdb->prefix . 'bidi_recycle_api_signature';
 		$charset_collate = $wpdb->get_charset_collate();
@@ -193,6 +191,5 @@ class Activate {
 			dbDelta( $sql );
 		}
 	}
-
-
+	
 }

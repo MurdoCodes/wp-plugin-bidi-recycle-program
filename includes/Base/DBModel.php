@@ -1,11 +1,9 @@
-<?php 
-
+<?php
 /**
 * Trigger this file on Plugin uninstall
 *
 * @package Bidi Recycle Program
 */
-
 namespace Includes\Base;
 
 class DBModel{
@@ -19,15 +17,14 @@ class DBModel{
 
 	// insert return information to the database
 	function insertReturnInformation($return_code, $total_prod_qty, $current_date, $return_status, $customer_id){
-
+		$table = $this->wpdb->prefix . 'bidi_return_information';
 		$sql = $this->wpdb->prepare(
-			"INSERT INTO `wp_bidi_return_information`      
+			"INSERT INTO `" . $table . "`      
 			(`return_id`, `return_code`, `return_total_qty_returned`, `return_date`, `return_item_status`, `customer_id`) 
 			values
 			(%d, %s, %d, %s, %s, %d)",
 			NULL, $return_code, $total_prod_qty, $current_date, $return_status, $customer_id
- 		); 		
-
+ 		);
 		if($this->wpdb->query($sql)){
 			return array($this->wpdb->insert_id);
 		}
@@ -36,9 +33,9 @@ class DBModel{
 
 	// insert return product list and information
 	function insertProductInformation($product_name, $product_order_id, $product_item_id, $product_image, $current_date, $return_id, $return_code){
-
+		$table = $this->wpdb->prefix . 'bidi_return_product_info';
 		$sql = $this->wpdb->prepare(
-			"INSERT INTO `wp_bidi_return_product_info`      
+			"INSERT INTO `" . $table . "`      
 			(`product_info_id`, `product_name`, `product_order_id`, `product_item_id`, `product_image`, `product_return_date`, `return_id`, `return_code`) 
 			values
 			(%d, %s, %d, %d, %s, %s, %d, %s)",
@@ -53,9 +50,12 @@ class DBModel{
 
 	// Get All Data from two tables wp_bidi_return_information and wp_users
 	function getAllReturnAndUserData(){
+		$table = $this->wpdb->prefix . 'bidi_return_information';
+		$table2 = $this->wpdb->prefix . 'users';
+
 		$sql = "SELECT *
-				FROM wp_bidi_return_information wp_bidi_return_information
-				INNER JOIN wp_users wp_users ON wp_bidi_return_information.customer_id = wp_users.ID
+				FROM ".$table." wp_bidi_return_information
+				INNER JOIN ". $table2 ." ON ".$table.".customer_id = ".$table2.".ID
 				";
         $result = $this->wpdb->get_results($sql);
         if($result){
@@ -64,13 +64,16 @@ class DBModel{
 	}
 
 	function getReturnProductData($param){
+		$bidi_return_information = $this->wpdb->prefix . 'bidi_return_information';
+		$bidi_return_product_info = $this->wpdb->prefix . 'bidi_return_product_info';
+		$users = $table = $this->wpdb->prefix . 'users';
+
 		$sql = "SELECT *
-				FROM wp_bidi_return_information wp_bidi_return_information
-		 		INNER JOIN wp_bidi_return_product_info wp_bidi_return_product_info ON wp_bidi_return_information.return_id = wp_bidi_return_product_info.return_id
-		 		INNER JOIN wp_users wp_users ON wp_bidi_return_information.customer_id = wp_users.ID
+				FROM " . $bidi_return_information . " wp_bidi_return_information
+		 		INNER JOIN " . $bidi_return_product_info . " wp_bidi_return_product_info ON wp_bidi_return_information.return_id = wp_bidi_return_product_info.return_id
+		 		INNER JOIN " . $users . " wp_users ON wp_bidi_return_information.customer_id = wp_users.ID
 		 		WHERE wp_bidi_return_information.return_id = ".$param."
 				";
-				
         $result = $this->wpdb->get_results($sql);
         if($result){
 			return $result;

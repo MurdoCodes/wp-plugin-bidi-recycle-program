@@ -1,11 +1,9 @@
-<?php 
-
+<?php
 /**
 * Trigger this file on Plugin uninstall
 *
 * @package Kim Test Plugin
 */
-
 namespace Includes;
 
 final class Init {

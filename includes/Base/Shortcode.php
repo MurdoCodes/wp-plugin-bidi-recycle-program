@@ -1,13 +1,10 @@
 <?php 
-
 /**
 * Trigger this file on Plugin uninstall
 *
 * @package Bidi Recycle Program
 */
-
 namespace Includes\Base;
-
 use \Includes\Base\BaseController;
 
 class Shortcode extends BaseController{

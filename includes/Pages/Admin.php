@@ -1,13 +1,10 @@
-<?php 
-
+<?php
 /**
 * Trigger this file on Plugin uninstall
 *
 * @package Bidi Recycle Program
 */
-
 namespace Includes\Pages;
-
 use \Includes\Base\BaseController;
 
 class Admin extends BaseController {

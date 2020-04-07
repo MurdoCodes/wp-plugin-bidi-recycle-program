@@ -3,6 +3,7 @@ namespace Includes\Base;
 use \Includes\Base\BaseController;
 
 	// // Declare variable that contains current user details from wp_user table
+	if(wp_get_current_user()){
 	$customer = wp_get_current_user();
 
 	// Order count for a "loyal" customer
@@ -268,4 +269,4 @@ use \Includes\Base\BaseController;
 	}else{
 		echo "User doesnt have orders that are completed";
 	}
-?>
+}

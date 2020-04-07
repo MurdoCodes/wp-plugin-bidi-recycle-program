@@ -1,16 +1,15 @@
 <?php 
 namespace Includes\Base;
-$SubmitModel = new DBModel();
-$getAllReturnAndUserData = $SubmitModel->getAllReturnAndUserData();
-?>
+$DBModel = new DBModel();
+$getAllReturnAndUserData = $DBModel->getAllReturnAndUserData();
 
-<?php
 if(isset($_GET['return_id'])){
 	$return_id = $_GET['return_id'];
-	$getReturnProductData = $SubmitModel->getReturnProductData($return_id);
+	$getReturnProductData = $DBModel->getReturnProductData($return_id);
 ?>
 
 <div class="wrap return-product-data">
+	<h1 class="wp-heading-inline">Bidi Recycle Program</h1>
 	<div class="container-fluid" style="padding:1em;">
 		<div class="row">
 			<div class="col-md-8">
@@ -94,7 +93,7 @@ if(isset($_GET['return_id'])){
 </div>
 
 <?php
-	}else{
+	}else if(!empty($getReturnProductData)){
 ?>
 
 <div class="wrap">
@@ -221,5 +220,7 @@ if(isset($_GET['return_id'])){
 </div>
 
 <?php 
+	}else{
+		echo '<h1 class="wp-heading-inline">Bidi Recycle Program</h1>';
+		echo "<h1>No Data!</h1>";
 	}
- ?>
