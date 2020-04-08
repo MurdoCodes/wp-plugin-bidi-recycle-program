@@ -3,6 +3,12 @@ var countQty = [];
 $(".content").niceScroll();
 $(".modal-body").niceScroll();
 
+// Get File Location
+function enquiryPluginUrl(){
+	var plugin_url = pluginScript.pluginsUrl;
+	return plugin_url;
+}
+
 // To add product on the list function
 function addElement(elem){
 	event.preventDefault();
@@ -25,17 +31,32 @@ function addElement(elem){
 		appendSingleProduct(id, modal_product_order_id, modal_product_order_item_id, modal_product_imgSrc, modal_product_name, modal_product_productQty);
 
 	}else if(eval(countQty.join('+')) > 10){
-
-		alert("Maximum Number of Product Quantity Reached. Limited to 10 Products. Please add the exact quantity. Current Product Quantity Count : " + eval(countQty.join('+')));		
-		countQty.splice(-1,1)
+		
+		$.confirm({
+		    title: '<style="">Warning!',
+		    content: 'Maximum Number of Product Quantity Reached. Limited to 10 Products. Please add the exact quantity. Current Product Quantity Count : ' + + eval(countQty.join('+')),
+		    buttons: {
+		        Ok: function () {
+		        	countQty.splice(-1,1)
+		        }
+		    }
+		});		
 
 	}else if(eval(countQty.join('+')) == 10){
 
 		appendSingleProduct(id, modal_product_order_id, modal_product_order_item_id, modal_product_imgSrc, modal_product_name, modal_product_productQty);
-		$('.modalButton').prop('disabled', true);
-		$('#recycle-submit').removeAttr("disabled");
 		
-		alert("Maximum Number of Product Quantity Reached. Limited to 10 Products. Current Product Quantity Count : " + eval(countQty.join('+')));
+
+		$.confirm({
+		    title: 'Success!',
+		    content: 'Maximum Number of Product Quantity Reached. Limited to 10 Products. Current Product Quantity Count : ' + eval(countQty.join('+')),
+		    buttons: {
+		        Ok: function () {
+		        	$('.modalButton').prop('disabled', true);
+					$('#recycle-submit').removeAttr("disabled");
+		        }
+		    }
+		});
 
 	}
 	
@@ -129,3 +150,36 @@ function appendModalProduct(id, product_order_id, product_order_item_id, product
 
 }
 
+$(function() { 
+    $('#form-recycle').on('submit', function(event) { 
+        event.preventDefault();
+        $("#loader").show();
+        var data = $( "#form-recycle" ).serialize();
+        jQuery.ajax({
+        	dataType: "json",
+        	type : "POST",
+        	data : data,
+        	url : enquiryPluginUrl() + "templates/submit/submit.template.php",
+        	success: success,
+        	error: printError
+        });
+
+    });
+
+    var success = function( resp ){
+    	alert("Form is Submitted Successfully");
+    };
+
+    var printError = function( req, status, err ) {
+    	$("#loader").hide();
+    	$.confirm({
+		    title: 'Bidi Recycle Submitted Succeffully!',
+		    content: 'Thank You For Using Bidi Recycle!\nPlease wait for further Information regarding the Recycle Request',
+		    buttons: {
+		        Ok: function () {
+		            location.reload();
+		        }
+		    }
+		});
+	};
+});

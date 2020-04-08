@@ -1,7 +1,9 @@
 <?php 
 namespace Includes\Base;
-require "../vendor/autoload.php";
-require_once( dirname(dirname( dirname( dirname( dirname( __FILE__ ) ) ) )) . '\wp-load.php' );
+require "../../vendor/autoload.php";
+require_once( dirname (dirname(dirname( dirname( dirname( dirname( __FILE__ ) ) ) ) ) ) . '\wp-load.php' );
+
+
 
 if($_POST){
 
