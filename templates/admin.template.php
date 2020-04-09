@@ -102,8 +102,7 @@ if(isset($_GET['return_id'])){
 
 		<p class="search-box">
 			<label class="screen-reader-text" for="post-search-input">Search Returns:</label>
-			<input type="search" id="post-search-input" name="s" value="">
-			<input type="submit" id="search-submit" class="button" value="Search Returns">
+			<input type="search" id="recycle-search-input" name="searchRecyle" placeholder="Type To Search">
 		</p>
 
 		<table class="wp-list-table widefat fixed striped posts">
@@ -117,6 +116,12 @@ if(isset($_GET['return_id'])){
 					<th scope="col" id="order_number" class="manage-column column-order_number column-primary sortable desc">
 						<a href="http://bidivapor.quikfillrx.org/wp-admin/edit.php?post_type=shop_order&amp;orderby=ID&amp;order=asc">
 							<span>Returns</span>
+							<span class="sorting-indicator"></span>
+						</a>
+					</th>
+					<th scope="col" id="order_number" class="manage-column column-order_number column-primary sortable desc">
+						<a href="http://bidivapor.quikfillrx.org/wp-admin/edit.php?post_type=shop_order&amp;orderby=ID&amp;order=asc">
+							<span>Email</span>
 							<span class="sorting-indicator"></span>
 						</a>
 					</th>
@@ -142,42 +147,7 @@ if(isset($_GET['return_id'])){
 			</thead>
 
 			<tbody id="the-list">
-				<?php foreach ($getAllReturnAndUserData as $value): ?>
-					
-				<tr>
-					<th scope="row" class="check-column">
-						
-					</th>
-					<td class="order_number column-order_number has-row-actions column-primary" data-colname="Order">
-						<!-- <a href="#" data-id="<?php echo $value->return_id; ?>" data-toggle="modal" data-target="#ReturnInformationModal" class="ReturnInformationModal"> -->
-							<?php 
-								$query_args = array( 'page' => 'bidi_recycle_program', 'return_id' => $value->return_id );
-								$returnDetailsURL = add_query_arg( $query_args, admin_url('admin.php?') );
-							 ?>
-						<a href="<?php echo $returnDetailsURL; ?>">
-							<strong>
-								#<?php echo $value->return_code . " " . $value->display_name; ?>
-							</strong>
-						</a>
-					</td>
-					<td class="order_date column-order_date" data-colname="Date">
-						<time datetime="<?php echo date('F, j Y h:i:sa',strtotime($value->return_date)); ?>" title="<?php echo date('F, j Y h:i:sa',strtotime($value->return_date)); ?>">
-							<?php echo date('F, j Y h:i:sa',strtotime($value->return_date)); ?>
-						</time>
-					</td>
-					<td class="order_status column-order_status" data-colname="Status">
-						<mark class="alert alert-warning">
-							<span>
-								<?php echo $value->return_item_status; ?>
-							</span>
-						</mark>
-					</td>
-
-					<td class="order_status column-order_status" data-colname="Status">
-						<a href="<?php echo $returnDetailsURL; ?>">View</a> / <a href="">Delete</a>
-					</td>
-				</tr>
-				<?php endforeach; ?>
+				<!-- show all the list of returns -->
 			</tbody>
 
 			<tfoot>
@@ -190,6 +160,12 @@ if(isset($_GET['return_id'])){
 					<th scope="col" id="order_number" class="manage-column column-order_number column-primary sortable desc">
 						<a href="http://bidivapor.quikfillrx.org/wp-admin/edit.php?post_type=shop_order&amp;orderby=ID&amp;order=asc">
 							<span>Returns</span>
+							<span class="sorting-indicator"></span>
+						</a>
+					</th>
+					<th scope="col" id="order_number" class="manage-column column-order_number column-primary sortable desc">
+						<a href="http://bidivapor.quikfillrx.org/wp-admin/edit.php?post_type=shop_order&amp;orderby=ID&amp;order=asc">
+							<span>Email</span>
 							<span class="sorting-indicator"></span>
 						</a>
 					</th>

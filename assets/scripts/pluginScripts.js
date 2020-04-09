@@ -183,4 +183,30 @@ $(function() {
 		    }
 		});
 	};
+
+	$.ajax({
+		url : pluginURL() + "templates/submit/fetchrecycle.template.php",
+		method: "POST",
+		data: '*',
+		dataType: "html",
+		success: function(data){
+			console.log(data);
+			$('#the-list').html(data);
+		}
+	});
+	$('#recycle-search-input').keyup(function(){
+		var txt = $(this).val();
+		$('result').html('');
+		$.ajax({
+			url : pluginURL() + "templates/submit/fetchrecycle.template.php",
+			method: "POST",
+			data: txt,
+			dataType: "html",
+			success: function(data){
+				console.log(data);
+				$('#the-list').html(data);
+			}
+		});		
+	});
+
 });
