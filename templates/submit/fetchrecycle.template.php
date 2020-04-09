@@ -4,8 +4,8 @@ require "../../vendor/autoload.php";
 require_once( dirname (dirname(dirname( dirname( dirname( dirname( __FILE__ ) ) ) ) ) ) . '/wp-load.php' );
 	
 	$DBModel = new DBModel();
-
-	$param = $_POST['searchRecyle'];
+	
+	$param = $_POST['data'];
 	$recycleSearch = $DBModel->recycleSearch($param);
 	
 	$output = '';
@@ -19,7 +19,7 @@ require_once( dirname (dirname(dirname( dirname( dirname( dirname( __FILE__ ) ) 
 							<td class="order_number column-order_number has-row-actions column-primary" data-colname="Order">
 							<a href="' . $returnDetailsURL . '"
 									<strong>
-										# ' . $value->return_code . ' ' . $value->display_name . '
+										#' . $value->return_code . ' ' . $value->display_name . '
 									</strong>
 								</a>
 							</td>

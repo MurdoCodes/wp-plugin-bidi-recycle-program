@@ -89,7 +89,6 @@ class DBModel{
 		$sql = "SELECT * FROM " . $bidi_return_information . " wp_bidi_return_information
 				INNER JOIN " . $users . " wp_users ON wp_bidi_return_information.customer_id = wp_users.ID
 				WHERE  wp_users.user_email LIKE '%" . $param . "%'";
-				
         $result = $this->wpdb->get_results($sql);		
         if($result){
 			return $result;

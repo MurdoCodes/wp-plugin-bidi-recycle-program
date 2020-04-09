@@ -184,29 +184,35 @@ $(function() {
 		});
 	};
 
-	$.ajax({
-		url : pluginURL() + "templates/submit/fetchrecycle.template.php",
-		method: "POST",
-		data: '*',
-		dataType: "html",
-		success: function(data){
-			console.log(data);
-			$('#the-list').html(data);
-		}
-	});
-	$('#recycle-search-input').keyup(function(){
+	
+	var searchValue = $('#recycle-search-input').val();	
+	if( searchValue == '' ){
 		var txt = $(this).val();
 		$('result').html('');
 		$.ajax({
 			url : pluginURL() + "templates/submit/fetchrecycle.template.php",
 			method: "POST",
-			data: txt,
+			data: {data: txt},
 			dataType: "html",
 			success: function(data){
-				console.log(data);
+				$('#the-list2').html(data);
+			}
+		});
+
+	}
+
+	$('#recycle-search-input').keyup(function(){
+		$('#the-list2').hide();
+		var txt = $(this).val();
+		$('result').html('');
+		$.ajax({
+			url : pluginURL() + "templates/submit/fetchrecycle.template.php",
+			method: "POST",
+			data: {data: txt},
+			dataType: "html",
+			success: function(data){
 				$('#the-list').html(data);
 			}
 		});		
 	});
-
 });

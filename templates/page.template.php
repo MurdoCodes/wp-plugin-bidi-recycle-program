@@ -35,8 +35,8 @@ use \Includes\Base\BaseController;
 	
 ?>
 
-<form id="form-recycle" method="POST" action="<?php echo $this->plugin_url . 'templates/submit/submit.template.php'; ?>">
-<!-- <form id="form-recycle" method="POST"> -->
+<!-- <form id="form-recycle" method="POST" action="<?php //echo $this->plugin_url . 'templates/submit/submit.template.php'; ?>"> -->
+<form id="form-recycle" method="POST">
 	<input type="text" name="return_code" value="<?php echo $random_hash; ?>" hidden>
 	<input type="text" name="current_user_id" value="<?php echo get_current_user_id(); ?>" hidden>
 	<div class="container">

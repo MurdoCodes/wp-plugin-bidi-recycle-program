@@ -102,7 +102,7 @@ if(isset($_GET['return_id'])){
 
 		<p class="search-box">
 			<label class="screen-reader-text" for="post-search-input">Search Returns:</label>
-			<input type="search" id="recycle-search-input" name="searchRecyle" placeholder="Type To Search">
+			<input type="search" id="recycle-search-input" name="searchRecyle" placeholder="Type Email To Search">
 		</p>
 
 		<table class="wp-list-table widefat fixed striped posts">
@@ -147,6 +147,10 @@ if(isset($_GET['return_id'])){
 			</thead>
 
 			<tbody id="the-list">
+				<!-- show all the list of returns -->
+			</tbody>
+
+			<tbody id="the-list2">
 				<!-- show all the list of returns -->
 			</tbody>
 
