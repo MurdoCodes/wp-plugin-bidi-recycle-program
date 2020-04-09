@@ -6,6 +6,9 @@ use PHPMailer\PHPMailer\Exception;
 require "../../vendor/autoload.php";
 require_once( dirname (dirname(dirname( dirname( dirname( dirname( __FILE__ ) ) ) ) ) ) . '/wp-load.php' );
 
+// Declare CustomerORder Object
+$CustomerOrderObj = new CustomerOrder();
+
 if($_POST){
 
 	$product_name = $_POST['product_name'];
@@ -50,7 +53,27 @@ if($_POST){
 
 	// Loop to product details array and save each to wp_bidi_return_product_info table
 	for ($x = 0; $x < $count; $x++) {
+
 		$insertProductInformation = $SubmitModel->insertProductInformation($product_name[$x], $product_qty[$x], $product_order_id[$x], $product_item_id[$x], $product_image[$x], $current_date, $return_id, $return_code);
+
+		$currentProductQuantity = $CustomerOrderObj->getOrderItemQty( $product_order_id[$x], $product_item_id[$x] );
+
+		if($currentProductQuantity = $product_qty[$x]){
+
+			$zero = 0;
+			wc_update_order_item_meta( $product_item_id[$x], '_qty', '0' );
+
+		}else if($currentProductQuantity < $product_qty[$x]){
+
+			wc_update_order_item_meta( $product_item_id[$x], '_qty', $product_qty[$x] );
+
+		}else if($currentProductQuantity > $product_qty[$x]){
+
+			$total = $currentProductQuantity - $product_qty[$x];
+			wc_update_order_item_meta( $product_item_id[$x], '_qty', $total );
+
+		}
+
 	}
 
 	// Instantiation and passing `true` enables exceptions

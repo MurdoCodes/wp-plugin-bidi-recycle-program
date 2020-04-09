@@ -214,7 +214,9 @@ use \Includes\Base\BaseController;
 					$order_item_id = $value['id'];
 					$product_name = $value['name'];
 					$product_id = $value['product_id'];
-					$product_qty = $value['quantity'];	
+					$product_qty = $value['quantity'];
+
+					if($product_qty != 0){
 					
 			?>
       		<!-- Product -->
@@ -253,7 +255,7 @@ use \Includes\Base\BaseController;
 
 			</div>
 
-		<?php $x++; } ?>
+		<?php $x++; } } ?>
 			
       </div>
 
