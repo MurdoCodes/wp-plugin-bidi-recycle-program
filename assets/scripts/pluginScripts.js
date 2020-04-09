@@ -151,6 +151,7 @@ function appendModalProduct(id, product_order_id, product_order_item_id, product
 }
 
 $(function() {
+    
 	$("#loader").hide();
     $('#form-recycle').on('submit', function(event) { 
         event.preventDefault();
@@ -183,10 +184,9 @@ $(function() {
 		    }
 		});
 	};
-
-	
+    
 	var searchValue = $('#recycle-search-input').val();	
-	if( searchValue == '' ){
+	if( !searchValue ){
 		var txt = $(this).val();
 		$('result').html('');
 		$.ajax({
