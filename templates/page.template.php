@@ -232,7 +232,10 @@ use \Includes\Base\BaseController;
 								<?php
 							}else{
 								?>
-								<img src="<?php echo $product_id; ?>" alt="<?php echo $product_name; ?>" id="modal_product_image_<?php echo $x; ?>">
+								<?php 
+									$image = wp_get_attachment_image_src( get_post_thumbnail_id( $product_id ), 'single-post-thumbnail' );
+								?>
+								<img src="<?php echo $image['0']; ?>" alt="<?php echo $product_name; ?>" id="modal_product_image_<?php echo $x; ?>">
 								<?php
 							}
 						 ?>

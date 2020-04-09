@@ -69,7 +69,10 @@ if(isset($_GET['return_id'])){
 							    <tr>
 							      <th scope="row"><?php echo $counter; ?></th>
 							      <td>
-							      	<img width="100" height="100" src="<?php echo $value->product_image; ?>" class="attachment-thumbnail size-thumbnail" alt="<?php echo $value->product_name; ?>" title="<?php echo $value->product_name; ?>">
+							      	<?php 
+									$image = wp_get_attachment_image_src( get_post_thumbnail_id( $value->product_image ), 'single-post-thumbnail' );
+								?>
+							      	<img width="100" height="100" src="<?php echo $image['0']; ?>" class="attachment-thumbnail size-thumbnail" alt="<?php echo $value->product_name; ?>" title="<?php echo $value->product_name; ?>">
 							      	</td>
 							      <td><?php echo $value->product_name; ?></td>
 							      <td><?php echo $value->product_info_id; ?></td>
