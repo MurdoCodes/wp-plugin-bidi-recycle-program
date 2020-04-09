@@ -34,14 +34,14 @@ class DBModel{
 	}
 
 	// insert return product list and information
-	function insertProductInformation($product_name, $product_order_id, $product_item_id, $product_image, $current_date, $return_id, $return_code){
+	function insertProductInformation($product_name, $product_qty, $product_order_id, $product_item_id, $product_image, $current_date, $return_id, $return_code){
 		$table = $this->wpdb->prefix . 'bidi_return_product_info';
 		$sql = $this->wpdb->prepare(
 			"INSERT INTO `" . $table . "`      
-			(`product_info_id`, `product_name`, `product_order_id`, `product_item_id`, `product_image`, `product_return_date`, `return_id`, `return_code`) 
+			(`product_info_id`, `product_name`, `product_qty`, `product_order_id`, `product_item_id`, `product_image`, `product_return_date`, `return_id`, `return_code`) 
 			values
-			(%d, %s, %d, %d, %s, %s, %d, %s)",
-			NULL, $product_name, $product_order_id, $product_item_id, $product_image, $current_date, $return_id, $return_code
+			(%d, %s, %s, %d, %d, %s, %s, %d, %s)",
+			NULL, $product_name, $product_qty, $product_order_id, $product_item_id, $product_image, $current_date, $return_id, $return_code
  		);
 		if($this->wpdb->query($sql)){
 			return "Success";

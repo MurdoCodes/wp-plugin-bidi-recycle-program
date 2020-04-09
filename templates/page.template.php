@@ -35,7 +35,7 @@ use \Includes\Base\BaseController;
 	
 ?>
 
-<!-- <form id="form-recycle" action="<?php //echo $this->plugin_url . 'templates/submit.template.php'; ?>" method="POST"> -->
+<!-- <form id="form-recycle" method="POST" action="<?php //echo $this->plugin_url . 'templates/submit/submit.template.php'; ?>"> -->
 <form id="form-recycle" method="POST">
 	<input type="text" name="return_code" value="<?php echo $random_hash; ?>" hidden>
 	<input type="text" name="current_user_id" value="<?php echo get_current_user_id(); ?>" hidden>
@@ -188,15 +188,7 @@ use \Includes\Base\BaseController;
 	</div>
 </form>
 
-<div id='loader' style='display: none;'>
-	<?php 
-		$loader =  $this->plugin_path . 'assets/img/loader.gif';
-		$str = 'https://cdn.shortpixel.ai/spai/w_32+q_lossless+ret_img+to_webp/';
-	?>
-
-  <img src='<?php echo $loader; ?>' width='32px' height='32px'>
-  
-</div>
+<div id="loader"></div>
 
 <!-- Modal -->
 <div id="selectProductModal" class="modal fade" role="dialog">

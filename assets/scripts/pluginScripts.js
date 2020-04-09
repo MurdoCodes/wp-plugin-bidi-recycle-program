@@ -4,7 +4,7 @@ $(".content").niceScroll();
 $(".modal-body").niceScroll();
 
 // Get File Location
-function enquiryPluginUrl(){
+function pluginURL(){
 	var plugin_url = pluginScript.pluginsUrl;
 	return plugin_url;
 }
@@ -150,7 +150,8 @@ function appendModalProduct(id, product_order_id, product_order_item_id, product
 
 }
 
-$(function() { 
+$(function() {
+	$("#loader").hide();
     $('#form-recycle').on('submit', function(event) { 
         event.preventDefault();
         $("#loader").show();
@@ -159,7 +160,7 @@ $(function() {
         	dataType: "json",
         	type : "POST",
         	data : data,
-        	url : enquiryPluginUrl() + "templates/submit/submit.template.php",
+        	url : pluginURL() + "templates/submit/submit.template.php",
         	success: success,
         	error: printError
         });

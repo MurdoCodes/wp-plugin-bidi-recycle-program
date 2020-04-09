@@ -52,6 +52,7 @@ class Activate {
 			$sql = "CREATE TABLE {$return_product_info} (
 						product_info_id INT(11) NOT NULL AUTO_INCREMENT,
 						product_name VARCHAR(50) NOT NULL,
+						product_qty VARCHAR(50) NOT NULL,
 						product_order_id INT(11) NOT NULL,
 						product_item_id INT(11) NOT NULL,
 						product_image VARCHAR(255) NOT NULL,
