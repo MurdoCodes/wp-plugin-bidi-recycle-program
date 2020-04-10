@@ -17,7 +17,7 @@ class DBModel{
 		$this->wpdb = $wpdb;
 	}
 
-	// insert return information to the database
+	// Insert return information to the database
 	function insertReturnInformation($return_code, $total_prod_qty, $current_date, $return_status, $customer_id){
 		$table = $this->wpdb->prefix . 'bidi_return_information';
 		$sql = $this->wpdb->prepare(
@@ -33,7 +33,7 @@ class DBModel{
 
 	}
 
-	// insert return product list and information
+	// Insert return product list and information
 	function insertProductInformation($product_name, $product_qty, $product_order_id, $product_item_id, $product_image, $current_date, $return_id, $return_code){
 		$table = $this->wpdb->prefix . 'bidi_return_product_info';
 		$sql = $this->wpdb->prepare(
@@ -65,6 +65,7 @@ class DBModel{
 
 	}
 
+	// Get All Return Product Data
 	function getReturnProductData($param){
 		$bidi_return_information = $this->wpdb->prefix . 'bidi_return_information';
 		$bidi_return_product_info = $this->wpdb->prefix . 'bidi_return_product_info';
@@ -82,6 +83,7 @@ class DBModel{
 		}
 	}
 
+	// Search Return Via Email
 	function recycleSearch($param){
 		$bidi_return_information = $this->wpdb->prefix . 'bidi_return_information';
 		$users = $table = $this->wpdb->prefix . 'users';
@@ -89,6 +91,36 @@ class DBModel{
 		$sql = "SELECT * FROM " . $bidi_return_information . " wp_bidi_return_information
 				INNER JOIN " . $users . " wp_users ON wp_bidi_return_information.customer_id = wp_users.ID
 				WHERE  wp_users.user_email LIKE '%" . $param . "%'";
+        $result = $this->wpdb->get_results($sql);		
+        if($result){
+			return $result;
+		}
+	}
+
+	// Sort Table By Date
+	function recycleSortingByDate($param){
+		$bidi_return_information = $this->wpdb->prefix . 'bidi_return_information';
+		$users = $table = $this->wpdb->prefix . 'users';
+
+		$sql = "SELECT * FROM " . $bidi_return_information . " wp_bidi_return_information
+				INNER JOIN " . $users . " wp_users ON wp_bidi_return_information.customer_id = wp_users.ID
+				ORDER BY return_date " . $param;
+
+        $result = $this->wpdb->get_results($sql);		
+        if($result){
+			return $result;
+		}
+	}
+
+	// Sort Table By Status
+	function recycleSortingStatus($param){
+		$bidi_return_information = $this->wpdb->prefix . 'bidi_return_information';
+		$users = $table = $this->wpdb->prefix . 'users';
+
+		$sql = "SELECT * FROM " . $bidi_return_information . " wp_bidi_return_information
+				INNER JOIN " . $users . " wp_users ON wp_bidi_return_information.customer_id = wp_users.ID
+				WHERE wp_bidi_return_information.return_item_status = '".$param."'
+				ORDER BY return_date DESC";
         $result = $this->wpdb->get_results($sql);		
         if($result){
 			return $result;

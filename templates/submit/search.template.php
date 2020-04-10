@@ -3,17 +3,18 @@ namespace Includes\Base;
 require "../../vendor/autoload.php";
 require_once( dirname (dirname(dirname( dirname( dirname( dirname( __FILE__ ) ) ) ) ) ) . '/wp-load.php' );
 	
-	$DBModel = new DBModel();
-	
-	$param = $_POST['data'];
-	$recycleSearch = $DBModel->recycleSearch($param);
-	
+$DBModel = new DBModel();
+$param = $_POST['data'];
+$recycleSearch = $DBModel->recycleSearch($param);
+showDetails($recycleSearch);
+
+function showDetails($param){
 	$output = '';
-	foreach ($recycleSearch as $value) {
+	foreach ($param as $value) {
 		$query_args = array( 'page' => 'bidi_recycle_program', 'return_id' => $value->return_id );
 		$returnDetailsURL = add_query_arg( $query_args, admin_url('admin.php?') );
 
-		$output = '
+		$output .= '
 					<tr>
 						<th scope="row" class="check-column"></th>
 							<td class="order_number column-order_number has-row-actions column-primary" data-colname="Order">
@@ -34,19 +35,32 @@ require_once( dirname (dirname(dirname( dirname( dirname( dirname( __FILE__ ) ) 
 							<time datetime="' . date('F, j Y h:i:sa',strtotime($value->return_date)). '" title="' . date('F, j Y h:i:sa',strtotime($value->return_date)) . '">
 								' . date('F, j Y h:i:sa',strtotime($value->return_date)) . '
 							</time>
-						</td>
+						</td>';
+						if($value->return_item_status == 'PENDING'){
+		$output .= '
 						<td class="order_status column-order_status" data-colname="Status">
 							<mark class="alert alert-warning">
 								<span>
 									' . $value->return_item_status . '
 								</span>
 							</mark>
-						</td>
-
+						</td>';
+						}else{
+		$output .= '
+						<td class="order_status column-order_status" data-colname="Status">
+							<mark class="alert alert-success">
+								<span>
+									' . $value->return_item_status . '
+								</span>
+							</mark>
+						</td>';
+						}
+		$output .= '
 						<td class="order_status column-order_status" data-colname="Status">
 							<a href="' . $returnDetailsURL . '">View</a> / <a href="">Delete</a>
 						</td>
 					</tr>';
-		echo $output;
+		
 	}
-
+	echo $output;
+}

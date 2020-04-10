@@ -3,13 +3,13 @@ var countQty = [];
 $(".content").niceScroll();
 $(".modal-body").niceScroll();
 
-// Get File Location
+/** Get File Location **/
 function pluginURL(){
 	var plugin_url = pluginScript.pluginsUrl;
 	return plugin_url;
 }
 
-// To add product on the list function
+/** To add product on the list function **/
 function addElement(elem){
 	event.preventDefault();
 	// Get button value
@@ -84,7 +84,7 @@ function addElement(elem){
 
 }
 
-// To append product on the product list and remove in modal product list
+/** To append product on the product list and remove in modal product list **/
 function appendSingleProduct(id, modal_product_order_id, modal_product_order_item_id, modal_product_imgSrc, modal_product_name, modal_product_productQty){
 
 	$(".product-list .content").append(
@@ -118,7 +118,7 @@ function appendSingleProduct(id, modal_product_order_id, modal_product_order_ite
 
 }
 
-// To append product in Modal and remove from the product list
+/** To append product in Modal and remove from the product list **/
 function appendModalProduct(id, product_order_id, product_order_item_id, product_imgSrc, product_name, product_productQty){
 
 	$("#selectProductModal .modal-body").append(
@@ -152,67 +152,111 @@ function appendModalProduct(id, product_order_id, product_order_item_id, product
 
 $(function() {
     
-	$("#loader").hide();
-    $('#form-recycle').on('submit', function(event) { 
-        event.preventDefault();
-        $("#loader").show();
-        var data = $( "#form-recycle" ).serialize();
-        jQuery.ajax({
-        	dataType: "json",
-        	type : "POST",
-        	data : data,
-        	url : pluginURL() + "templates/submit/submit.template.php",
-        	success: success,
-        	error: printError
-        });
+    /** Start Searching **/
+	    // Hide Loader
+		$("#loader").hide();
+		// Submit Front End Form
+	    $('#form-recycle').on('submit', function(event) { 
+	        event.preventDefault();
+	        $("#loader").show();
+	        var data = $( "#form-recycle" ).serialize();
+	        jQuery.ajax({
+	        	dataType: "json",
+	        	type : "POST",
+	        	data : data,
+	        	url : pluginURL() + "templates/submit/submit.template.php",
+	        	success: success,
+	        	error: printError
+	        });
 
-    });
+	    });
 
-    var success = function( resp ){
-    	alert("Form is Submitted Successfully");
-    };
+	    // Success Message
+	    var success = function( resp ){
+	    	alert("Form is Submitted Successfully");
+	    };
+	    // Error Message > This is the function being called whenever the form submission is succesful
+	    var printError = function( req, status, err ) {
+	    	$("#loader").hide();
+	    	$.confirm({
+			    title: 'Bidi Recycle Submitted Succeffully!',
+			    content: 'Thank You For Using Bidi Recycle!\nPlease wait for further Information regarding the Recycle Request',
+			    buttons: {
+			        Ok: function () {
+			            location.reload();
+			        }
+			    }
+			});
+		};
+    /** End Searching **/
 
-    var printError = function( req, status, err ) {
-    	$("#loader").hide();
-    	$.confirm({
-		    title: 'Bidi Recycle Submitted Succeffully!',
-		    content: 'Thank You For Using Bidi Recycle!\nPlease wait for further Information regarding the Recycle Request',
-		    buttons: {
-		        Ok: function () {
-		            location.reload();
-		        }
-		    }
+    /** Start Admin Searching **/
+		var searchValue = $('#recycle-search-input').val();	
+		if( !searchValue ){
+			var txt = $(this).val();
+			$('result').html('');
+			$.ajax({
+				url : pluginURL() + "templates/submit/search.template.php",
+				method: "POST",
+				data: {data: txt},
+				dataType: "html",
+				success: function(data){
+					$('#the-list').html(data);
+				}
+			});
+
+		}
+
+		$('#recycle-search-input').keyup(function(){
+			$('#the-list2').hide();
+			var txt = $(this).val();
+			$('result').html('');
+			$.ajax({
+				url : pluginURL() + "templates/submit/search.template.php",
+				method: "POST",
+				data: {data: txt},
+				dataType: "html",
+				success: function(data){
+					$('#the-list').html(data);
+				}
+			});		
 		});
-	};
-    
-	var searchValue = $('#recycle-search-input').val();	
-	if( !searchValue ){
-		var txt = $(this).val();
-		$('result').html('');
-		$.ajax({
-			url : pluginURL() + "templates/submit/fetchrecycle.template.php",
-			method: "POST",
-			data: {data: txt},
-			dataType: "html",
-			success: function(data){
-				$('#the-list2').html(data);
-			}
+
+	/** End Admin Searching **/
+
+	/** Start Date Sorting **/
+		// By Date
+		$('.dateSorting').click(function(event) { 
+		    event.preventDefault();
+		    var txt = $(this).data("id");
+		    $.ajax({
+		        url : pluginURL() + "templates/submit/sorting.template.php",
+				method: "POST",
+				data: {dateSorting: txt},
+				dataType: "html",
+				success: function(data){
+					$('#the-list').html(data);
+				}
+		    });
+		    return false; // for good measure
 		});
 
-	}
+		// By Status		
+		$('.statusSorting').click(function(event) { 
+		    event.preventDefault();
+		    var txt = $(this).data("id");
+		    $.ajax({
+		        url : pluginURL() + "templates/submit/sorting.template.php",
+				method: "POST",
+				data: {statusSorting: txt},
+				dataType: "html",
+				success: function(data){
+					$('#the-list').html(data);
+				}
+		    });
+		    return false; // for good measure
+		});
+	/** End Sorting **/
+	
 
-	$('#recycle-search-input').keyup(function(){
-		$('#the-list2').hide();
-		var txt = $(this).val();
-		$('result').html('');
-		$.ajax({
-			url : pluginURL() + "templates/submit/fetchrecycle.template.php",
-			method: "POST",
-			data: {data: txt},
-			dataType: "html",
-			success: function(data){
-				$('#the-list').html(data);
-			}
-		});		
-	});
 });
