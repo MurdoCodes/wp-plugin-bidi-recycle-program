@@ -17,7 +17,6 @@ use \Includes\Base\BaseController;
 	        'post_type'   => wc_get_order_types(),
 	        'post_status' => 'wc-completed',
 	    ) );
-    var_dump($customerOrderDetails);
     if($customerOrderDetails){
 
     // Text for our "thanks for loyalty" message
@@ -135,54 +134,34 @@ use \Includes\Base\BaseController;
 
 
 		<div class="row" style="margin-top:.5em;">
-
-			<div class="col-md-8">
+			<div class="col-md-12">
 				<div class="mail-return default-container-border">
-					<h3>How will you mail your return?</h3>
-					<div class="radio">
-					  <label><input type="radio" name="optradio" checked>Pick Up</label>
-					</div>
-					<div class="radio">
-					  <label><input type="radio" name="optradio">Drop Off</label>
-					</div>
-				</div>
-			</div>
-
-			<div class="col-md-4">
-				<div class="shipping-details default-container-border">
-					<h3>Return Summary</h3>
-					<div class="shippingfee">
-						<h5>Shipping FEE</h5>
-						<p><b>$9.0</b></p>
-					</div>
-					
+					<h3>Shipping Details</h3>
 					<hr>
-					
-					<span>Pay Securely with Authorize.net</span>
+					<div class="row">
+						<div class="col-md-4">			
 
-					<div class="form-group">
-				    	<label for="cardnumber">Card Number *:</label>
-				    	<input type="text" class="form-control" id="cardnumber" name="cardnumber">
-				  	</div>
-				  	<div class="form-group">
-				    	<label for="lastName">Expiry (MM/YY) *:</label>
-				    	<input type="text" class="form-control" id="expiryDate" name="expiryDate">
-				  	</div>
-				  	<div class="form-group">
-				    	<label for="cardcode">Card code *:</label>
-				    	<input type="text" class="form-control" id="cardcode" name="cardcode">
-				  	</div>
-				  	<div class="form-group">
-				    	<label for="email">Email address:</label>
-				    	<input type="email" class="form-control" id="email" name="email">
-				  	</div>
-
-				  	<div class="form-group">
-				  		<button type="submit" name="submit" class="form-control btn btn-success" id="recycle-submit" disabled>Confirm Recycle</button>
-				  		<!-- onclick="RecycleFormSubmit()" -->
-				  	</div>
+							<div class="form-group">
+								<label for="exampleFormControlSelect1">Service</label>
+								<select class="form-control" id="exampleFormControlSelect1">
+									<option>1</option>
+									<option>2</option>
+									<option>3</option>
+									<option>4</option>
+									<option>5</option>
+								</select>
+							</div>
+						</div>
+						<div class="col-md-4">
+							<h4>Other Details</h4>
+						</div>
+						<div class="col-md-4">
+							<h4>Other Details</h4>
+						</div>
+					</div>
+						
 				</div>
-			</div>
+			</div>	
 		</div>
 
 	</div>
