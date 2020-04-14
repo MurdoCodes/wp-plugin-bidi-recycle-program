@@ -98,15 +98,10 @@ p.search-box {margin: 5px 0px 10px 0px!important;}
 
 .return-product-data .customerDetails {border-radius: 0px 70px 0px 70px;background-color:#36B348;padding: 15px 75px 30px 75px!important}
 .woocommerce-order-data__heading {font-size: 30px; color: #fff; font-weight: 700; text-align: center;}
-.return-product-data .customerDetails .details .general{
-    color:#fff;font-size:18px!important;
+.return-product-data .customerDetails .details, label{
+    color:#fff !important;
 }
-.return-product-data .customerDetails .details .billing h1{
-    color:#fff;font-size:15px!important;
-}
-.return-product-data .customerDetails .details .shipping h1 {
-    color:#fff;font-size:15px!important;
-}
+
 /*.thead-light, tfoot {background-color:#36B348;}*/
 /*.thead-light tr th, tfoot tr th {color:#fff!important;font-size:16px;}*/
 /* END ADMIN PANEL */

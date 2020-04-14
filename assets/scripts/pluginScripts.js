@@ -201,7 +201,7 @@ $(function() {
 				data: {data: txt},
 				dataType: "html",
 				success: function(data){
-					$('#the-list').html(data);
+					$('#the-recycle-list').html(data);
 				}
 			});
 
@@ -210,14 +210,14 @@ $(function() {
 		$('#recycle-search-input').keyup(function(){
 			$('#the-list2').hide();
 			var txt = $(this).val();
-			$('result').html('');
+			// $('result').html('');
 			$.ajax({
 				url : pluginURL() + "templates/submit/search.template.php",
 				method: "POST",
 				data: {data: txt},
 				dataType: "html",
 				success: function(data){
-					$('#the-list').html(data);
+					$('#the-recycle-list').html(data);
 				}
 			});		
 		});
@@ -235,7 +235,7 @@ $(function() {
 				data: {dateSorting: txt},
 				dataType: "html",
 				success: function(data){
-					$('#the-list').html(data);
+					$('#the-recycle-list').html(data);
 				}
 		    });
 		    return false; // for good measure
@@ -251,7 +251,7 @@ $(function() {
 				data: {statusSorting: txt},
 				dataType: "html",
 				success: function(data){
-					$('#the-list').html(data);
+					$('#the-recycle-list').html(data);
 				}
 		    });
 		    return false; // for good measure

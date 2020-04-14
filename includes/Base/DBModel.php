@@ -126,5 +126,36 @@ class DBModel{
 			return $result;
 		}
 	}
+
+	// Save admin transaction
+	function saveAdminTransaction($transaction_date, $transaction_status, $return_id, $return_code){
+		$bidi_return_transaction = $this->wpdb->prefix . 'bidi_return_transaction';
+
+		$sql = $this->wpdb->prepare(
+				"INSERT INTO `" . $bidi_return_transaction . "`
+				(`transaction_id`, `transaction_date_processed`, `transaction_status`, `return_id`, `return_code`)
+				VALUES
+				(%d, %s, %s, %d, %s)",
+				NULL, $transaction_date, $transaction_status, $return_id, $return_code				
+		);
+
+		$result = $this->wpdb->get_results($sql);		
+        if($result){
+			return $result;
+		}
+
+	}
+
+	function updateReturnInformation($return_item_status, $return_code){
+		$bidi_return_information = $this->wpdb->prefix . 'bidi_return_information';
+		$sql = "UPDATE `" . $bidi_return_information . 
+				"` SET `return_item_status`= '" . $return_item_status .
+				"' WHERE return_code='" . $return_code . "'";
+
+		$result = $this->wpdb->get_results($sql);		
+        if($result){
+			return $result;
+		}
+	}
     	
 }

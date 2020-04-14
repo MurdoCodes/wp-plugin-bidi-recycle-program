@@ -53,3 +53,36 @@ register_deactivation_hook( __FILE__, 'deactivate_bidi_recycle_plugin' );
 if ( class_exists( 'Includes\\Init' ) ) {
 	Includes\Init::register_services();
 }
+
+
+// Register new status
+function register_recycle_order_status() {
+    register_post_status( 'wc-recycled', array(
+        'label'                     => 'Recycled',
+        'public'                    => true,
+        'exclude_from_search'       => false,
+        'show_in_admin_all_list'    => true,
+        'show_in_admin_status_list' => true,
+        'label_count'               => _n_noop( 'Recycled (%s)', 'Recycled (%s)' )
+    ) );
+}
+add_action( 'init', 'register_recycle_order_status' );
+		
+// Add to list of WC Order statuses
+function add_recycle_to_order_statuses( $order_statuses ) {
+ 
+    $new_order_statuses = array();
+ 
+    // add new order status after processing
+    foreach ( $order_statuses as $key => $status ) {
+ 
+        $new_order_statuses[ $key ] = $status;
+ 
+        if ( 'wc-processing' === $key ) {
+            $new_order_statuses['wc-recycled'] = 'Recycled';
+        }
+    }
+ 
+    return $new_order_statuses;
+}
+add_filter( 'wc_order_statuses', 'add_recycle_to_order_statuses' );

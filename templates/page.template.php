@@ -17,7 +17,7 @@ use \Includes\Base\BaseController;
 	        'post_type'   => wc_get_order_types(),
 	        'post_status' => 'wc-completed',
 	    ) );
-
+    var_dump($customerOrderDetails);
     if($customerOrderDetails){
 
     // Text for our "thanks for loyalty" message

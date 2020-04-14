@@ -20,7 +20,7 @@ if($_POST){
 	$return_code = $_POST['return_code'];
 	$total_prod_qty = array_sum($product_qty);	
 	$current_date = date('Y-m-d h:i:sa', strtotime("now"));
-	$return_status = "PENDING";
+	$return_status = "wc-completed";
 	$customer_id = $_POST['current_user_id'];
 
 	$from_firstname = $_POST['from_firstname'];

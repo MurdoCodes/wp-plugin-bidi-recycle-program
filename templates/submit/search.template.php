@@ -14,6 +14,20 @@ function showDetails($param){
 		$query_args = array( 'page' => 'bidi_recycle_program', 'return_id' => $value->return_id );
 		$returnDetailsURL = add_query_arg( $query_args, admin_url('admin.php?') );
 
+		if($value->return_item_status == 'wc-recycled'){
+			$itemStatus = '<mark class="alert alert-success">
+								<span>
+									RECYCLED
+								</span>
+							</mark>';
+		}else if($value->return_item_status == 'wc-completed'){
+			$itemStatus = '<mark class="alert alert-warning">
+								<span>
+									PENDING
+								</span>
+							</mark>';
+		}
+
 		$output .= '
 					<tr>
 						<th scope="row" class="check-column"></th>
@@ -25,7 +39,7 @@ function showDetails($param){
 								</a>
 							</td>
 						<td class="order_status column-order_status" data-colname="Status">
-							<mark class="alert alert-warning">
+							<mark class="alert alert-success">
 								<span>
 									' . $value->user_email . '
 								</span>
@@ -36,28 +50,14 @@ function showDetails($param){
 								' . date('F, j Y h:i:sa',strtotime($value->return_date)) . '
 							</time>
 						</td>';
-						if($value->return_item_status == 'PENDING'){
+						
+		$output .= '
+						<td class="order_status column-order_status" data-colname="Status">'
+						. $itemStatus .
+						'</td>';
 		$output .= '
 						<td class="order_status column-order_status" data-colname="Status">
-							<mark class="alert alert-warning">
-								<span>
-									' . $value->return_item_status . '
-								</span>
-							</mark>
-						</td>';
-						}else{
-		$output .= '
-						<td class="order_status column-order_status" data-colname="Status">
-							<mark class="alert alert-success">
-								<span>
-									' . $value->return_item_status . '
-								</span>
-							</mark>
-						</td>';
-						}
-		$output .= '
-						<td class="order_status column-order_status" data-colname="Status">
-							<a href="' . $returnDetailsURL . '">View</a> / <a href="">Delete</a>
+							<center><a href="' . $returnDetailsURL . '" ><span class="glyphicon glyphicon-eye-open"></span></a></center>
 						</td>
 					</tr>';
 		

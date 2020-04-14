@@ -1,36 +1,108 @@
 <?php 
 namespace Includes\Base;
 $DBModel = new DBModel();
-$getAllReturnAndUserData = $DBModel->getAllReturnAndUserData();
+$CustomerOrder = new CustomerOrder();
 
 if(isset($_GET['return_id'])){
 	$return_id = $_GET['return_id'];
 	$getReturnProductData = $DBModel->getReturnProductData($return_id);
+	$getUserBillingShipping = $CustomerOrder->getUserBillingShipping($getReturnProductData[0]->customer_id);
+	
 ?>
-	<!-- View Single Recycle Data -->
+	<!-- Start View Single Recycle Data -->
 	<div class="wrap return-product-data">
 		<h1 class="wp-heading-inline">Bidi Recycle Program</h1>
 		<div class="container-fluid" style="padding:1em;">
 			<div class="row">
-				<div class="col-md-8">
+				<div class="col-md-10">
 					<div class="row">
 						<div class="row">
 							<div class="customerDetails">
 								<h2 class="woocommerce-order-data__heading">Return Code : <?php echo $getReturnProductData[0]->return_code; ?></h2>
 								<div class="details">
 									<div class="general">
-										<h5>General</h5>
-										<?php 
-											echo "Return Date : " . $getReturnProductData[0]->return_date . "</br>";
-											echo "Return Status : " . $getReturnProductData[0]->return_item_status . "</br>";
-											echo "Name of Returnee : " . $getReturnProductData[0]->display_name . "</br>";
-										 ?>
+										<h4>General</h4>
+										<label>Customer Name : </label>
+										<p><?php echo $getReturnProductData[0]->display_name . "</br>"; ?></p>
+										</br>
+										<label>Date of Return : </label>
+										<p><?php echo $getReturnProductData[0]->return_date . "</br>"; ?></p>
 									</div>
 									<div class="billing">
-										<h1>NO DETAILS YET</h1>
+										<h4>Billing</h4>
+										<p>
+											<?php 
+												echo $getUserBillingShipping['billing_first_name'] . " " . $getUserBillingShipping['billing_last_name'];
+												echo "</br>";
+												echo $getUserBillingShipping['billing_address_1'];
+												echo "</br>";
+												echo $getUserBillingShipping['billing_city'] . " " . $getUserBillingShipping['billing_state'] . " " . $getUserBillingShipping['billing_postcode'];
+											?>
+										</p>
+										<label>Phone : </label>
+										<p>
+											<?php 
+												echo $getUserBillingShipping['billing_phone'];
+											 ?>
+										</p>
+										<label>Email : </label>
+										<p>
+											<?php 
+												echo $getUserBillingShipping['billing_email'];
+											 ?>
+										</p>
 									</div>
 									<div class="shipping">
-										<h1>NO DETAILS YET</h1>
+										<h4>Shipping</h4>
+										<p>
+											<?php 
+												echo $getUserBillingShipping['shipping_first_name'] . " " . $getUserBillingShipping['shipping_last_name'];
+												echo "</br>";
+												echo $getUserBillingShipping['shipping_address_1'];
+												echo "</br>";
+												echo $getUserBillingShipping['shipping_city'] . " " .$getUserBillingShipping['shipping_state'] . " " . $getUserBillingShipping['shipping_postcode'];
+											 ?>
+										</p>
+										
+									</div>
+									<div class="form-group">
+										<label>Status:</label>
+										<form action="<?php echo $this->plugin_url . 'templates/submit/adminSubmit.template.php'; ?>" method="POST">
+											<input type="hidden" name="customer_id" value="<?php echo $getReturnProductData[0]->customer_id; ?>">
+											<input type="hidden" name="return_code" value="<?php echo $getReturnProductData[0]->return_code; ?>">
+											<input type="hidden" name ="return_id" value="<?php echo $return_id; ?>">
+											<input type="hidden" name="transaction_date" value="<?php echo date("Y-m-d h:i:sa"); ?>">
+											<?php
+												$count = count($getReturnProductData);
+												$counter = 0;
+												foreach ($getReturnProductData as $value) {
+													$counter++; 
+											?>
+												<input type="hidden" name="order_ids[]" value="<?php echo $value->product_order_id; ?>">
+												<input type="hidden" name="product_item_id[]" value="<?php echo $value->product_item_id; ?>">
+											<?php } ?>
+											
+											<?php if($getReturnProductData[0]->return_item_status == 'wc-completed'){ ?>
+												<select class="form-control" name="transaction_status" id="transaction_status">
+													<option value="<?php echo $getReturnProductData[0]->return_item_status ?>">
+														PENDING
+													</option>
+													<option value="wc-recycled">RECYCLE</option>
+												</select>
+											<?php }else if($getReturnProductData[0]->return_item_status == 'wc-recycled'){ ?>
+												<input type="text" placeholder="RECYCLED" readonly>
+											<?php } ?>
+
+
+											</br>
+
+
+											<?php if($getReturnProductData[0]->return_item_status == 'wc-completed'){ ?>
+												<button type="submit" class="btn btn-primary">Save Transaction</button>
+											<?php }else if($getReturnProductData[0]->return_item_status == 'wc-recycled'){ ?>
+												<button type="submit" class="btn btn-primary" disabled>Save Transaction</button>
+											<?php } ?>
+										</form>
 									</div>
 								</div>
 							</div>
@@ -90,15 +162,19 @@ if(isset($_GET['return_id'])){
 						</div>
 					</div>
 				</div>
-				<div class="col-md-4"></div>
+				<div class="col-md-2">
+				</div>
 			</div>
 		</div>
 	</div>
+	<!-- End View Single Recycle Data -->
 
+<!-- Start View Recycle Data List -->
 <?php
+
 }else if(empty($getReturnProductData)){
 ?>
-	<!-- View Recycle Data List -->
+	
 	<div class="wrap">
 		<h1 class="wp-heading-inline">Bidi Recycle Program</h1>
 		<form id="posts-filter" method="get">
@@ -133,18 +209,18 @@ if(isset($_GET['return_id'])){
 						<th scope="col" class="manage-column column-order_date">
 							<span style="display: block;overflow: hidden;padding: 8px;">Status
 								<span class="sortingIcon">
-									<i class="glyphicon glyphicon-triangle-top statusSorting" data-id="COMPLETED"></i>
-									<i class="glyphicon glyphicon-triangle-bottom statusSorting" data-id="PENDING"></i>
+									<i class="glyphicon glyphicon-triangle-top statusSorting" data-id="wc-recycled"></i>
+									<i class="glyphicon glyphicon-triangle-bottom statusSorting" data-id="wc-completed"></i>
 								</span>
 							</span>
 						</th>
 						<th scope="col" class="manage-column column-order_date">
-							<span style="display: block;overflow: hidden;padding: 8px;">Actions</span>
+							<center><span style="display: block;overflow: hidden;padding: 8px;">Actions</span></center>
 						</th>
 					</tr>
 				</thead>
 
-				<tbody id="the-list">
+				<tbody id="the-recycle-list">
 					<!-- show all the list of returns -->
 				</tbody>
 
@@ -172,13 +248,13 @@ if(isset($_GET['return_id'])){
 						<th scope="col" class="manage-column column-order_date">
 							<span style="display: block;overflow: hidden;padding: 8px;">Status
 								<span class="sortingIcon">
-									<i class="glyphicon glyphicon-triangle-top statusSorting" data-id="COMPLETED"></i>
-									<i class="glyphicon glyphicon-triangle-bottom statusSorting" data-id="PENDING"></i>
+									<i class="glyphicon glyphicon-triangle-top statusSorting" data-id="wc-recycled"></i>
+									<i class="glyphicon glyphicon-triangle-bottom statusSorting" data-id="wc-completed"></i>
 								</span>
 							</span>
 						</th>
 						<th scope="col" class="manage-column column-order_date">
-							<span style="display: block;overflow: hidden;padding: 8px;">Actions</span>
+							<center><span style="display: block;overflow: hidden;padding: 8px;">Actions</span></center>
 						</th>
 					</tr>
 				</tfoot>
@@ -187,7 +263,9 @@ if(isset($_GET['return_id'])){
 			
 		</form>
 	</div>
+	<!-- End View Recycle Data List -->
 
+	<!-- Show no Data -->
 <?php 
 }else{
 	echo '<h1 class="wp-heading-inline">Bidi Recycle Program</h1>';

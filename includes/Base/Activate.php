@@ -81,13 +81,10 @@ class Activate {
 						transaction_id INT(11) NOT NULL AUTO_INCREMENT,
 						transaction_date_processed DATETIME DEFAULT '0000-00-00 00:00:00' NOT NULL,
 						transaction_status TEXT NOT NULL,
-						transaction_notes TEXT NOT NULL,
 						return_id INT(11) NOT NULL,
 						return_code VARCHAR(50) NOT NULL,
-						shipping_id INT(11) NOT NULL,
 						PRIMARY KEY  ( transaction_id ),
-						FOREIGN KEY ( return_id, return_code ) REFERENCES wp_bidi_return_information ( return_id, return_code ),
-						FOREIGN KEY ( shipping_id ) REFERENCES wp_bidi_return_shipping_info ( shipping_id )
+						FOREIGN KEY ( return_id, return_code ) REFERENCES wp_bidi_return_information ( return_id, return_code )
 					) {$charset_collate}";
 
 			require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
@@ -114,8 +111,10 @@ class Activate {
 						shipping_notes TEXT NOT NULL,
 						return_id INT(11) NOT NULL,
 						return_code VARCHAR(50) NOT NULL,
+						transaction_id INT(11) NOT NULL,
 						PRIMARY KEY  ( shipping_id ),
-						FOREIGN KEY ( return_id, return_code ) REFERENCES wp_bidi_return_information ( return_id, return_code )
+						FOREIGN KEY ( return_id, return_code ) REFERENCES wp_bidi_return_information ( return_id, return_code ),
+						FOREIGN KEY ( transaction_id ) REFERENCES wp_bidi_return_transaction ( transaction_id )
 					) {$charset_collate}";
 
 			require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
