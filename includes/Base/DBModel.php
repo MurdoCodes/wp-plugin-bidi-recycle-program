@@ -145,7 +145,7 @@ class DBModel{
 		}
 
 	}
-
+	// Update Item Status on table bidi_return_information
 	function updateReturnInformation($return_item_status, $return_code){
 		$bidi_return_information = $this->wpdb->prefix . 'bidi_return_information';
 		$sql = "UPDATE `" . $bidi_return_information . 
