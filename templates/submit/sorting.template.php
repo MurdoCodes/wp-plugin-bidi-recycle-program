@@ -68,7 +68,7 @@ function showDetails($param){
 						'</td>';
 		$output .= '
 						<td class="order_status column-order_status" data-colname="Status">
-							<center><a href="' . $returnDetailsURL . '" style="text-align:center;">View</a></center>
+							<center><a href="' . $returnDetailsURL . '" style="text-align:center;"><span class="glyphicon glyphicon-eye-open"></span></a></center>
 						</td>
 					</tr>';
 		

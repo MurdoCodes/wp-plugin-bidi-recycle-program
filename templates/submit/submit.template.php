@@ -126,7 +126,7 @@ if($_POST){
 											      <td style="padding:1em;text-align:center;border:1px solid #eeeeee;">' . $product_qty[$x] . '</td>
 											    </tr>';
 											    }
-											$mail->Body .='
+		$mail->Body .='
 										  </tbody>
 										  <tfoot>
 										    <tr style="border:1px solid #eeeeee;">

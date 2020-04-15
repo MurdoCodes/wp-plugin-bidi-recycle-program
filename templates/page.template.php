@@ -157,9 +157,10 @@ use \Includes\Base\BaseController;
 						</div>
 						<div class="col-md-4">
 							<h4>Other Details</h4>
+							<div class="form-group"> <button type="submit" name="submit" class="form-control btn btn-success" id="recycle-submit">Confirm Recycle</button></div>	
 						</div>
 					</div>
-						
+					
 				</div>
 			</div>	
 		</div>
