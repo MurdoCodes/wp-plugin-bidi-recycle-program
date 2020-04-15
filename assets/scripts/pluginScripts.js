@@ -152,7 +152,7 @@ function appendModalProduct(id, product_order_id, product_order_item_id, product
 
 $(function() {
     
-    /** Start Searching **/
+    /** Start Front End Form Submission **/
 	    // Hide Loader
 		$("#loader").hide();
 		// Submit Front End Form
@@ -188,7 +188,44 @@ $(function() {
 			    }
 			});
 		};
-    /** End Searching **/
+    /** End Front End Form Submission **/
+
+    /** Start Admin End Form Submission **/    	
+    	// Hide Loader
+		$("#adminLoader").hide();
+		// Submit Front End Form
+	    $('#form-admin-recycle').on('submit', function(event) { 
+	        event.preventDefault();
+	        $("#adminLoader").show();
+	        var data = $( "#form-admin-recycle" ).serialize();
+	        jQuery.ajax({
+	        	dataType: "json",
+	        	type : "POST",
+	        	data : data,
+	        	url : pluginURL() + "templates/submit/adminSubmit.template.php",
+	        	success: success,
+	        	error: printError
+	        });
+
+	    });
+	    // Success Message
+	    var success = function( resp ){
+	    	alert("Form is Submitted Successfully");
+	    };
+	    // Error Message > This is the function being called whenever the form submission is succesful
+	    var printError = function( req, status, err ) {
+	    	$("#loader").hide();
+	    	$.confirm({
+			    title: 'Item Recycled Successfully!',
+			    content: 'You have changed the current status of this recycled item.\nThank You!',
+			    buttons: {
+			        Ok: function () {
+			            location.reload();
+			        }
+			    }
+			});
+		};
+    /** Start Admin End Form Submission **/
 
     /** Start Admin Searching **/
 		var searchValue = $('#recycle-search-input').val();	

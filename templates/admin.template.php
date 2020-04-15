@@ -67,7 +67,8 @@ if(isset($_GET['return_id'])){
 									</div>
 									<div class="form-group">
 										<label>Status:</label>
-										<form action="<?php echo $this->plugin_url . 'templates/submit/adminSubmit.template.php'; ?>" method="POST">
+										<!-- <form action="<?php //echo $this->plugin_url . 'templates/submit/adminSubmit.template.php'; ?>" method="POST"> -->
+										<form id="form-admin-recycle" method="POST">
 											<input type="hidden" name="customer_id" value="<?php echo $getReturnProductData[0]->customer_id; ?>">
 											<input type="hidden" name="return_code" value="<?php echo $getReturnProductData[0]->return_code; ?>">
 											<input type="hidden" name ="return_id" value="<?php echo $return_id; ?>">
@@ -103,6 +104,7 @@ if(isset($_GET['return_id'])){
 												<button type="submit" class="btn btn-primary" disabled>Save Transaction</button>
 											<?php } ?>
 										</form>
+										<div id="adminLoader"></div>
 									</div>
 								</div>
 							</div>
