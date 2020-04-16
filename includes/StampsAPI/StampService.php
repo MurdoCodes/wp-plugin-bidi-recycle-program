@@ -249,7 +249,8 @@ class StampService {
      * being shipped to for a given package weight, size and shipDate
      *
      * @param string $fromZIPCode - ZIP Code of the customer
-     * @param float $weight - Estimated weight in lb
+     * @param float $weightlb - Estimated weight in lb
+     * @param float $weightOz - Estimated weight in Oz
      * @param string $serviceType - (Optional) Specific service type
      * @param string $packageType - (Optional) Specific package type
      * @param float $length - (Optional) Length of the package
@@ -258,19 +259,20 @@ class StampService {
      * @param string $shipDate - (Optional) When will the package be shipped. Format (yy-d-m). Default value is now + 3 days.
      * @return list of Rates. Rate object documentation : https://developer.stamps.com/developer/docs/swsimv90.html#getrates
      */
-    public function getRates(string $fromZIPCode, float $weight, string $serviceType = NULL, string $packageType = NULL,
+    public function getRates(string $fromZIPCode, float $weightLb, float $weightOz, string $serviceType = NULL, string $packageType = NULL,
                              float $length = NULL, float $width = NULL, float $height = NULL,  string $shipDate = NULL) {
         if(isset($this->soapClient)) {
             try {
-                if(!isset($fromZIPCode) && !isset($weight)){
-                    throw new InvalidArgumentException('From ZIP code and Weight are required!');
+                if(!isset($fromZIPCode) && !isset($weightLb) && !isset($weightOz)){
+                    throw new InvalidArgumentException('From ZIP code and Weights are required!');
                 }
 
                 $params = array("Authenticator" => $this->authenticator,
                                 "Rate" => array(
                                     "FromZipCode" => $fromZIPCode,
                                     "ToZIPCode" => $this->toAddress->ZIPCode,
-                                    "WeightLb" => $weight,
+                                    "WeightLb" => $weightLb,
+                                    "WeightOz" => $weightOz,
                                     "ServiceType" => isset($serviceType) ? $serviceType : '',
                                     "PackageType" => isset($packageType) ? $packageType : '',
                                     "Length" => isset($length) ? $length : '',
@@ -293,7 +295,7 @@ class StampService {
                 
                 return $response->Rates->Rate;
             } catch (Exception $e) {
-                $this->_log(LOG_ERR, $e->getMessage());
+                _log(LOG_ERR, $e->getMessage());
                 throw $e;
             }
         } else {
