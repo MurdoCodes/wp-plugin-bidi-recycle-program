@@ -1,5 +1,6 @@
 // Set array to count modal product quantity
 var countQty = [];
+var countItemQty = [];
 $(".content").niceScroll();
 $(".modal-body").niceScroll();
 
@@ -116,7 +117,73 @@ function appendSingleProduct(id, modal_product_order_id, modal_product_order_ite
         $(this).remove();
     });
 
+
+    var itemQtyInList = $('#productQty_' + id).val();
+    countItemQty.push(itemQtyInList);
+    var totalItemQty = eval(countItemQty.join('+'));
+    
+	returnStampsValue(totalItemQty);
+
 }
+function returnStampsValue(totalItemQty){
+
+	var fixedItemWeight = 0.5;
+    var totalItemWeight = totalItemQty * fixedItemWeight;
+
+    var from_firstname = $("input[name=from_firstname]").val();
+	var from_lastName = $("input[name=from_lastName]").val();	
+	var from_address = $("input[name=from_address]").val();	
+	var from_city = $("input[name=from_city]").val();
+	var from_state = $("input[name=from_state]").val();
+	var from_postcode = $("input[name=from_postcode]").val();
+	var from_phone_number = $("input[name=from_phone_number]").val();
+	var from_email = $("input[name=from_email]").val();
+
+	var data = {
+		from_firstname : from_firstname,
+		from_lastName : from_lastName,
+		from_address : from_address,
+		from_city : from_city,
+		from_state : from_state,
+		from_postcode : from_postcode,
+		from_phone_number : from_phone_number,
+		from_email : from_email,
+		totalItemQty : totalItemQty,
+		totalItemWeight : totalItemWeight
+	};
+
+	console.log(data);
+
+	$.ajax({
+		url: pluginURL() + 'templates/submit/stampsSubmit.template.php',
+	    method: 'POST',	    
+	    data: data,
+	    dataType:"JSON",
+	    success: function(response) {       	
+	       	$('input[name=serviceType]').val(response.ServiceDescription + "/" + response.PackageType);
+	       	$(".serviceType").html(response.ServiceDescription + "/" + response.PackageType);
+
+	       	var maxAmount = parseFloat(response.MaxAmount);
+	       	$('input[name=returnedRate]').val("$"+ maxAmount.toFixed(2));
+	       	$(".returnedRate").html("$" + maxAmount.toFixed(2));
+
+	       	$('input[name=totalItemQty]').val(totalItemQty);
+
+			$('input[name=totalItemWeight]').val(response.WeightOz);
+			$(".totalItemWeight").html(totalItemQty + " Items * " + "0.5oz/stick = " + response.WeightOz + "oz");
+
+			$('input[name=DeliverDays]').val(response.DeliverDays);
+			$(".DeliverDays").html(response.DeliverDays);
+
+			$('input[name=ShipDate]').val(response.ShipDate);
+			$(".ShipDate").html(response.ShipDate);
+	       	
+	       	console.log(response);
+	    }
+	});
+
+}
+
 
 /** To append product in Modal and remove from the product list **/
 function appendModalProduct(id, product_order_id, product_order_item_id, product_imgSrc, product_name, product_productQty){
@@ -151,13 +218,13 @@ function appendModalProduct(id, product_order_id, product_order_item_id, product
 }
 
 $(function() {
-    
     /** Start Front End Form Submission **/
 	    // Hide Loader
 		$("#loader").hide();
 		// Submit Front End Form
 	    $('#form-recycle').on('submit', function(event) { 
 	        event.preventDefault();
+	        alert("SENDING USER FORM");
 	        $("#loader").show();
 	        var data = $( "#form-recycle" ).serialize();
 	        jQuery.ajax({
@@ -196,25 +263,25 @@ $(function() {
 		// Submit Front End Form
 	    $('#form-admin-recycle').on('submit', function(event) { 
 	        event.preventDefault();
-	        $("#loader").show();
+	        $("#adminLoader").show();
 	        var data = $( "#form-admin-recycle" ).serialize();
 	        jQuery.ajax({
 	        	dataType: "json",
 	        	type : "POST",
 	        	data : data,
 	        	url : pluginURL() + "templates/submit/adminSubmit.template.php",
-	        	success: success,
-	        	error: printError
+	        	success: successAdmin,
+	        	error: printErrorAdmin
 	        });
 
 	    });
 	    // Success Message
-	    var success = function( resp ){
+	    var successAdmin = function( resp ){
 	    	alert("Form is Submitted Successfully");
 	    };
 	    // Error Message > This is the function being called whenever the form submission is succesful
-	    var printError = function( req, status, err ) {
-	    	$("#loader").hide();
+	    var printErrorAdmin = function( req, status, err ) {
+	    	$("#adminLoader").hide();
 	    	$.confirm({
 			    title: 'Item Recycled Successfully!',
 			    content: 'You have changed the current status of this recycled item.\nThank You!',

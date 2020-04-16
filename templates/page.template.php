@@ -1,7 +1,11 @@
-<?php 
-namespace Includes\Base;
-use \Includes\Base\BaseController;
-
+<?php
+/**
+* @package Bidi Recycle Program
+*/
+use Includes\Base\BaseController;
+use Includes\Base\CustomerOrder;
+use Includes\StampsAPI\StampService;
+use Includes\StampsAPI\Address;
 	// // Declare variable that contains current user details from wp_user table
 	if(wp_get_current_user()){
 	$customer = wp_get_current_user();
@@ -33,9 +37,8 @@ use \Includes\Base\BaseController;
 	$random_hash = substr(md5(uniqid(rand(), true)), 16, 16);
 	
 ?>
-
-<!-- <form id="form-recycle" method="POST" action="<?php //echo $this->plugin_url . 'templates/submit/submit.template.php'; ?>"> -->
-<form id="form-recycle" method="POST">
+<form method="POST" action="<?php echo $this->plugin_url . 'templates/submit/submit.template.php'; ?>">
+<!-- <form id="form-recycle" method="POST"> -->
 	<input type="text" name="return_code" value="<?php echo $random_hash; ?>" hidden>
 	<input type="text" name="current_user_id" value="<?php echo get_current_user_id(); ?>" hidden>
 	<div class="container">
@@ -82,12 +85,12 @@ use \Includes\Base\BaseController;
 						
 							<div class="form-group">
 						    	<label for="firstName">First Name:</label>
-						    	<input type="text" class="form-control" name="from_firstname" value="<?php echo $orderDetails->get_billing_first_name(); ?>" placeholder="<?php echo $orderDetails->get_billing_first_name(); ?>" >
+						    	<input type="text" class="form-control" name="from_firstname" value="<?php echo $orderDetails->get_shipping_first_name(); ?>" placeholder="<?php echo $orderDetails->get_shipping_first_name(); ?>" >
 						  	</div>
 
 						  	<div class="form-group">
 						    	<label for="lastName">Last Name:</label>
-						    	<input type="text" class="form-control" name="from_lastName" value="<?php echo $orderDetails->get_billing_last_name(); ?>" placeholder="<?php echo $orderDetails->get_billing_last_name(); ?>" >
+						    	<input type="text" class="form-control" name="from_lastName" value="<?php echo $orderDetails->get_shipping_last_name(); ?>" placeholder="<?php echo $orderDetails->get_shipping_last_name(); ?>" >
 						  	</div>
 
 						  	<div class="form-group">
@@ -97,7 +100,7 @@ use \Includes\Base\BaseController;
 							
 							<div class="form-group">
 						    	<label for="email">Address:</label>
-						    	<input type="text" class="form-control" name="from_address" value="<?php echo $orderDetails->get_billing_address_1(); ?>" placeholder="<?php echo $orderDetails->get_billing_address_1(); ?>" >
+						    	<input type="text" class="form-control" name="from_address" value="<?php echo $orderDetails->get_shipping_address_1(); ?>" placeholder="<?php echo $orderDetails->get_shipping_address_1(); ?>" >
 						  	</div>
 
 
@@ -108,22 +111,22 @@ use \Includes\Base\BaseController;
 
 						  	<div class="form-group">
 						    	<label for="country">Country:</label>
-						    	<input type="text" class="form-control" name="from_country" value="<?php echo $orderDetails->get_billing_country(); ?>" placeholder="<?php echo $orderDetails->get_billing_country(); ?>" >
+						    	<input type="text" class="form-control" name="from_country" value="<?php echo $orderDetails->get_shipping_country(); ?>" placeholder="<?php echo $orderDetails->get_shipping_country(); ?>" >
 						  	</div>
 
 						  	<div class="form-group">
 						    	<label for="postcode">Postcode:</label>
-						    	<input type="text" class="form-control" name="from_postcode" value="<?php echo $orderDetails->get_billing_postcode(); ?>" placeholder="<?php echo $orderDetails->get_billing_postcode(); ?>" >
+						    	<input type="text" class="form-control" name="from_postcode" value="<?php echo $orderDetails->get_shipping_postcode(); ?>" placeholder="<?php echo $orderDetails->get_shipping_postcode(); ?>" >
 						  	</div>
 
 						  	<div class="form-group">
 						    	<label for="city">City:</label>
-						    	<input type="text" class="form-control" name="from_city" value="<?php echo $orderDetails->get_billing_city(); ?>" placeholder="<?php echo $orderDetails->get_billing_city(); ?>">
+						    	<input type="text" class="form-control" name="from_city" value="<?php echo $orderDetails->get_shipping_city(); ?>" placeholder="<?php echo $orderDetails->get_shipping_city(); ?>">
 						  	</div>
 
 						  	<div class="form-group">
 						    	<label for="state">State:</label>
-						    	<input type="text" class="form-control" name="from_state" value="<?php echo $orderDetails->get_billing_state(); ?>" placeholder="<?php echo $orderDetails->get_billing_state(); ?>">
+						    	<input type="text" class="form-control" name="from_state" value="<?php echo $orderDetails->get_shipping_state(); ?>" placeholder="<?php echo $orderDetails->get_shipping_state(); ?>">
 						  	</div>
 						
 					</div>
@@ -136,28 +139,97 @@ use \Includes\Base\BaseController;
 		<div class="row" style="margin-top:.5em;">
 			<div class="col-md-12">
 				<div class="mail-return default-container-border">
-					<h3>Shipping Details</h3>
+					<h3>Shipping Details : </h3>
+					<input type="hidden" class="form-control" id="serviceType" name="serviceType" value="">
+					<input type="hidden" class="form-control" id="totalItemQty" name="totalItemQty" value="">
+					<input type="hidden" class="form-control" id="totalItemWeight" name="totalItemWeight" value="">
+					<input type="hidden" class="form-control" id="ShipDate" name="ShipDate" value="">
+					<input type="hidden" class="form-control" id="DeliverDays" name="DeliverDays" value="">
 					<hr>
 					<div class="row">
-						<div class="col-md-4">			
+						<div class="col-md-3">
+							
+							<h4 style="color:#fff;font-weight: bold;">Package Details</h4>
+							<div class="col-md-12">
+								<div class="form-group">
+									<label for="serviceType">Service Type:</label>
+									<p class="serviceType"></p>
+								</div>
 
-							<div class="form-group">
-								<label for="exampleFormControlSelect1">Service</label>
-								<select class="form-control" id="exampleFormControlSelect1">
-									<option>1</option>
-									<option>2</option>
-									<option>3</option>
-									<option>4</option>
-									<option>5</option>
-								</select>
+								<div class="form-group">
+									<label for="totalItemWeight">Total Item Weight in oz:</label>
+									<p class="totalItemWeight"></p>
+								</div>
+
+								<div class="form-group">
+									<label for="returnedRate">Amount:</label>
+									<p class="returnedRate"></p>
+								</div>
+
+								<div class="form-group">
+									<label for="ShipDate">Ship Date:</label>
+									<p class="ShipDate"></p>
+								</div>
+
+								<div class="form-group">
+									<label for="DeliverDays">Deliver Days:</label>
+									<p class="DeliverDays"></p>
+								</div>
 							</div>
+
+						</div>
+						<div class="col-md-5">
+
+							<h4 style="color:#fff;font-weight: bold;">Ship To : </h4>
+
+							<div class="col-md-6">
+								<div class="form-group">
+									<label for="ShippingFullName">Full Name :</label>
+									<p>Eric Mosser</p>
+								</div>
+
+								<div class="form-group">
+									<label for="ShippingEmail">Email :</label>
+									<p>admin@kaivalbrands.com</p>
+								</div>
+
+								<div class="form-group">
+									<label for="ShippingPhone">Phone :</label>
+									<p>5035671167</p>
+								</div>
+							</div>
+
+							<div class="col-md-6">
+								<div class="form-group">
+									<label for="ShippingStreetAddress">Address :</label>
+									<p>16300 SW Blackbird Street</p>
+									<p>Beaverton</p>
+									<p>Oregon</p>
+									<p>97007</p>
+								</div>
+							</div>
+
 						</div>
 						<div class="col-md-4">
-							<h4>Other Details</h4>
-						</div>
-						<div class="col-md-4">
-							<h4>Other Details</h4>
-							<div class="form-group"> <button type="submit" name="submit" class="form-control btn btn-success" id="recycle-submit">Confirm Recycle</button></div>	
+							<h4 style="color:#fff;font-weight: bold;">Card Details : </h4>
+							<div class="col-md-12">
+								<div class="form-group">
+									<label for="creditCardNumber">Credit Card Number:</label>
+									<input type="number" class="form-control" id="creditCardNumber" name="creditCardNumber">
+								</div>
+								<div class="form-group">
+									<label for="ExpirationDate">Expiration Date:</label>
+									<input type="date" class="form-control" id="ExpirationDate" name="ExpirationDate">
+								</div>
+								<div class="form-group">
+									<label for="returnedRate">Amount:</label>
+									<input type="readonly" class="form-control" id="returnedRate" name="returnedRate" value="">
+								</div>
+
+								<div class="form-group">
+									<button type="submit" name="submit" class="form-control btn btn-success" id="recycle-submit">Confirm Recycle</button>
+								</div>
+							</div>
 						</div>
 					</div>
 					

@@ -1,5 +1,8 @@
-<?php 
-namespace Includes\Base;
+<?php
+/**
+* @package Bidi Recycle Program
+*/
+use Includes\Base\DBModel;
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;

@@ -1,5 +1,8 @@
-<?php 
-namespace Includes\Base;
+<?php
+/**
+* @package Bidi Recycle Program
+*/
+use Includes\Base\DBModel;
 require "../../vendor/autoload.php";
 require_once( dirname (dirname(dirname( dirname( dirname( dirname( __FILE__ ) ) ) ) ) ) . '/wp-load.php' );
 	

@@ -43,6 +43,7 @@ header h1{margin:0 !important;font-size:7rem !important;}
 
 /* MAIL RETURN */
 .mail-return h3{margin: 0 !important;}
+.mail-return p{color:#fff !important;}
 
 /*SHIPPING DETAILS*/
 .shipping-details .shippingfee{display: flex !important;justify-content: space-between !important;}
@@ -59,7 +60,7 @@ header h1{margin:0 !important;font-size:7rem !important;}
 
 
 /* LOADER */
-#loader {
+#loader, #adminLoader {
   border: 16px solid #f3f3f3;
   border-radius: 50%;
   border-top: 16px solid #37b348;

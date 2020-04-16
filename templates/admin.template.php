@@ -1,5 +1,10 @@
-<?php 
-namespace Includes\Base;
+<?php
+/**
+* @package Bidi Recycle Program
+*/
+use Includes\Base\DBModel;
+use Includes\Base\CustomerOrder;
+
 $DBModel = new DBModel();
 $CustomerOrder = new CustomerOrder();
 
@@ -104,7 +109,7 @@ if(isset($_GET['return_id'])){
 												<button type="submit" class="btn btn-primary" disabled>Save Transaction</button>
 											<?php } ?>
 										</form>
-										<div id="loader"></div>
+										<div id="adminLoader"></div>
 									</div>
 								</div>
 							</div>
