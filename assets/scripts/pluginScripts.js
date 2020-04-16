@@ -196,7 +196,7 @@ $(function() {
 		// Submit Front End Form
 	    $('#form-admin-recycle').on('submit', function(event) { 
 	        event.preventDefault();
-	        $("#adminLoader").show();
+	        $("#loader").show();
 	        var data = $( "#form-admin-recycle" ).serialize();
 	        jQuery.ajax({
 	        	dataType: "json",

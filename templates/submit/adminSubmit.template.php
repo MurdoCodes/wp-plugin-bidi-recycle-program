@@ -31,12 +31,13 @@ if(isset($_POST)){
 
 	$coupon_code = strtoupper(substr(base_convert(sha1(uniqid(mt_rand())), 16, 36), 0, 10));
 
-	$amount = '15.95';
+	$coupon_amount = '15.95';
 	$discount_type = 'fixed_cart';
 	$usage_limit = '1';
 						
 	$coupon = array(
 		'post_title' => $coupon_code,
+		'description' => $description,
 		'post_content' => '',
 		'post_status' => 'publish',
 		'post_author' => 1,
@@ -47,11 +48,12 @@ if(isset($_POST)){
 						
 	// Add meta
 	update_post_meta( $new_coupon_id, 'discount_type', $discount_type );
-	update_post_meta( $new_coupon_id, 'coupon_amount', $amount );
+	update_post_meta( $new_coupon_id, 'coupon_amount', $coupon_amount );
+	update_post_meta( $new_coupon_id, 'usage_limit', $usage_limit );
+	update_post_meta( $new_coupon_id, 'description', 'Free Bidi Stick for Recycling Items' );
 	update_post_meta( $new_coupon_id, 'individual_use', 'no' );
 	update_post_meta( $new_coupon_id, 'product_ids', '' );
-	update_post_meta( $new_coupon_id, 'exclude_product_ids', '' );
-	update_post_meta( $new_coupon_id, 'usage_limit', $usage_limit );
+	update_post_meta( $new_coupon_id, 'exclude_product_ids', '' );	
 	update_post_meta( $new_coupon_id, 'expiry_date', '' );
 	update_post_meta( $new_coupon_id, 'apply_before_tax', 'yes' );
 	update_post_meta( $new_coupon_id, 'free_shipping', 'no' );

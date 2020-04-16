@@ -104,7 +104,7 @@ if(isset($_GET['return_id'])){
 												<button type="submit" class="btn btn-primary" disabled>Save Transaction</button>
 											<?php } ?>
 										</form>
-										<div id="adminLoader"></div>
+										<div id="loader"></div>
 									</div>
 								</div>
 							</div>
@@ -152,7 +152,7 @@ if(isset($_GET['return_id'])){
 								      <td><?php echo $value->product_info_id; ?></td>
 								      <td><?php echo $value->product_order_id; ?></td>
 								      <td><?php echo $value->product_item_id; ?></td>
-								      <td><?php echo $value->product_return_date; ?></td>
+								      <td><?php echo date('F, j Y h:i:sa',strtotime($value->product_return_date)); ?></td>
 								    </tr>
 								    <?php } ?>
 								  </tbody>
