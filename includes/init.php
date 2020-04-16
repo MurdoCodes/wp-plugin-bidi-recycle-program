@@ -18,7 +18,7 @@ final class Init {
 			Base\Shortcode::class,
 			Base\CustomerOrder::class,
 			Base\DBModel::class,
-			Stamps\StampService::class
+			StampsAPI\StampService::class
 		];
 	}
 
