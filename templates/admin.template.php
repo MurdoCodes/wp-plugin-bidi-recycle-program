@@ -23,7 +23,7 @@ if(isset($_GET['return_id'])){
 					<div class="row">
 						<div class="row">
 							<div class="customerDetails">
-								<h2 class="woocommerce-order-data__heading">Return Code : <?php echo $getReturnProductData[0]->return_code; ?></h2>
+								<h2 class="woocommerce-order-data__heading">Recycle Tracking Number : <?php echo $getReturnProductData[0]->shipping_tracking_number; ?></h2>
 								<div class="details">
 									<div class="general">
 										<h4>General</h4>
@@ -75,7 +75,7 @@ if(isset($_GET['return_id'])){
 										<!-- <form action="<?php //echo $this->plugin_url . 'templates/submit/adminSubmit.template.php'; ?>" method="POST"> -->
 										<form id="form-admin-recycle" method="POST">
 											<input type="hidden" name="customer_id" value="<?php echo $getReturnProductData[0]->customer_id; ?>">
-											<input type="hidden" name="return_code" value="<?php echo $getReturnProductData[0]->return_code; ?>">
+											<input type="hidden" name="shipping_tracking_number" value="<?php echo $getReturnProductData[0]->shipping_tracking_number; ?>">
 											<input type="hidden" name ="return_id" value="<?php echo $return_id; ?>">
 											<input type="hidden" name="transaction_date" value="<?php echo date("Y-m-d h:i:sa"); ?>">
 											<?php
@@ -90,7 +90,7 @@ if(isset($_GET['return_id'])){
 											
 											<?php if($getReturnProductData[0]->return_item_status == 'wc-completed'){ ?>
 												<select class="form-control" name="transaction_status" id="transaction_status">
-													<option value="<?php echo $getReturnProductData[0]->return_item_status ?>">
+													<option value="" disabled selected hidden>
 														PENDING
 													</option>
 													<option value="wc-recycled">RECYCLE</option>
@@ -104,7 +104,7 @@ if(isset($_GET['return_id'])){
 
 
 											<?php if($getReturnProductData[0]->return_item_status == 'wc-completed'){ ?>
-												<button type="submit" class="btn btn-primary">Save Transaction</button>
+												<button type="submit" class="btn btn-primary" id="adminSubmitButton">Save Transaction</button>
 											<?php }else if($getReturnProductData[0]->return_item_status == 'wc-recycled'){ ?>
 												<button type="submit" class="btn btn-primary" disabled>Save Transaction</button>
 											<?php } ?>

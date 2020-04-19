@@ -18,14 +18,30 @@ class DBModel{
 	}
 
 	// Insert return information to the database
-	function insertReturnInformation($return_code, $total_prod_qty, $current_date, $return_status, $customer_id){
+	function insertReturnInformation($total_prod_qty, $current_date, $return_status, $customer_id, $TrackingNumber){
 		$table = $this->wpdb->prefix . 'bidi_return_information';
 		$sql = $this->wpdb->prepare(
 			"INSERT INTO `" . $table . "`      
-			(`return_id`, `return_code`, `return_total_qty_returned`, `return_date`, `return_item_status`, `customer_id`) 
+			(`return_id`, `return_total_qty_returned`, `return_date`, `return_item_status`, `customer_id`, `shipping_tracking_number`) 
 			values
-			(%d, %s, %d, %s, %s, %d)",
-			NULL, $return_code, $total_prod_qty, $current_date, $return_status, $customer_id
+			(%d, %s, %s, %s, %s, %s)",
+			NULL, $total_prod_qty, $current_date, $return_status, $customer_id, $TrackingNumber
+ 		);
+		if($this->wpdb->query($sql)){
+			return array($this->wpdb->insert_id);
+		}
+
+	}
+
+	function insertShippingInformation($TrackingNumber, $StampsTxID, $postageURL, $ShipDate, $DeliveryDate, $MaxAmount, $return_id){
+
+		$table = $this->wpdb->prefix . 'bidi_return_shipping_info';
+		$sql = $this->wpdb->prepare(
+			"INSERT INTO `" . $table . "`      
+			(`shipping_id`, `shipping_tracking_number`, `shipping_stamps`, `shipping_postage_url`, `shipping_date`, `shipping_delivery_day`, `shipping_rate`, `return_id`) 
+			values
+			(%d, %s, %s, %s, %s, %s, %s, %s)",
+			NULL, $TrackingNumber, $StampsTxID, $postageURL, $ShipDate, $DeliveryDate, $MaxAmount, $return_id
  		);
 		if($this->wpdb->query($sql)){
 			return array($this->wpdb->insert_id);
@@ -34,14 +50,14 @@ class DBModel{
 	}
 
 	// Insert return product list and information
-	function insertProductInformation($product_name, $product_qty, $product_order_id, $product_item_id, $product_image, $current_date, $return_id, $return_code){
+	function insertProductInformation($product_name, $product_qty, $product_order_id, $product_item_id, $product_image, $current_date, $return_id, $TrackingNumber){
 		$table = $this->wpdb->prefix . 'bidi_return_product_info';
 		$sql = $this->wpdb->prepare(
 			"INSERT INTO `" . $table . "`      
-			(`product_info_id`, `product_name`, `product_qty`, `product_order_id`, `product_item_id`, `product_image`, `product_return_date`, `return_id`, `return_code`) 
+			(`product_info_id`, `product_name`, `product_qty`, `product_order_id`, `product_item_id`, `product_image`, `product_return_date`, `return_id`, `shipping_tracking_number`) 
 			values
 			(%d, %s, %s, %d, %d, %s, %s, %d, %s)",
-			NULL, $product_name, $product_qty, $product_order_id, $product_item_id, $product_image, $current_date, $return_id, $return_code
+			NULL, $product_name, $product_qty, $product_order_id, $product_item_id, $product_image, $current_date, $return_id, $TrackingNumber
  		);
 		if($this->wpdb->query($sql)){
 			return "Success";
@@ -128,15 +144,15 @@ class DBModel{
 	}
 
 	// Save admin transaction
-	function saveAdminTransaction($transaction_date, $transaction_status, $return_id, $return_code){
+	function saveAdminTransaction($transaction_date, $transaction_status, $return_id, $TrackingNumber){
 		$bidi_return_transaction = $this->wpdb->prefix . 'bidi_return_transaction';
 
 		$sql = $this->wpdb->prepare(
 				"INSERT INTO `" . $bidi_return_transaction . "`
-				(`transaction_id`, `transaction_date_processed`, `transaction_status`, `return_id`, `return_code`)
+				(`transaction_id`, `transaction_date_processed`, `transaction_status`, `return_id`, `shipping_tracking_number`)
 				VALUES
 				(%d, %s, %s, %d, %s)",
-				NULL, $transaction_date, $transaction_status, $return_id, $return_code				
+				NULL, $transaction_date, $transaction_status, $return_id, $TrackingNumber				
 		);
 
 		$result = $this->wpdb->get_results($sql);		
@@ -146,11 +162,11 @@ class DBModel{
 
 	}
 	// Update Item Status on table bidi_return_information
-	function updateReturnInformation($return_item_status, $return_code){
+	function updateReturnInformation($return_item_status, $TrackingNumber){
 		$bidi_return_information = $this->wpdb->prefix . 'bidi_return_information';
 		$sql = "UPDATE `" . $bidi_return_information . 
 				"` SET `return_item_status`= '" . $return_item_status .
-				"' WHERE return_code='" . $return_code . "'";
+				"' WHERE shipping_tracking_number='" . $TrackingNumber . "'";
 
 		$result = $this->wpdb->get_results($sql);		
         if($result){

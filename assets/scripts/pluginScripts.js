@@ -35,7 +35,7 @@ function addElement(elem){
 		
 		$.confirm({
 		    title: '<style="">Warning!',
-		    content: 'Maximum Number of Product Quantity Reached. Limited to 10 Products. Please add the exact quantity. Current Product Quantity Count : ' + + eval(countQty.join('+')),
+		    content: 'Maximum Number of Product Quantity Reached. Limited to 10 Products. Please add the exact quantity. Product Quantity Count if Item Is Added : ' + + eval(countQty.join('+')),
 		    buttons: {
 		        Ok: function () {
 		        	countQty.splice(-1,1)
@@ -125,6 +125,7 @@ function appendSingleProduct(id, modal_product_order_id, modal_product_order_ite
 	returnStampsValue(totalItemQty);
 
 }
+
 function returnStampsValue(totalItemQty){
 
 	var fixedItemWeight = 0.5;
@@ -160,11 +161,12 @@ function returnStampsValue(totalItemQty){
 	    data: data,
 	    dataType:"JSON",
 	    success: function(response) {       	
-	       	$('input[name=serviceType]').val(response.ServiceDescription + "/" + response.PackageType);
+	       	$('input[name=ServiceType]').val(response.PackageType);
+	       	$('input[name=ServiceDescription]').val(response.ServiceDescription);
 	       	$(".serviceType").html(response.ServiceDescription + "/" + response.PackageType);
 
 	       	var maxAmount = parseFloat(response.MaxAmount);
-	       	$('input[name=returnedRate]').val("$"+ maxAmount.toFixed(2));
+	       	$('input[name=returnedRate]').val(response.MaxAmount);
 	       	$(".returnedRate").html("$" + maxAmount.toFixed(2));
 
 	       	$('input[name=totalItemQty]').val(totalItemQty);
@@ -224,14 +226,13 @@ $(function() {
 		// Submit Front End Form
 	    $('#form-recycle').on('submit', function(event) { 
 	        event.preventDefault();
-	        alert("SENDING USER FORM");
 	        $("#loader").show();
 	        var data = $( "#form-recycle" ).serialize();
 	        jQuery.ajax({
 	        	dataType: "json",
 	        	type : "POST",
 	        	data : data,
-	        	url : pluginURL() + "templates/submit/submit.template.php",
+	        	url : pluginURL() + "templates/submit/pageSubmit.template.php",
 	        	success: success,
 	        	error: printError
 	        });
@@ -258,40 +259,49 @@ $(function() {
     /** End Front End Form Submission **/
 
     /** Start Admin End Form Submission **/    	
+    	$('#adminSubmitButton').prop('disabled', true);
     	// Hide Loader
 		$("#adminLoader").hide();
-		// Submit Front End Form
-	    $('#form-admin-recycle').on('submit', function(event) { 
-	        event.preventDefault();
-	        $("#adminLoader").show();
-	        var data = $( "#form-admin-recycle" ).serialize();
-	        jQuery.ajax({
-	        	dataType: "json",
-	        	type : "POST",
-	        	data : data,
-	        	url : pluginURL() + "templates/submit/adminSubmit.template.php",
-	        	success: successAdmin,
-	        	error: printErrorAdmin
-	        });
+		$("#transaction_status").change(function(){
+	        var selectedCountry = $(this).children("option:selected").val();
+	        
+	        if(selectedCountry = 'wc-recycled'){
+	        	// Submit Front End Form
+	        	$('#adminSubmitButton').prop('disabled', false);
+			    $('#form-admin-recycle').on('submit', function(event) { 
+			        event.preventDefault();
+			        $("#adminLoader").show();
+			        var data = $( "#form-admin-recycle" ).serialize();
+			        jQuery.ajax({
+			        	dataType: "json",
+			        	type : "POST",
+			        	data : data,
+			        	url : pluginURL() + "templates/submit/adminSubmit.template.php",
+			        	success: successAdmin,
+			        	error: printErrorAdmin
+			        });
+
+			    });
+			    // Success Message
+			    var successAdmin = function( resp ){
+			    	alert("Form is Submitted Successfully");
+			    };
+			    // Error Message > This is the function being called whenever the form submission is succesful
+			    var printErrorAdmin = function( req, status, err ) {
+			    	$("#adminLoader").hide();
+			    	$.confirm({
+					    title: 'Item Recycled Successfully!',
+					    content: 'You have changed the current status of this recycled item.\nThank You!',
+					    buttons: {
+					        Ok: function () {
+					            location.reload();
+					        }
+					    }
+					});
+				};
+	        }
 
 	    });
-	    // Success Message
-	    var successAdmin = function( resp ){
-	    	alert("Form is Submitted Successfully");
-	    };
-	    // Error Message > This is the function being called whenever the form submission is succesful
-	    var printErrorAdmin = function( req, status, err ) {
-	    	$("#adminLoader").hide();
-	    	$.confirm({
-			    title: 'Item Recycled Successfully!',
-			    content: 'You have changed the current status of this recycled item.\nThank You!',
-			    buttons: {
-			        Ok: function () {
-			            location.reload();
-			        }
-			    }
-			});
-		};
     /** Start Admin End Form Submission **/
 
     /** Start Admin Searching **/
@@ -361,7 +371,4 @@ $(function() {
 		    return false; // for good measure
 		});
 	/** End Sorting **/
-		
-
-
 });

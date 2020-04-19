@@ -37,9 +37,8 @@ use Includes\StampsAPI\Address;
 	$random_hash = substr(md5(uniqid(rand(), true)), 16, 16);
 	
 ?>
-<form method="POST" action="<?php echo $this->plugin_url . 'templates/submit/submit.template.php'; ?>">
-<!-- <form id="form-recycle" method="POST"> -->
-	<input type="text" name="return_code" value="<?php echo $random_hash; ?>" hidden>
+<!-- <form method="POST" action="<?php //echo $this->plugin_url . 'templates/submit/pageSubmit.template.php'; ?>"> -->
+<form id="form-recycle" method="POST">
 	<input type="text" name="current_user_id" value="<?php echo get_current_user_id(); ?>" hidden>
 	<div class="container">
 		<div class="row">
@@ -140,11 +139,7 @@ use Includes\StampsAPI\Address;
 			<div class="col-md-12">
 				<div class="mail-return default-container-border">
 					<h3>Shipping Details : </h3>
-					<input type="hidden" class="form-control" id="serviceType" name="serviceType" value="">
-					<input type="hidden" class="form-control" id="totalItemQty" name="totalItemQty" value="">
 					<input type="hidden" class="form-control" id="totalItemWeight" name="totalItemWeight" value="">
-					<input type="hidden" class="form-control" id="ShipDate" name="ShipDate" value="">
-					<input type="hidden" class="form-control" id="DeliverDays" name="DeliverDays" value="">
 					<hr>
 					<div class="row">
 						<div class="col-md-3">
@@ -215,7 +210,7 @@ use Includes\StampsAPI\Address;
 							<div class="col-md-12">
 								<div class="form-group">
 									<label for="creditCardNumber">Credit Card Number:</label>
-									<input type="number" class="form-control" id="creditCardNumber" name="creditCardNumber">
+									<input type="text" class="form-control" id="creditCardNumber" name="creditCardNumber">
 								</div>
 								<div class="form-group">
 									<label for="ExpirationDate">Expiration Date:</label>
@@ -223,7 +218,7 @@ use Includes\StampsAPI\Address;
 								</div>
 								<div class="form-group">
 									<label for="returnedRate">Amount:</label>
-									<input type="readonly" class="form-control" id="returnedRate" name="returnedRate" value="">
+									<p class="returnedRate"></p>
 								</div>
 
 								<div class="form-group">

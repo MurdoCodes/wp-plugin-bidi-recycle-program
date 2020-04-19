@@ -10,11 +10,7 @@ class Activate {
 		self::createTableReturnInformation();
 		self::createTableReturnProductInfo();
 		self::createTableReturnTransaction();
-		self::createTableReturnShipping();
-		self::createTableReturnCoupon();
-		self::createTableReturnRetailerSetting();
-		self::createTableRecycleAPISignature();
-		
+		self::createTableReturnShipping();		
 		flush_rewrite_rules();
 	}	
 
@@ -28,12 +24,13 @@ class Activate {
 
 			$sql = "CREATE TABLE {$bidi_return_information} (
 						return_id INT(11) NOT NULL AUTO_INCREMENT,
-						return_code VARCHAR(50) NOT NULL,
 						return_total_qty_returned INT(11) NOT NULL,
 						return_date DATETIME DEFAULT '0000-00-00 00:00:00' NOT NULL,
 						return_item_status TEXT NOT NULL,
 						customer_id INT(11) NOT NULL,
-						PRIMARY KEY ( return_id, return_code )
+						shipping_tracking_number VARCHAR(100) NOT NULL,
+						PRIMARY KEY ( return_id ),
+						FOREIGN KEY ( shipping_tracking_number ) REFERENCES ".$wpdb->prefix ."bidi_return_shipping_info ( shipping_tracking_number )
 					) {$charset_collate}";
 
 			require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
@@ -58,9 +55,9 @@ class Activate {
 						product_image VARCHAR(255) NOT NULL,
 						product_return_date DATETIME DEFAULT '0000-00-00 00:00:00' NOT NULL,
 						return_id INT(11) NOT NULL,
-						return_code VARCHAR(50) NOT NULL,
+						shipping_tracking_number VARCHAR(100) NOT NULL,
 						PRIMARY KEY ( product_info_id ),
-						FOREIGN KEY ( return_id, return_code ) REFERENCES wp_bidi_return_information ( return_id, return_code )
+						FOREIGN KEY ( return_id, shipping_tracking_number ) REFERENCES ".$wpdb->prefix ."wp_bidi_return_information ( return_id, shipping_tracking_number )
 					) {$charset_collate}";
 
 			require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
@@ -82,9 +79,9 @@ class Activate {
 						transaction_date_processed DATETIME DEFAULT '0000-00-00 00:00:00' NOT NULL,
 						transaction_status TEXT NOT NULL,
 						return_id INT(11) NOT NULL,
-						return_code VARCHAR(50) NOT NULL,
+						shipping_tracking_number VARCHAR(100) NOT NULL,
 						PRIMARY KEY  ( transaction_id ),
-						FOREIGN KEY ( return_id, return_code ) REFERENCES wp_bidi_return_information ( return_id, return_code )
+						FOREIGN KEY ( return_id, shipping_tracking_number ) REFERENCES ".$wpdb->prefix ."wp_bidi_return_information ( return_id, shipping_tracking_number )
 					) {$charset_collate}";
 
 			require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
@@ -103,85 +100,15 @@ class Activate {
 
 			$sql = "CREATE TABLE {$bidi_return_shipping_info} (
 						shipping_id INT(11) NOT NULL AUTO_INCREMENT,
-						shipping_card_number INT(11) NOT NULL,
-						shipping_expiry VARCHAR(50) NOT NULL,
-						shipping_cvv VARCHAR(50) NOT NULL,
-						shipping_date_processed DATETIME DEFAULT '0000-00-00 00:00:00' NOT NULL,
-						shipping_status TEXT NOT NULL,
-						shipping_notes TEXT NOT NULL,
+						shipping_tracking_number VARCHAR(100) NOT NULL,
+						shipping_stamps TEXT NOT NULL,
+						shipping_postage_url TEXT NOT NULL,
+						shipping_date VARCHAR(20) NOT NULL,
+						shipping_delivery_day VARCHAR(20) NOT NULL,
+						shipping_rate FLOAT NOT NULL,
 						return_id INT(11) NOT NULL,
-						return_code VARCHAR(50) NOT NULL,
-						transaction_id INT(11) NOT NULL,
 						PRIMARY KEY  ( shipping_id ),
-						FOREIGN KEY ( return_id, return_code ) REFERENCES wp_bidi_return_information ( return_id, return_code ),
-						FOREIGN KEY ( transaction_id ) REFERENCES wp_bidi_return_transaction ( transaction_id )
-					) {$charset_collate}";
-
-			require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
-
-			dbDelta( $sql );
-		}
-	}
-
-	private static function createTableReturnCoupon(){
-
-		global $wpdb;
-		$bidi_return_coupon = $wpdb->prefix . 'bidi_return_coupon';
-		$charset_collate = $wpdb->get_charset_collate();
-
-		if($wpdb->get_var( "show tables like '$bidi_return_coupon'" ) != $bidi_return_coupon ){
-
-			$sql = "CREATE TABLE {$bidi_return_coupon} (
-						coupon_id INT(11) NOT NULL AUTO_INCREMENT,
-						coupon_generated_code VARCHAR(50) NOT NULL,
-						coupon_date_created DATETIME DEFAULT '0000-00-00 00:00:00' NOT NULL,
-						coupon_status TEXT NOT NULL,
-						coupon_notes TEXT NOT NULL,
-						transaction_id INT(11) NOT NULL,
-						PRIMARY KEY  ( coupon_id ),
-						FOREIGN KEY ( transaction_id ) REFERENCES wp_bidi_return_transaction ( transaction_id )
-					) {$charset_collate}";
-
-			require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
-
-			dbDelta( $sql );
-		}
-
-	}
-
-	private static function createTableReturnRetailerSetting(){
-		global $wpdb;
-		$return_retailer_setting = $wpdb->prefix . 'bidi_return_retailer_setting';
-		$charset_collate = $wpdb->get_charset_collate();
-
-		if($wpdb->get_var( "show tables like '$return_retailer_setting'" ) != $return_retailer_setting ){
-
-			$sql = "CREATE TABLE {$return_retailer_setting} (
-						recycle_id INT(11) NOT NULL AUTO_INCREMENT,
-						recycle_key VARCHAR(50) NOT NULL,
-						recycle_description TEXT NOT NULL,
-						recycle_value TEXT NOT NULL,
-						PRIMARY KEY  ( recycle_id )
-					) {$charset_collate}";
-
-			require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
-
-			dbDelta( $sql );
-		}
-	}
-
-	private static function createTableRecycleAPISignature(){
-		global $wpdb;
-		$recycle_api_signature = $wpdb->prefix . 'bidi_recycle_api_signature';
-		$charset_collate = $wpdb->get_charset_collate();
-
-		if($wpdb->get_var( "show tables like '$recycle_api_signature'" ) != $recycle_api_signature ){
-
-			$sql = "CREATE TABLE {$recycle_api_signature} (
-						api_id INT(11) NOT NULL AUTO_INCREMENT,
-						api_key VARCHAR(255) NOT NULL,
-						api_value VARCHAR(255) NOT NULL,
-						PRIMARY KEY  ( api_id )
+						FOREIGN KEY ( return_id ) REFERENCES wp_bidi_return_information ( return_id ),
 					) {$charset_collate}";
 
 			require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
