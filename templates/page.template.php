@@ -37,8 +37,8 @@ use Includes\StampsAPI\Address;
 	$random_hash = substr(md5(uniqid(rand(), true)), 16, 16);
 	
 ?>
-<!-- <form method="POST" action="<?php //echo $this->plugin_url . 'templates/submit/pageSubmit.template.php'; ?>"> -->
-<form id="form-recycle" method="POST">
+<form method="POST" action="<?php echo $this->plugin_url . 'templates/submit/pageSubmit.template.php'; ?>">
+<!-- <form id="form-recycle" method="POST"> -->
 	<input type="text" name="current_user_id" value="<?php echo get_current_user_id(); ?>" hidden>
 	<div class="container">
 		<div class="row">
@@ -209,12 +209,16 @@ use Includes\StampsAPI\Address;
 							<h4 style="color:#fff;font-weight: bold;">Card Details : </h4>
 							<div class="col-md-12">
 								<div class="form-group">
-									<label for="creditCardNumber">Credit Card Number:</label>
-									<input type="text" class="form-control" id="creditCardNumber" name="creditCardNumber">
+									<label for="creditCardNumber">Card Number:</label>
+									<input type="number" class="form-control" id="creditCardNumber" name="creditCardNumber">
 								</div>
 								<div class="form-group">
-									<label for="ExpirationDate">Expiration Date:</label>
-									<input type="date" class="form-control" id="ExpirationDate" name="ExpirationDate">
+									<label for="ExpirationDate">Expiry Date:</label>
+									<input type="month" class="form-control" id="card_exp_month" name="card_exp_month">
+								</div>
+								<div class="form-group">
+									<label for="returnedRate">CVC CODE:</label>
+									<input type="text" class="form-control" id="card_cvc" name="card_cvc" autocomplete="off">
 								</div>
 								<div class="form-group">
 									<label for="returnedRate">Amount:</label>

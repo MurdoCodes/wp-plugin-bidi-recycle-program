@@ -7,17 +7,18 @@ use Includes\Base\DBModel;
 use Includes\StampsAPI\StampService;
 use Includes\StampsAPI\Address;
 use Includes\StampsAPI\Credentials;
+use Includes\AuthorizeNet_API\AuthorizeNetService;
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
 require "../../vendor/autoload.php";
 require_once( dirname (dirname(dirname( dirname( dirname( dirname( __FILE__ ) ) ) ) ) ) . '/wp-load.php' );
 
-// Declare CustomerORder Object
-$SubmitModel = new DBModel();
-$StampService = new StampService();
-$CustomerOrderObj = new CustomerOrder();
-if($_POST){
+if(isset($_POST)){
+	$SubmitModel = new DBModel();
+	$StampService = new StampService();
+	$CustomerOrderObj = new CustomerOrder();
+	$AuthorizeService = new AuthorizeNetService();
 
 	$product_name = $_POST['product_name'];
 	$product_order_id = $_POST['order_id'];
@@ -47,38 +48,48 @@ if($_POST){
 	$ExpirationDate = $_POST['ExpirationDate'];
 	$returnedRate = $_POST['returnedRate'];
 	
-	// $address = new Address(
-	// 	$from_firstname,
-	// 	$from_lastName,
-	// 	$from_address,
-	// 	$from_city,
-	// 	$from_state,
-	// 	$from_postcode,
-	// 	$from_phone_number,
-	// 	$from_email,
-	// );
-	// $cleanseAddress = $StampService->cleanseAddress($address);
-	// $cleansedAddress = $cleanseAddress['address'];
+	$address = new Address(
+		$from_firstname,
+		$from_lastName,
+		$from_address,
+		$from_city,
+		$from_state,
+		$from_postcode,
+		$from_phone_number,
+		$from_email,
+	);
+	$cleanseAddress = $StampService->cleanseAddress($address);
+	$cleansedAddress = $cleanseAddress['address'];
 	
-	// $rate = $StampService->getRates($cleansedAddress->ZIPCode,0,$totalItemWeight,'US-FC', 'Thick Envelope');
+	$rate = $StampService->getRates($cleansedAddress->ZIPCode,0,$totalItemWeight,'US-FC', 'Thick Envelope');
 
-	// $generateShippingLabel = $StampService->generateShippingLabel($cleansedAddress, $rate);
-	// $TrackingNumber = $generateShippingLabel['TrackingNumber'];
-	// $StampsTxID = $generateShippingLabel['StampsTxID'];
-	// $postageURL = $generateShippingLabel['URL'];
-	// $rates = $generateShippingLabel['Rate'];
-	// $ShipDate = $rates['ShipDate'];
-	// $DeliveryDate = $rates['DeliveryDate'];
-	// $MaxAmount = $rates['MaxAmount'];	
-	$TrackingNumber = '9400111899564088684777';
-	$StampsTxID = '2c6d7435-496e-41c5-b0c5-da307cca3f58';
-	$postageURL = 'https://swsim.testing.stamps.com/Label/Label3.ashx/label-200.png?AQAAAH1CHRfx49cIlyD_f5vH-V1rZ4v0wrc2QgUgOit4nG2SS2gTQRjH_5vZ2HTT9GE0vmoZzMH6CJ3Z97Ra8-iqS2siuxtbRGwRPIoe9VYPgtR6qEIPUtAiireKZz1o1at4CqiXSukpIB48iMI6MQoF_Yb_Zeab7_efb77KxWEs3nWm9_rNsSfZ29-ufri18_7KzKNz88e9xaXLl5S-4u6zAM639HQI-bdXoAD75SLQ0QFYULUeuTfbfP1ivZHaAaIYOahIYvt0UoljgNl6OOW_VzZyBBjNYH3EVG7MyCp_IgHcSSngusFnn3_8tPa9_8vjdOHn2vVCavnrteVX9XK2f6HxcOvG0vjCvZdvfjS7_SSeDc4PKCBJi-sW24YM8KA4AjVxUKKFVAQ1PgTS3YIzZjBTGIzboxgg2BSGzDwiDRyVKkKT5uBCVY4h9U4FODr_Jjro6MUw1C275I3D6M3LvqW9wK_QU7Uw9II4jnPcNhij4SQtT5Qq47TsB2M0jBCjs-yVznhBVKsmakFSOIw5qmCGqVnMsGyHc9sZAlEDxp09SLVwfSCaw3XT5MwVVqHN0yoTJT_waOSVJC5jGYJa0UmJoNVJSekK_Vp9ila8auQFCb_Ubo3KheFuqsXkv2kg-1bnTJ39trI6J0zGOOeuEJZtMte1XVNwIw2S-_9JF0hPPTwd0iiQD_WrJ2g-I8v2yikorngXPjduZtu9PCBRMgb_zf8Fq3uKZQ==';
-	$ShipDate = '2020-04-20';
-	$DeliveryDate = '2020-04-23';
-	$MaxAmount = '3.3900';
+	$generateShippingLabel = $StampService->generateShippingLabel($cleansedAddress, $rate);
+	$TrackingNumber = $generateShippingLabel['TrackingNumber'];
+	$StampsTxID = $generateShippingLabel['StampsTxID'];
+	$postageURL = $generateShippingLabel['URL'];
 
+	$rates = $generateShippingLabel['Rate'];
+	$ShipDate = $rates['ShipDate'];
+	$DeliveryDate = $rates['DeliveryDate'];
+	$MaxAmount = $rates['MaxAmount'];
+
+	$creditCardNumber = $_POST['creditCardNumber'];
+	$card_exp_month = $_POST['card_exp_month'];
+	$card_cvc = $_POST['card_cvc'];
+
+	$cardDetails = array(
+		'card-number' => $creditCardNumber,
+		'year-month' => $card_exp_month,
+		'card-cvc' => $card_cvc
+	);
+
+
+	var_dump($AuthorizeService->chargeCreditCard($cardDetails, $MaxAmount, $customer_id, $from_firstname, $from_lastName, $from_email, $from_phone_number, $from_address, $from_city, $from_state, $from_postcode, $from_country));
+
+	/**
 	$count = count($product_order_id);
 
+	
 	// Insert Return Information Data from the form to wp_bidi_return_information table
 	$insertReturnInformation = $SubmitModel->insertReturnInformation($total_prod_qty, $current_date, $return_status, $customer_id, $TrackingNumber);
 	// Get Latest inserted ID from wp_bidi_return_information table
@@ -207,4 +218,6 @@ if($_POST){
 	} catch (Exception $e) {
 	    echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
 	}
+	**/
+
 }
