@@ -25,6 +25,7 @@ if(isset($_POST)){
 	$product_item_id = $_POST['order_item_id'];
 	$product_image = $_POST['product_img'];
 	$product_qty = $_POST['product_qty'];
+	$totalQty = $_POST['product_qty'][0];
 
 	$total_prod_qty = array_sum($product_qty);	
 	$current_date = date('Y-m-d h:i:sa', strtotime("now"));
@@ -43,11 +44,8 @@ if(isset($_POST)){
 	$from_state = $_POST['from_state'];
 
 	$totalItemWeight = $_POST['totalItemWeight'];
-
-	$creditCardNumber = $_POST['creditCardNumber'];
-	$ExpirationDate = $_POST['ExpirationDate'];
-	$returnedRate = $_POST['returnedRate'];
 	
+	// STAMPS START
 	$address = new Address(
 		$from_firstname,
 		$from_lastName,
@@ -72,7 +70,9 @@ if(isset($_POST)){
 	$ShipDate = $rates['ShipDate'];
 	$DeliveryDate = $rates['DeliveryDate'];
 	$MaxAmount = $rates['MaxAmount'];
+	// STAMPS END
 
+	// AUTHORIZE.NET START
 	$creditCardNumber = $_POST['creditCardNumber'];
 	$card_exp_month = $_POST['card_exp_month'];
 	$card_cvc = $_POST['card_cvc'];
@@ -83,10 +83,10 @@ if(isset($_POST)){
 		'card-cvc' => $card_cvc
 	);
 
+	$AuthorizeService->chargeCreditCard($cardDetails, $MaxAmount, $customer_id, $from_firstname, $from_lastName, $from_email, $from_phone_number, $from_address, $from_city, $from_state, $from_postcode, $from_country);
+	// AUTHORIZE.NET END
 
-	var_dump($AuthorizeService->chargeCreditCard($cardDetails, $MaxAmount, $customer_id, $from_firstname, $from_lastName, $from_email, $from_phone_number, $from_address, $from_city, $from_state, $from_postcode, $from_country));
-
-	/**
+	
 	$count = count($product_order_id);
 
 	
@@ -127,7 +127,7 @@ if(isset($_POST)){
 	// Instantiation and passing `true` enables exceptions
 	$mail = new PHPMailer(true);
 	// Site logo
-	$logoFileUrl = plugin_dir_path( dirname( __FILE__, 2 ) ) . "assets/img/logo.png";
+	$logoFileUrl = plugin_dir_path( dirname( __FILE__, 2 ) ) . "assets/img/adminHeader.jpg";
 
 	try {
 	    //Server settings
@@ -146,29 +146,31 @@ if(isset($_POST)){
 	    $mail->addAddress('murdoc21daddie@gmail.com', $customerFullName);
 
 	    $mail->addEmbeddedImage($logoFileUrl, 'bidi_logo');
+	    
 	    // Attachments
 	    // $mail->addAttachment('/var/tmp/file.tar.gz');         // Add attachments
 	    // $mail->addAttachment('/tmp/image.jpg', 'new.jpg');    // Optional name
 
 	    // Content
 	    $mail->isHTML(true);
-	    $mail->Subject = 'Bidi Recycle Transaction Summary';
+	    $mail->Subject = 'Your Bidi Cares Return Label';
 	    $mail->Body = '<div style="width:50%;">
-	    				<img src="cid:bidi_logo" alt="Bidi Cares Logs">
+	    				<img src="cid:bidi_logo" alt="Bidi Cares" style="width:100%;">
 
-						<p>Hello, '.$customerFullName.'</p>
+						<p>Hello, '.$customerFullName.'!</p>
 						</br>
 						<p>We are grateful for your participation in our recycling program!</p>
 						</br>
-						<p>As an environmental advocate, we want to lessen our product’s impact on the planet through Bidi Cares, our eco platform. It’s the only program in the vaping industry that helps protect our planet from further degradation. Now that you joined our recycling activity, we are confident that we can make a positive impact together.</p>
+						<p>As an environmental advocate, we want to lessen our product’s impact on the planet through Bidi Cares, our eco platform. It is the only program in the vaping industry that helps protect our planet from further degradation. Now that you joined our recycling activity, we are positive that we can make a positive impact together. </p>
 						</br>
+						</br>
+						<p>Your return label is attached to this message. </p>
 						</br>
 						<p>Do your part through these simple steps:</p>
 						<ol>
-							<li>Print the return label that we will send 1-2 business days after your transaction.</li>
-							<li>Ship your used Bidi Stick to our facility.</li>
-							<li>Get a coupon code for a FREE Bidi Stick two days after you ship your sticks. For every 10 Bidi Sticks returned and wait for redemption instructions.</li>
-							<li>Redeem your coupon after you receive the activation email for your coupon code. Use this coupon code on your next purchase of Bidi Stick at <a href="www.bidivapor.com">www.bidivapor.com</a> or to a nearest Bidi Stick retail partner</li>
+							<li>Ship your used Bidi Sticks to our facility.</li>
+							<li>The coupon code for your <b><u>FREE Bidi Stick</u></b> will be sent right after your items have arrived in our facility and have been validated by our staff.</li>
+							<li>3.	The coupon code will include the instructions on how to redeem your <b><u>FREE Bidi Stick</u></b> on your next purchase.</li>
 						</ol>
 						</br></br>
 						<p>If you are interested in our environmental program, visit our Bidi Cares website. For further questions, don’t hesitate to contact us at <a href="mailto:support@bidivapor.com">support@bidivapor.com</a> or go to our <a href="bidivapor.org/faq/"></a>FAQs page</p>
@@ -180,7 +182,7 @@ if(isset($_POST)){
 									<header style="padding:1em;background-color:#37b348;">
 										<h2 style="color:#fff;">Thank You For Choosing Bidi Recycle</h2>
 										<h3 style="color:#fff;">Recycle Tracking Number : ' . $TrackingNumber . '</h3>
-										<a href="'.$postageURL.'">Click Here To Print Postage Label</a>
+										<a href="'.$postageURL.'"><button>Click Here To Print Postage Label</button></a>
 									</header>
 									<div style="padding:1em;background-color:#fdfdfd;border:1px solid #eeeeee;color:#717983;">
 										<p>Your Recycle has been received and is now being processed.</br>Your Recycle details are shown below for your reference:</p>									
@@ -210,6 +212,9 @@ if(isset($_POST)){
 										</table>
 									</div>
 								</div>
+								</br>
+								<hr>
+								<p>If you are interested in knowing more about the Bidi Cares program, you may visit our <a href="https://bidicares.quikfillrx.org/about-bidi-stick/">FAQ page</a> or through our <a href="https://bidicares.quikfillrx.org/contact/">Contact Page</a>.</p>
 							</div>
 							';
 
@@ -218,6 +223,79 @@ if(isset($_POST)){
 	} catch (Exception $e) {
 	    echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
 	}
-	**/
+	
+	echo adminEmail($TrackingNumber, $from_firstname, $from_lastName, $from_email, $from_phone_number, $from_address, $from_city, $from_postcode, $from_state, $totalQty);
+}
 
+function adminEmail($TrackingNumber, $from_firstname, $from_lastName, $from_email, $from_phone_number, $from_address, $from_city, $from_postcode, $from_state, $totalQty){
+
+	$adminEmail = get_option( 'admin_email' );
+	$blogname = 'Bidi Vapor Admin';
+	// Instantiation and passing `true` enables exceptions
+	$mailAdmin = new PHPMailer(true);
+	// Site logo
+	$logoFileUrl = plugin_dir_path( dirname( __FILE__, 2 ) ) . "assets/img/adminHeader.jpg";
+
+	try {
+	    //Server settings
+	    $mailAdmin->SMTPDebug = SMTP::DEBUG_SERVER;
+	    $mailAdmin->isSMTP();
+	    $mailAdmin->Host       = 'smtp.gmail.com';
+	    $mailAdmin->SMTPAuth   = true;
+	    $mailAdmin->Username   = 'quickfillkim@gmail.com';
+	    $mailAdmin->Password   = 'kim123!@#';
+	    $mailAdmin->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
+	    $mailAdmin->Port       = 465;
+
+	    $customerFullName = $from_firstname . " " . $from_lastName;
+	    //Sender
+	    $mailAdmin->setFrom('quickfillkim@gmail.com', 'Bidi Vapor - Bidi Recycle');
+	    // Receiver
+	    $mailAdmin->addAddress('murdoc21daddie@gmail.com', $customerFullName);
+
+	    $mailAdmin->addEmbeddedImage($logoFileUrl, 'bidi_logo');
+	    
+	    // Attachments
+	    // $mailAdmin->addAttachment('/var/tmp/file.tar.gz');         // Add attachments
+	    // $mailAdmin->addAttachment('/tmp/image.jpg', 'new.jpg');    // Optional name
+
+	    // Content
+	    $mailAdmin->isHTML(true);
+	    $mailAdmin->Subject = 'Your Bidi Cares Return Label';
+	    $mailAdmin->Body = '<div style="width:50%;">
+	    				<img src="cid:bidi_logo" alt="Bidi Cares" style="width:100%;">
+
+						<p>Dear, '.$blogname.'</p>
+						</br>
+						<p>Greetings!</p>
+						</br>
+						<p>Through the Bidi Cares Program, we encourage our customers to give back 10 used Bidi Sticks in exchange for a free one. This is part of our mission to make Bidi more recyclable and save the environment from the dangers of nicotine and improper battery disposal.</p>
+						</br>
+						<h3>'.$customerFullName.' has sent his/her Bidi Sticks with a Tracking Number : '.$TrackingNumber.' to our facility for recycling, together with the return label.</h3>
+						</br></br>
+						<p>The complete details of this shipment are found below:</p>
+						</br>
+						<h3 style="text-align:center;">Bidi Cares Recycling</h3>
+						<p>First Name: '.$from_firstname.'</p>
+						<p>Last Name: '.$from_lastName.'</p>
+						<p>Email Address: '.$from_email.'</p>
+						<p>Phone: '.$from_phone_number.'</p>
+						<p>Street Address: '.$from_address.'</p>
+						<p>City: '.$from_city.'</p>
+						<p>Zip Code: '.$from_postcode.'</p>
+						<p>US State: '.$from_state.'</p>
+						<p>Quantity of Bidi Stick you want to recycle: '.$totalQty.'</p>
+						</br>
+						<h4>Please approve and validate recycled items. Once approved, please complete recycle process by pressing the complete button. This will automatically send them a coupon email.</h4>
+						</br></br>
+						<p>Cheers,</p>
+						</br>
+						<p>Bidi Cares Team</p>
+						';
+
+	    $mailAdmin->send();
+	    echo 'Message has been sent';
+	} catch (Exception $e) {
+	    echo "Message could not be sent. Mailer Error: {$mailAdmin->ErrorInfo}";
+	}
 }

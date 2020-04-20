@@ -110,13 +110,13 @@ class AuthorizeNetService {
     //         $tresponse = $response->getTransactionResponse();
         
     //         if ($tresponse != null && $tresponse->getMessages() != null) {
-    //             echo " Successfully created transaction with Transaction ID: " . $tresponse->getTransId() . "\n";
-    //             echo " Transaction Response Code: " . $tresponse->getResponseCode() . "\n";
-    //             echo " Message Code: " . $tresponse->getMessages()[0]->getCode() . "\n";
-    //             echo " Auth Code: " . $tresponse->getAuthCode() . "\n";
-    //             echo " Description: " . $tresponse->getMessages()[0]->getDescription() . "\n";
+    //             echo " 1 Successfully created transaction with Transaction ID: " . $tresponse->getTransId() . "\n";
+    //             echo " 1 Transaction Response Code: " . $tresponse->getResponseCode() . "\n";
+    //             echo " 1 Message Code: " . $tresponse->getMessages()[0]->getCode() . "\n";
+    //             echo " 1 Auth Code: " . $tresponse->getAuthCode() . "\n";
+    //             echo " 1 Description: " . $tresponse->getMessages()[0]->getDescription() . "\n";
     //         } else {
-    //             echo "Transaction Failed \n";
+    //             echo "2 Transaction Failed \n";
     //             if ($tresponse->getErrors() != null) {
     //                 echo " Error Code  : " . $tresponse->getErrors()[0]->getErrorCode() . "\n";
     //                 echo " Error Message : " . $tresponse->getErrors()[0]->getErrorText() . "\n";
@@ -124,7 +124,7 @@ class AuthorizeNetService {
     //         }
     //         // Or, print errors if the API request wasn't successful
     //     } else {
-    //         echo "Transaction Failed \n";
+    //         echo "3 Transaction Failed \n";
     //         $tresponse = $response->getTransactionResponse();
         
     //         if ($tresponse != null && $tresponse->getErrors() != null) {
@@ -136,7 +136,7 @@ class AuthorizeNetService {
     //         }
     //     }
     // } else {
-    //     echo  "No response returned \n";
+    //     echo  "4 No response returned \n";
     // }
 
     return $response;

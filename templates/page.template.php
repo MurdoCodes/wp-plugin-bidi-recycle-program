@@ -37,8 +37,8 @@ use Includes\StampsAPI\Address;
 	$random_hash = substr(md5(uniqid(rand(), true)), 16, 16);
 	
 ?>
-<form method="POST" action="<?php echo $this->plugin_url . 'templates/submit/pageSubmit.template.php'; ?>">
-<!-- <form id="form-recycle" method="POST"> -->
+<!-- <form method="POST" action="<?php //echo $this->plugin_url . 'templates/submit/pageSubmit.template.php'; ?>"> -->
+<form id="form-recycle" method="POST">
 	<input type="text" name="current_user_id" value="<?php echo get_current_user_id(); ?>" hidden>
 	<div class="container">
 		<div class="row">
@@ -226,7 +226,7 @@ use Includes\StampsAPI\Address;
 								</div>
 
 								<div class="form-group">
-									<button type="submit" name="submit" class="form-control btn btn-success" id="recycle-submit">Confirm Recycle</button>
+									<button type="submit" name="submit" class="form-control btn btn-success" id="recycle-submit" disabled>Confirm Recycle</button>
 								</div>
 							</div>
 						</div>
