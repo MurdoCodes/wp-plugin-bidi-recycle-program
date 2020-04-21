@@ -1,7 +1,5 @@
 <?php
-
 namespace net\authorize\api\contract\v1;
-
 /**
  * Class representing TransactionSummaryType
  *
@@ -555,4 +553,3 @@ class TransactionSummaryType implements \JsonSerializable
     }
     
 }
-

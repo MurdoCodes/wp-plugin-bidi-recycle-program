@@ -4,7 +4,6 @@
  * @package PHPMailer
  * @author Jonadabe <jonadabe@hotmail.com>
  */
-
 $PHPMAILER_LANG['authenticate']         = 'Erro do SMTP: Não foi possível realizar a autenticação.';
 $PHPMAILER_LANG['connect_host']         = 'Erro do SMTP: Não foi possível realizar ligação com o servidor SMTP.';
 $PHPMAILER_LANG['data_not_accepted']    = 'Erro do SMTP: Os dados foram rejeitados.';

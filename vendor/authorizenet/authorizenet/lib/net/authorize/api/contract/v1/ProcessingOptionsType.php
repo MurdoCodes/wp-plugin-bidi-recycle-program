@@ -1,7 +1,5 @@
 <?php
-
 namespace net\authorize\api\contract\v1;
-
 /**
  * Class representing ProcessingOptionsType
  *
@@ -204,4 +202,3 @@ class ProcessingOptionsType implements \JsonSerializable
     }
     
 }
-

@@ -1,7 +1,5 @@
 <?php
-
 namespace net\authorize\api\contract\v1;
-
 /**
  * Class representing ProfileTransAmountType
  *
@@ -265,4 +263,3 @@ class ProfileTransAmountType implements \JsonSerializable
     }
     
 }
-

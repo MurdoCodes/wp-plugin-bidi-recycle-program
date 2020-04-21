@@ -1,7 +1,5 @@
 <?php
-
 namespace net\authorize\api\contract\v1;
-
 /**
  * Class representing NameAndAddressType
  *
@@ -312,4 +310,3 @@ class NameAndAddressType implements \JsonSerializable
     }
     
 }
-

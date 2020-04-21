@@ -1,7 +1,5 @@
 <?php
-
 namespace net\authorize\api\contract\v1;
-
 /**
  * Class representing CustomerProfileBaseType
  *
@@ -177,4 +175,3 @@ class CustomerProfileBaseType implements \JsonSerializable
     }
     
 }
-

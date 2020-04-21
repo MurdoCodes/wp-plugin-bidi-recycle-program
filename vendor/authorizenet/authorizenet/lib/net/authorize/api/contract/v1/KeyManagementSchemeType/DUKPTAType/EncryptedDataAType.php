@@ -1,5 +1,4 @@
 <?php
-
 namespace net\authorize\api\contract\v1\KeyManagementSchemeType\DUKPTAType;
 
 /**
@@ -120,4 +119,3 @@ class EncryptedDataAType implements \JsonSerializable
     }
     
 }
-

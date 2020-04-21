@@ -4,7 +4,6 @@
  * @package PHPMailer
  * @author Ermin Islamagić <ermin@islamagic.com>
  */
-
 $PHPMAILER_LANG['authenticate']         = 'SMTP Greška: Neuspjela prijava.';
 $PHPMAILER_LANG['connect_host']         = 'SMTP Greška: Nije moguće spojiti se sa SMTP serverom.';
 $PHPMAILER_LANG['data_not_accepted']    = 'SMTP Greška: Podatci nisu prihvaćeni.';

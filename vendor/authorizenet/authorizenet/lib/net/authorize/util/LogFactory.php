@@ -14,4 +14,3 @@ class LogFactory
         return self::$logger;
     }
 }
-?>

@@ -4,7 +4,6 @@
  * @package PHPMailer
  * @author Nawawi Jamili <nawawi@rutweb.com>
  */
-
 $PHPMAILER_LANG['authenticate']         = 'Ralat SMTP: Tidak dapat pengesahan.';
 $PHPMAILER_LANG['connect_host']         = 'Ralat SMTP: Tidak dapat menghubungi hos pelayan SMTP.';
 $PHPMAILER_LANG['data_not_accepted']    = 'Ralat SMTP: Data tidak diterima oleh pelayan.';

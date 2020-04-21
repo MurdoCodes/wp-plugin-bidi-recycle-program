@@ -5,7 +5,6 @@
  * @author Klemen Tušar <techouse@gmail.com>
  * @author Filip Š <projects@filips.si>
  */
-
 $PHPMAILER_LANG['authenticate']         = 'SMTP napaka: Avtentikacija ni uspela.';
 $PHPMAILER_LANG['connect_host']         = 'SMTP napaka: Vzpostavljanje povezave s SMTP gostiteljem ni uspelo.';
 $PHPMAILER_LANG['data_not_accepted']    = 'SMTP napaka: Strežnik zavrača podatke.';

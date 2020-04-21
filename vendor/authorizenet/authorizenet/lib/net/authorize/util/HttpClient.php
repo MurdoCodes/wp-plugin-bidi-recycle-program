@@ -1,9 +1,7 @@
 <?php
 namespace net\authorize\util;
-
 use net\authorize\util\LogFactory;
 use net\authorize\util\Log;
-
 /**
  * A class to send a request to the XML API.
  *

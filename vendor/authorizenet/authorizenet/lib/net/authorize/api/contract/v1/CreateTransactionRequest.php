@@ -1,7 +1,5 @@
 <?php
-
 namespace net\authorize\api\contract\v1;
-
 /**
  * Class representing CreateTransactionRequest
  */
@@ -73,4 +71,3 @@ class CreateTransactionRequest extends ANetApiRequestType
     }
     
 }
-

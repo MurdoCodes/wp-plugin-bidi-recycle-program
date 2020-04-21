@@ -1,7 +1,5 @@
 <?php
-
 namespace net\authorize\api\contract\v1;
-
 /**
  * Class representing WebCheckOutDataTypeTokenType
  *
@@ -231,4 +229,3 @@ class WebCheckOutDataTypeTokenType implements \JsonSerializable
     }
     
 }
-

@@ -1,6 +1,5 @@
 <?php
 namespace net\authorize\util;
-
 /**
  * A class defining helpers
  *

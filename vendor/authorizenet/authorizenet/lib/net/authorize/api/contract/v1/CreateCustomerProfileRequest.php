@@ -1,7 +1,5 @@
 <?php
-
 namespace net\authorize\api\contract\v1;
-
 /**
  * Class representing CreateCustomerProfileRequest
  */
@@ -99,4 +97,3 @@ class CreateCustomerProfileRequest extends ANetApiRequestType
     }
     
 }
-

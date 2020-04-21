@@ -1,7 +1,5 @@
 <?php
-
 namespace net\authorize\api\contract\v1;
-
 /**
  * Class representing CreditCardSimpleType
  *
@@ -150,4 +148,3 @@ class CreditCardSimpleType implements \JsonSerializable
     }
     
 }
-

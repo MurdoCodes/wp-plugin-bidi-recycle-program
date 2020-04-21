@@ -1,7 +1,5 @@
 <?php
-
 namespace net\authorize\api\contract\v1;
-
 /**
  * Class representing GetMerchantDetailsResponse
  */
@@ -471,4 +469,3 @@ class GetMerchantDetailsResponse extends ANetApiResponseType
     }
     
 }
-

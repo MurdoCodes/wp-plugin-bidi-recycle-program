@@ -6,16 +6,16 @@ use Includes\Base\DBModel;
 require "../../vendor/autoload.php";
 require_once( dirname (dirname(dirname( dirname( dirname( dirname( __FILE__ ) ) ) ) ) ) . '/wp-load.php' );
 	
-$DBModel = new DBModel();
+
 
 if(isset($_POST['dateSorting'])){
-
+	$DBModel = new DBModel();
 	$param = $_POST['dateSorting'];
 	$sorting = $DBModel->recycleSortingByDate($param);
 	showDetails($sorting);
 
 }else if(isset($_POST['statusSorting'])){
-
+	$DBModel = new DBModel();
 	$param = $_POST['statusSorting'];
 	$sorting = $DBModel->recycleSortingStatus($param);
 	showDetails($sorting);

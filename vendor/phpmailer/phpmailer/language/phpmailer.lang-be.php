@@ -4,7 +4,6 @@
  * @package PHPMailer
  * @author Aleksander Maksymiuk <info@setpro.pl>
  */
-
 $PHPMAILER_LANG['authenticate']         = 'Памылка SMTP: памылка ідэнтыфікацыі.';
 $PHPMAILER_LANG['connect_host']         = 'Памылка SMTP: нельга ўстанавіць сувязь з SMTP-серверам.';
 $PHPMAILER_LANG['data_not_accepted']    = 'Памылка SMTP: звесткі непрынятыя.';

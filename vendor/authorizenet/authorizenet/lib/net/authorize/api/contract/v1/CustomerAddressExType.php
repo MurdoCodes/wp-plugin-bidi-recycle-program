@@ -1,7 +1,5 @@
 <?php
-
 namespace net\authorize\api\contract\v1;
-
 /**
  * Class representing CustomerAddressExType
  *
@@ -123,4 +121,3 @@ class CustomerAddressExType extends CustomerAddressType implements \JsonSerializ
     }
     
 }
-

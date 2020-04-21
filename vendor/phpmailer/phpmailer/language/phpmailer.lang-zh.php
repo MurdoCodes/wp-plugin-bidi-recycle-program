@@ -6,7 +6,6 @@
  * @author Peter Dave Hello <@PeterDaveHello/>
  * @author Jason Chiang <xcojad@gmail.com>
  */
-
 $PHPMAILER_LANG['authenticate']         = 'SMTP 錯誤：登入失敗。';
 $PHPMAILER_LANG['connect_host']         = 'SMTP 錯誤：無法連線到 SMTP 主機。';
 $PHPMAILER_LANG['data_not_accepted']    = 'SMTP 錯誤：無法接受的資料。';

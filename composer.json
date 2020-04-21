@@ -16,6 +16,6 @@
         "authorizenet/authorizenet": "2.0.0"
     },
     "autoload": {
-        "psr-4": {"Includes\\": "./includes"}
+        "psr-4": {"Includes\\": "includes/"}
     }
 }

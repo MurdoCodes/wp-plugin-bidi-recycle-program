@@ -1,7 +1,5 @@
 <?php
-
 namespace net\authorize\api\contract\v1\TransactionResponseType\ErrorsAType;
-
 /**
  * Class representing ErrorAType
  */
@@ -147,4 +145,3 @@ class ErrorAType implements \JsonSerializable
     }
     
 }
-

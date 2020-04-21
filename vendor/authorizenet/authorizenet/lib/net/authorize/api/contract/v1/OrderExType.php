@@ -1,7 +1,5 @@
 <?php
-
 namespace net\authorize\api\contract\v1;
-
 /**
  * Class representing OrderExType
  *
@@ -123,4 +121,3 @@ class OrderExType extends OrderType implements \JsonSerializable
     }
     
 }
-

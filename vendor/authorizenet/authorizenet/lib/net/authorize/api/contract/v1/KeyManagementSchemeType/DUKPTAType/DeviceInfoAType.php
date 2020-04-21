@@ -1,7 +1,5 @@
 <?php
-
 namespace net\authorize\api\contract\v1\KeyManagementSchemeType\DUKPTAType;
-
 /**
  * Class representing DeviceInfoAType
  */
@@ -120,4 +118,3 @@ class DeviceInfoAType implements \JsonSerializable
     }
     
 }
-

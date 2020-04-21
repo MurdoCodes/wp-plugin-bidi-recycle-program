@@ -4,7 +4,6 @@
  * @package PHPMailer
  * @author Johan Linnér <johan@linner.biz>
  */
-
 $PHPMAILER_LANG['authenticate']         = 'SMTP fel: Kunde inte autentisera.';
 $PHPMAILER_LANG['connect_host']         = 'SMTP fel: Kunde inte ansluta till SMTP-server.';
 $PHPMAILER_LANG['data_not_accepted']    = 'SMTP fel: Data accepterades inte.';

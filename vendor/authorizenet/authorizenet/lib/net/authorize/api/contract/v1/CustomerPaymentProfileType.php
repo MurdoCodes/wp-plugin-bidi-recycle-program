@@ -1,7 +1,5 @@
 <?php
-
 namespace net\authorize\api\contract\v1;
-
 /**
  * Class representing CustomerPaymentProfileType
  *
@@ -204,4 +202,3 @@ class CustomerPaymentProfileType extends CustomerPaymentProfileBaseType implemen
     }
     
 }
-

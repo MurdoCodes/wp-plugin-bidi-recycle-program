@@ -9,9 +9,10 @@ use PHPMailer\PHPMailer\Exception;
 require "../../vendor/autoload.php";
 require_once( dirname (dirname(dirname( dirname( dirname( dirname( __FILE__ ) ) ) ) ) ) . '/wp-load.php' );
 
-$DBModel = new DBModel();
+
 
 if(isset($_POST)){
+	$DBModel = new DBModel();
 
 	if($_POST['transaction_status'] == 'wc-recycled'){
 		$customer_id = $_POST['customer_id'];
@@ -66,20 +67,27 @@ if(isset($_POST)){
 		$mail = new PHPMailer(true);
 		$logoFileUrl = plugin_dir_path( dirname( __FILE__, 2 ) ) . "assets/img/adminHeader.jpg";
 			try {
+				// $senderEmail = 'quickfillkim@gmail.com';
+				// $senderPassword = 'kim123!@#';
+				
+				$senderEmail = 'quikfillrx@gmail.com';
+				$senderPassword = 'OnwardandUpward2021';
+
+				$receiverEmail = 'murdoc21daddie@gmail.com';
 			    //Server settings
 			    $mail->SMTPDebug = SMTP::DEBUG_SERVER;
 			    $mail->isSMTP();
 			    $mail->Host       = 'smtp.gmail.com';
 			    $mail->SMTPAuth   = true;
-			    $mail->Username   = 'quickfillkim@gmail.com';
-			    $mail->Password   = 'kim123!@#';
+			    $mail->Username   = $senderEmail;
+			    $mail->Password   = $senderPassword;
 			    $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
 			    $mail->Port       = 465;
 
 			    //Recipients
-			    $mail->setFrom('quickfillkim@gmail.com', 'Bidi Vapor - Bidi Recycle');
+			    $mail->setFrom($senderEmail, 'Bidi Vapor - Bidi Recycle');
 			    // $mail->addAddress($from_email, $customerFullName);
-			    $mail->addAddress('murdoc21daddie@gmail.com', $customerFullName);
+			    $mail->addAddress($receiverEmail, $customerFullName);
 			    $mail->addEmbeddedImage($logoFileUrl, 'bidi_logo');
 			    // Attachments
 			    // $mail->addAttachment('/var/tmp/file.tar.gz');         // Add attachments
@@ -122,4 +130,3 @@ if(isset($_POST)){
 	}
 
 }
-

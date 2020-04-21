@@ -1,7 +1,5 @@
 <?php
-
 namespace net\authorize\api\contract\v1;
-
 /**
  * Class representing GetTransactionListRequest
  */
@@ -126,4 +124,3 @@ class GetTransactionListRequest extends ANetApiRequestType
     }
     
 }
-

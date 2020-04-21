@@ -1,10 +1,7 @@
 <?php
 namespace net\authorize\util;
-
 use net\authorize\util\ANetSensitiveFields;
-
 define ("ANET_LOG_FILES_APPEND",true);
-
 define("ANET_LOG_DEBUG_PREFIX","DEBUG");
 define("ANET_LOG_INFO_PREFIX","INFO");
 define("ANET_LOG_WARN_PREFIX","WARN");
@@ -366,4 +363,3 @@ class Log
         $this->sensitiveStringRegexes = ANetSensitiveFields::getSensitiveStringRegexes();
     }
 }
-?>

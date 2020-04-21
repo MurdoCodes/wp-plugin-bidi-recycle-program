@@ -1,7 +1,5 @@
 <?php
-
 namespace net\authorize\api\contract\v1;
-
 /**
  * Class representing TransRetailInfoType
  *
@@ -204,4 +202,3 @@ class TransRetailInfoType implements \JsonSerializable
     }
     
 }
-

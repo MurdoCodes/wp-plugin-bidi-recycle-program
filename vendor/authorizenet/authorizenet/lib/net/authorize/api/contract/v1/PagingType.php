@@ -1,7 +1,5 @@
 <?php
-
 namespace net\authorize\api\contract\v1;
-
 /**
  * Class representing PagingType
  *
@@ -150,4 +148,3 @@ class PagingType implements \JsonSerializable
     }
     
 }
-

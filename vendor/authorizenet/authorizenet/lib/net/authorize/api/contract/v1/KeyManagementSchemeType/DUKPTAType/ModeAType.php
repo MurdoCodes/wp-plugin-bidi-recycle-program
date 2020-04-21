@@ -1,7 +1,5 @@
 <?php
-
 namespace net\authorize\api\contract\v1\KeyManagementSchemeType\DUKPTAType;
-
 /**
  * Class representing ModeAType
  */
@@ -147,4 +145,3 @@ class ModeAType implements \JsonSerializable
     }
     
 }
-

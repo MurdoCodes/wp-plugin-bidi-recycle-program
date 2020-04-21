@@ -1,7 +1,5 @@
 <?php
-
 namespace net\authorize\api\contract\v1;
-
 /**
  * Class representing ARBCancelSubscriptionRequest
  */
@@ -72,4 +70,3 @@ class ARBCancelSubscriptionRequest extends ANetApiRequestType
     }
     
 }
-

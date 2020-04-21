@@ -7,7 +7,6 @@
  * There is one of these characters between these quotes: " "
  * @see http://unicode.org/udhr/n/notes_fra.html
  */
-
 $PHPMAILER_LANG['authenticate']         = 'Erreur SMTP : échec de l\'authentification.';
 $PHPMAILER_LANG['connect_host']         = 'Erreur SMTP : impossible de se connecter au serveur SMTP.';
 $PHPMAILER_LANG['data_not_accepted']    = 'Erreur SMTP : données incorrectes.';

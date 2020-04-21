@@ -1,5 +1,4 @@
 <?php
-
 namespace net\authorize\api\contract\v1;
 
 /**
@@ -179,4 +178,3 @@ class ANetApiRequestType implements \JsonSerializable
     }
     
 }
-

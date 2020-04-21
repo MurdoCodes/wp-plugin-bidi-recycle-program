@@ -1,7 +1,5 @@
 <?php
-
 namespace net\authorize\api\contract\v1;
-
 /**
  * Class representing ValidateCustomerPaymentProfileRequest
  */
@@ -180,4 +178,3 @@ class ValidateCustomerPaymentProfileRequest extends ANetApiRequestType
     }
     
 }
-

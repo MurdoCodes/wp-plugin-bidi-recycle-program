@@ -1,7 +1,5 @@
 <?php
-
 namespace net\authorize\api\contract\v1;
-
 /**
  * Class representing ExtendedAmountType
  *
@@ -177,4 +175,3 @@ class ExtendedAmountType implements \JsonSerializable
     }
     
 }
-

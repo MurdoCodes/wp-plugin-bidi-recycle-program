@@ -1,7 +1,5 @@
 <?php
-
 namespace net\authorize\api\contract\v1;
-
 /**
  * Class representing GetCustomerPaymentProfileListRequest
  */
@@ -154,4 +152,3 @@ class GetCustomerPaymentProfileListRequest extends ANetApiRequestType
     }
     
 }
-

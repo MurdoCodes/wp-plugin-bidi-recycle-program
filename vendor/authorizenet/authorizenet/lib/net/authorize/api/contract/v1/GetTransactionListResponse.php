@@ -1,7 +1,5 @@
 <?php
-
 namespace net\authorize\api\contract\v1;
-
 /**
  * Class representing GetTransactionListResponse
  */
@@ -146,4 +144,3 @@ class GetTransactionListResponse extends ANetApiResponseType
     }
     
 }
-

@@ -1,7 +1,5 @@
 <?php
-
 namespace net\authorize\api\contract\v1;
-
 /**
  * Class representing AuDeleteType
  *
@@ -123,4 +121,3 @@ class AuDeleteType extends AuDetailsType implements \JsonSerializable
     }
     
 }
-

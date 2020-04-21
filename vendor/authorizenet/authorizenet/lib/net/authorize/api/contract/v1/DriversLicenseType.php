@@ -1,7 +1,5 @@
 <?php
-
 namespace net\authorize\api\contract\v1;
-
 /**
  * Class representing DriversLicenseType
  *
@@ -177,4 +175,3 @@ class DriversLicenseType implements \JsonSerializable
     }
     
 }
-

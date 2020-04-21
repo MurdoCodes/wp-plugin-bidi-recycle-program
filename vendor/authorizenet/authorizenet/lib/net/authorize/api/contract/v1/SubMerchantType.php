@@ -1,7 +1,5 @@
 <?php
-
 namespace net\authorize\api\contract\v1;
-
 /**
  * Class representing SubMerchantType
  *
@@ -393,4 +391,3 @@ class SubMerchantType implements \JsonSerializable
     }
     
 }
-

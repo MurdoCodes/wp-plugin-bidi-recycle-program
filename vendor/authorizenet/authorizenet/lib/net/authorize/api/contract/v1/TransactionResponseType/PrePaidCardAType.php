@@ -1,7 +1,5 @@
 <?php
-
 namespace net\authorize\api\contract\v1\TransactionResponseType;
-
 /**
  * Class representing PrePaidCardAType
  */
@@ -174,4 +172,3 @@ class PrePaidCardAType implements \JsonSerializable
     }
     
 }
-

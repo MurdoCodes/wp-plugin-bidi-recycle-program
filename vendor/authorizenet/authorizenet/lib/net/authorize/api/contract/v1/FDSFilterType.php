@@ -1,7 +1,5 @@
 <?php
-
 namespace net\authorize\api\contract\v1;
-
 /**
  * Class representing FDSFilterType
  *
@@ -150,4 +148,3 @@ class FDSFilterType implements \JsonSerializable
     }
     
 }
-

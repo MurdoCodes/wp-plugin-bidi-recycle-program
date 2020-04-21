@@ -1,7 +1,5 @@
 <?php
-
 namespace net\authorize\api\contract\v1\PaymentScheduleType;
-
 /**
  * Class representing IntervalAType
  */
@@ -147,4 +145,3 @@ class IntervalAType implements \JsonSerializable
     }
     
 }
-

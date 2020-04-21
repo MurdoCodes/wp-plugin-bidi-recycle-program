@@ -1,7 +1,5 @@
 <?php
-
 namespace net\authorize\api\contract\v1;
-
 /**
  * Class representing PaymentType
  *
@@ -313,4 +311,3 @@ class PaymentType implements \JsonSerializable
     }
     
 }
-

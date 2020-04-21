@@ -1,7 +1,5 @@
 <?php
-
 namespace net\authorize\api\contract\v1;
-
 /**
  * Class representing TokenMaskedType
  *
@@ -204,4 +202,3 @@ class TokenMaskedType implements \JsonSerializable
     }
     
 }
-

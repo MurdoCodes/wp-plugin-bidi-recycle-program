@@ -1,7 +1,5 @@
 <?php
-
 namespace net\authorize\api\contract\v1;
-
 /**
  * Class representing CustomerProfileInfoExType
  *
@@ -123,4 +121,3 @@ class CustomerProfileInfoExType extends CustomerProfileExType implements \JsonSe
     }
     
 }
-

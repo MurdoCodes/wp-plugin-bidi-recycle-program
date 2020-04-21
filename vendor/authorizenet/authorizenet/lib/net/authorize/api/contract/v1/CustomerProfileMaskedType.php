@@ -1,7 +1,5 @@
 <?php
-
 namespace net\authorize\api\contract\v1;
-
 /**
  * Class representing CustomerProfileMaskedType
  *
@@ -248,4 +246,3 @@ class CustomerProfileMaskedType extends CustomerProfileExType implements \JsonSe
     }
     
 }
-

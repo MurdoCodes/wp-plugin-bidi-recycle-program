@@ -1,7 +1,5 @@
 <?php
-
 namespace net\authorize\api\contract\v1;
-
 /**
  * Class representing ARBSubscriptionMaskedType
  *
@@ -347,4 +345,3 @@ class ARBSubscriptionMaskedType implements \JsonSerializable
     }
     
 }
-

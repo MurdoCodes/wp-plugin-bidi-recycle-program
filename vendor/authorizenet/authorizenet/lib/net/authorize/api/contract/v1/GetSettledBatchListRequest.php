@@ -1,7 +1,5 @@
 <?php
-
 namespace net\authorize\api\contract\v1;
-
 /**
  * Class representing GetSettledBatchListRequest
  */
@@ -126,4 +124,3 @@ class GetSettledBatchListRequest extends ANetApiRequestType
     }
     
 }
-

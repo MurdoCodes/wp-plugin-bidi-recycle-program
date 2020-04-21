@@ -1,7 +1,5 @@
 <?php
-
 namespace net\authorize\api\contract\v1;
-
 /**
  * Class representing MessagesType
  *
@@ -184,4 +182,3 @@ class MessagesType implements \JsonSerializable
     }
     
 }
-

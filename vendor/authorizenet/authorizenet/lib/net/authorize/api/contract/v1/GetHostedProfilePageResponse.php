@@ -1,7 +1,5 @@
 <?php
-
 namespace net\authorize\api\contract\v1;
-
 /**
  * Class representing GetHostedProfilePageResponse
  */
@@ -85,4 +83,3 @@ class GetHostedProfilePageResponse extends ANetApiResponseType
     }
     
 }
-

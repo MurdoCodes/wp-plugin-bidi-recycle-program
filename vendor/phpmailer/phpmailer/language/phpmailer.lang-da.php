@@ -6,7 +6,6 @@
  * Rewrite and extension of the work by Mikael Stokkebro <info@stokkebro.dk> 
  *  
  */
-
 $PHPMAILER_LANG['authenticate']         = 'SMTP fejl: Login mislykkedes.';
 $PHPMAILER_LANG['connect_host']         = 'SMTP fejl: Forbindelse til SMTP serveren kunne ikke oprettes.';
 $PHPMAILER_LANG['data_not_accepted']    = 'SMTP fejl: Data blev ikke accepteret.';

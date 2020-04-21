@@ -1,7 +1,5 @@
 <?php
-
 namespace net\authorize\api\contract\v1;
-
 /**
  * Class representing CreateCustomerShippingAddressResponse
  */
@@ -112,4 +110,3 @@ class CreateCustomerShippingAddressResponse extends ANetApiResponseType
     }
     
 }
-

@@ -1,7 +1,5 @@
 <?php
-
 namespace net\authorize\api\contract\v1;
-
 /**
  * Class representing EmailSettingsType
  *
@@ -123,4 +121,3 @@ class EmailSettingsType extends ArrayOfSettingType implements \JsonSerializable
     }
     
 }
-

@@ -83,12 +83,11 @@ if(isset($_POST)){
 		'card-cvc' => $card_cvc
 	);
 
+	if($cardDetails){
 	$AuthorizeService->chargeCreditCard($cardDetails, $MaxAmount, $customer_id, $from_firstname, $from_lastName, $from_email, $from_phone_number, $from_address, $from_city, $from_state, $from_postcode, $from_country);
-	// AUTHORIZE.NET END
-
-	
+	}
+	// AUTHORIZE.NET END	
 	$count = count($product_order_id);
-
 	
 	// Insert Return Information Data from the form to wp_bidi_return_information table
 	$insertReturnInformation = $SubmitModel->insertReturnInformation($total_prod_qty, $current_date, $return_status, $customer_id, $TrackingNumber);
@@ -130,20 +129,28 @@ if(isset($_POST)){
 	$logoFileUrl = plugin_dir_path( dirname( __FILE__, 2 ) ) . "assets/img/adminHeader.jpg";
 
 	try {
+		// $senderEmail = 'quickfillkim@gmail.com';
+		// $senderPassword = 'kim123!@#';
+		
+		$senderEmail = 'quikfillrx@gmail.com';
+		$senderPassword = 'OnwardandUpward2021';
+
+		$receiverEmail = 'murdoc21daddie@gmail.com';
+
 	    //Server settings
 	    $mail->SMTPDebug = SMTP::DEBUG_SERVER;
 	    $mail->isSMTP();
 	    $mail->Host       = 'smtp.gmail.com';
 	    $mail->SMTPAuth   = true;
-	    $mail->Username   = 'quickfillkim@gmail.com';
-	    $mail->Password   = 'kim123!@#';
+	    $mail->Username   = $senderEmail;
+	    $mail->Password   = $senderPassword;
 	    $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
 	    $mail->Port       = 465;
 
 	    //Sender
-	    $mail->setFrom('quickfillkim@gmail.com', 'Bidi Vapor - Bidi Recycle');
+	    $mail->setFrom($senderEmail, 'Bidi Vapor - Bidi Recycle');
 	    // Receiver
-	    $mail->addAddress('murdoc21daddie@gmail.com', $customerFullName);
+	    $mail->addAddress($receiverEmail, $customerFullName);
 
 	    $mail->addEmbeddedImage($logoFileUrl, 'bidi_logo');
 	    
@@ -229,7 +236,16 @@ if(isset($_POST)){
 
 function adminEmail($TrackingNumber, $from_firstname, $from_lastName, $from_email, $from_phone_number, $from_address, $from_city, $from_postcode, $from_state, $totalQty){
 
-	$adminEmail = get_option( 'admin_email' );
+	// $senderEmail = get_option( 'admin_email' );
+	// $receiverEmail = 'quikfillrx@gmail.com'
+	// $senderEmail = 'quickfillkim@gmail.com';
+	// $senderPassword = 'kim123!@#';
+		
+	$senderEmail = 'quikfillrx@gmail.com';
+	$senderPassword = 'OnwardandUpward2021';
+
+	$receiverEmail = 'quikfillrx@gmail.com';
+
 	$blogname = 'Bidi Vapor Admin';
 	// Instantiation and passing `true` enables exceptions
 	$mailAdmin = new PHPMailer(true);
@@ -242,16 +258,16 @@ function adminEmail($TrackingNumber, $from_firstname, $from_lastName, $from_emai
 	    $mailAdmin->isSMTP();
 	    $mailAdmin->Host       = 'smtp.gmail.com';
 	    $mailAdmin->SMTPAuth   = true;
-	    $mailAdmin->Username   = 'quickfillkim@gmail.com';
-	    $mailAdmin->Password   = 'kim123!@#';
+	    $mailAdmin->Username   = $senderEmail;
+	    $mailAdmin->Password   = $senderPassword;
 	    $mailAdmin->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
 	    $mailAdmin->Port       = 465;
 
 	    $customerFullName = $from_firstname . " " . $from_lastName;
 	    //Sender
-	    $mailAdmin->setFrom('quickfillkim@gmail.com', 'Bidi Vapor - Bidi Recycle');
+	    $mailAdmin->setFrom($senderEmail, 'Bidi Vapor - Bidi Recycle');
 	    // Receiver
-	    $mailAdmin->addAddress('murdoc21daddie@gmail.com', $customerFullName);
+	    $mailAdmin->addAddress($receiverEmail, $blogname);
 
 	    $mailAdmin->addEmbeddedImage($logoFileUrl, 'bidi_logo');
 	    

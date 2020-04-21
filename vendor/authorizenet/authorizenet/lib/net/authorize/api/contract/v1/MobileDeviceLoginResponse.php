@@ -1,7 +1,5 @@
 <?php
-
 namespace net\authorize\api\contract\v1;
-
 /**
  * Class representing MobileDeviceLoginResponse
  */
@@ -173,4 +171,3 @@ class MobileDeviceLoginResponse extends ANetApiResponseType
     }
     
 }
-

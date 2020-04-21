@@ -1,7 +1,5 @@
 <?php
-
 namespace net\authorize\api\contract\v1;
-
 /**
  * Class representing BatchStatisticType
  *
@@ -663,4 +661,3 @@ class BatchStatisticType implements \JsonSerializable
     }
     
 }
-

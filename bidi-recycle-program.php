@@ -12,46 +12,43 @@ Author URI : http://quickfillrx.com/
 License: GPLv2 or later
 Text Domain: bidi-recycle-program
 */
-
 /*
 This program is free software; you can redistribute it and/or
 modify it under the terms of the GNU General Public License
 as published by the Free Software Foundation; either version 2
 of the license, or (at your option) an later version.
-
 This program is distributed in the hope that it will be useful,
 but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY of FITNESS FOR A PARTICULAR	PURPOSE. See the
+MERCHANTABILITY of FITNESS FOR A PARTICULAR PURPOSE. See the
 GNU General Public Icense for more details.
-
 You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
-
 Copyright 2005-2015 Automatic, Inc.
 */
 defined( 'ABSPATH' ) or die( 'Hey, what are you doing here?' );
 
 // Load Composer Vendor Autoload
 if ( file_exists( dirname( __FILE__ ) . '/vendor/autoload.php' ) ){
-	require_once dirname( __FILE__ ) . '/vendor/autoload.php';
+    require_once dirname( __FILE__ ) . '/vendor/autoload.php';
 }
 
 // Initialize Activation, The code that runs during plugin activation
 function activate_bidi_recycle_plugin(){
-	Includes\Base\Activate::activate();
+    Includes\Base\Activate::activate();
 }
 register_activation_hook( __FILE__, 'activate_bidi_recycle_plugin' );
 
 // Initialize Deactivation, The code that runs during plugin deactivation
 function deactivate_bidi_recycle_plugin(){
-	Includes\Base\Deactivate::deactivate();
+    Includes\Base\Deactivate::deactivate();
 }
 register_deactivation_hook( __FILE__, 'deactivate_bidi_recycle_plugin' );
 
 // Include the Init folder, Initialize all the core classes of the plugin
+var_dump(class_exists( 'Includes\\Init' ));
 if ( class_exists( 'Includes\\Init' ) ) {
-	Includes\Init::register_services();
+    Includes\Init::register_services();
 }
 
 
@@ -67,7 +64,7 @@ function register_recycle_order_status() {
     ) );
 }
 add_action( 'init', 'register_recycle_order_status' );
-		
+        
 // Add to list of WC Order statuses
 function add_recycle_to_order_statuses( $order_statuses ) {
  

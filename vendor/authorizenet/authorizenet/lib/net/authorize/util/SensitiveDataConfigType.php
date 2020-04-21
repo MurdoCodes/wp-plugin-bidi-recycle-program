@@ -1,8 +1,5 @@
 <?php
 namespace net\authorize\util;
-
-
-
 class SensitiveDataConfigType
 {
 	/**
@@ -17,4 +14,3 @@ class SensitiveDataConfigType
      */
 	public $sensitiveStringRegexes;
 }
-?>

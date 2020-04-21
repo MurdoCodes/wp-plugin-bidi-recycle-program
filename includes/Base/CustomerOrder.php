@@ -5,68 +5,48 @@
 namespace Includes\Base;
 
 class CustomerOrder{
-
     	private $customer_orders;
-
-    	function register() {
-		
+    	public function register() {		
 		}
-
-	 	function return(){
+	 	public function return(){
 	 		$this->getOrderID();
-
 	 	}      
-
 	 	// Set All Details of Customer Orders
 	 	public function setCustomerOrderDetails($customer_orders){
 	 		$this->customer_orders = $customer_orders;
 	 	}
-
 	 	// Get All Details of Customer Orders
 	 	public function getCustomerOrderDetails(){
 	 		return $this->customer_orders;
 	 	}
-
-
 	 	// function to get Order ID via get_post
 	 	function returnOrderDetails(){
-
 	 		$customer_orders = $this->getCustomerOrderDetails();
 	 		foreach ($customer_orders as $value) {
 				// use woocommerce function to get list of orders and its details
 				$order_id = wc_get_order( $value->ID );
 				return $order_id;
 		    } 
-
 	 	}
-
 		function getOrderItems(){
 			$customer_orders = $this->getCustomerOrderDetails();
 			$items = array();
 			foreach ($customer_orders as $value) {
-
 				// use woocommerce function to get list of orders and its details
-				$order = wc_get_order( $value->ID );		
-
+				$order = wc_get_order( $value->ID );
 				// use woocommerce function get order items inside single order				
-				$order_items = $order->get_items();
-			
+				$order_items = $order->get_items();			
       			// loop to show all the items inside a single order
-				foreach( $order_items as $item_id => $item ){
-					
+				foreach( $order_items as $item_id => $item ){					
 					$items[] = $item->get_data();
-
 				}
 			}
 			return($items);
 		}
-
 		function getOrderItemQty( $product_order_id, $product_item_id ){
 			wc_add_order_item_meta( $order_item_id, '_qty', 2, true );
 			$order = wc_get_order( $product_order_id );
-
 			foreach ( $order->get_items() as $item_id => $item ) {
-
 				if($item_id == $product_item_id){
 					return $item->get_quantity();
 				}
@@ -74,7 +54,6 @@ class CustomerOrder{
 		}
 
 		function getUserBillingShipping($user_id) {
-
 			$data = array(
 				"billing_first_name" => get_user_meta( $user_id, 'billing_first_name', true ),
 				"billing_last_name" => get_user_meta( $user_id, 'billing_last_name', true ),
@@ -98,7 +77,6 @@ class CustomerOrder{
 				"shipping_country" => get_user_meta( $user_id, 'shipping_country', true ),
 				"shipping_state" => get_user_meta( $user_id, 'shipping_state', true )
 			);
-
 		    return $data;
 		}
 }

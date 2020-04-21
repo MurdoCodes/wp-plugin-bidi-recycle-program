@@ -1,7 +1,5 @@
 <?php
-
 namespace net\authorize\api\contract\v1;
-
 /**
  * Class representing GetAUJobDetailsRequest
  */
@@ -126,4 +124,3 @@ class GetAUJobDetailsRequest extends ANetApiRequestType
     }
     
 }
-

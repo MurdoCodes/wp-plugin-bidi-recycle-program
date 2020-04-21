@@ -1,7 +1,5 @@
 <?php
-
 namespace net\authorize\api\contract\v1\TransactionRequestType;
-
 /**
  * Class representing UserFieldsAType
  */
@@ -154,4 +152,3 @@ class UserFieldsAType implements \JsonSerializable
     }
     
 }
-

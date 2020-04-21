@@ -1,7 +1,5 @@
 <?php
-
 namespace net\authorize\api\contract\v1\TransactionResponseType;
-
 /**
  * Class representing SecureAcceptanceAType
  */
@@ -174,4 +172,3 @@ class SecureAcceptanceAType implements \JsonSerializable
     }
     
 }
-

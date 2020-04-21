@@ -271,7 +271,6 @@ if(isset($_GET['return_id'])){
 		</form>
 	</div>
 	<!-- End View Recycle Data List -->
-
 	<!-- Show no Data -->
 <?php 
 }else{

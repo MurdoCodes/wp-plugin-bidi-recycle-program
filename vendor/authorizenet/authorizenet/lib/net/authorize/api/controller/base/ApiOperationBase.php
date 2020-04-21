@@ -1,16 +1,13 @@
 <?php
 namespace net\authorize\api\controller\base;
-
 use InvalidArgumentException;
 // use JMS\Serializer\SerializerBuilder;
 // use JMS\Serializer\handler\HandlerRegistryInterface;
 // use GoetasWebservices\Xsd\XsdToPhpRuntime\Jms\Handler\BaseTypesHandler;
 // use GoetasWebservices\Xsd\XsdToPhpRuntime\Jms\Handler\XmlSchemaDateHandler;
-
 use \net\authorize\util\HttpClient;
 use \net\authorize\util\Helpers;
 use \net\authorize\util\LogFactory as LogFactory;
-
 
 abstract class ApiOperationBase implements IApiOperation
 {

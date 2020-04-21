@@ -1,7 +1,5 @@
 <?php
-
 namespace net\authorize\api\contract\v1;
-
 /**
  * Class representing SubsequentAuthInformationType
  *
@@ -150,4 +148,3 @@ class SubsequentAuthInformationType implements \JsonSerializable
     }
     
 }
-

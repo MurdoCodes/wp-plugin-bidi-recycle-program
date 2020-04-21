@@ -1,7 +1,5 @@
 <?php
-
 namespace net\authorize\api\contract\v1;
-
 /**
  * Class representing MerchantAuthenticationType
  *
@@ -341,4 +339,3 @@ class MerchantAuthenticationType implements \JsonSerializable
     }
     
 }
-

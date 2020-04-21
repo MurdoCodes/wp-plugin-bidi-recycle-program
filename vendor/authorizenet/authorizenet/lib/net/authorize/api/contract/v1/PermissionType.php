@@ -1,7 +1,5 @@
 <?php
-
 namespace net\authorize\api\contract\v1;
-
 /**
  * Class representing PermissionType
  *
@@ -123,4 +121,3 @@ class PermissionType implements \JsonSerializable
     }
     
 }
-

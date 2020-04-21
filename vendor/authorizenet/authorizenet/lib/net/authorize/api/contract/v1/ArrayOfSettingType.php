@@ -1,7 +1,5 @@
 <?php
-
 namespace net\authorize\api\contract\v1;
-
 /**
  * Class representing ArrayOfSettingType
  *
@@ -157,4 +155,3 @@ class ArrayOfSettingType implements \JsonSerializable
     }
     
 }
-

@@ -5,7 +5,6 @@
  * @author Indrek Päri
  * @author Elan Ruusamäe <glen@delfi.ee>
  */
-
 $PHPMAILER_LANG['authenticate']         = 'SMTP Viga: Autoriseerimise viga.';
 $PHPMAILER_LANG['connect_host']         = 'SMTP Viga: Ei õnnestunud luua ühendust SMTP serveriga.';
 $PHPMAILER_LANG['data_not_accepted']    = 'SMTP Viga: Vigased andmed.';

@@ -1,7 +1,5 @@
 <?php
-
 namespace net\authorize\api\contract\v1;
-
 /**
  * Class representing CreateCustomerProfileTransactionResponse
  */
@@ -114,4 +112,3 @@ class CreateCustomerProfileTransactionResponse extends ANetApiResponseType
     }
     
 }
-

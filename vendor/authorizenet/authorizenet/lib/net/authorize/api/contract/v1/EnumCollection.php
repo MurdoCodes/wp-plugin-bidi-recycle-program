@@ -1,7 +1,5 @@
 <?php
-
 namespace net\authorize\api\contract\v1;
-
 /**
  * Class representing EnumCollection
  */
@@ -280,6 +278,4 @@ class EnumCollection
         return $this;
     }
 
-
 }
-

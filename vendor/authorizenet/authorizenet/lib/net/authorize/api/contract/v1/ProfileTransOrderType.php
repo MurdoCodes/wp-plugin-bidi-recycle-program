@@ -1,7 +1,5 @@
 <?php
-
 namespace net\authorize\api\contract\v1;
-
 /**
  * Class representing ProfileTransOrderType
  *
@@ -369,4 +367,3 @@ class ProfileTransOrderType extends ProfileTransAmountType implements \JsonSeria
     }
     
 }
-

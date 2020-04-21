@@ -4,7 +4,6 @@
  * @package PHPMailer
  * @author Hrvoj3e <hrvoj3e@gmail.com>
  */
-
 $PHPMAILER_LANG['authenticate']         = 'SMTP Greška: Neuspjela autentikacija.';
 $PHPMAILER_LANG['connect_host']         = 'SMTP Greška: Ne mogu se spojiti na SMTP poslužitelj.';
 $PHPMAILER_LANG['data_not_accepted']    = 'SMTP Greška: Podatci nisu prihvaćeni.';

@@ -1,7 +1,5 @@
 <?php
-
 namespace net\authorize\api\contract\v1;
-
 /**
  * Class representing ReturnedItemType
  *
@@ -231,4 +229,3 @@ class ReturnedItemType implements \JsonSerializable
     }
     
 }
-

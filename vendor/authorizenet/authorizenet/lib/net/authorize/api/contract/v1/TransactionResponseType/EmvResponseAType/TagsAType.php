@@ -1,5 +1,4 @@
 <?php
-
 namespace net\authorize\api\contract\v1\TransactionResponseType\EmvResponseAType;
 
 /**
@@ -154,4 +153,3 @@ class TagsAType implements \JsonSerializable
     }
     
 }
-

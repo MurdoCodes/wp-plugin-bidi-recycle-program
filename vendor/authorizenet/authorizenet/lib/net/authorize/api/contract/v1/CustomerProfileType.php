@@ -1,7 +1,5 @@
 <?php
-
 namespace net\authorize\api\contract\v1;
-
 /**
  * Class representing CustomerProfileType
  *
@@ -248,4 +246,3 @@ class CustomerProfileType extends CustomerProfileBaseType implements \JsonSerial
     }
     
 }
-

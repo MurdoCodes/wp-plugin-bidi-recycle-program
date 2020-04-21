@@ -1,7 +1,5 @@
 <?php
-
 namespace net\authorize\api\contract\v1;
-
 /**
  * Class representing ProfileTransAuthCaptureType
  *
@@ -96,4 +94,3 @@ class ProfileTransAuthCaptureType extends ProfileTransOrderType implements \Json
     }
     
 }
-

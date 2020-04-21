@@ -1,7 +1,5 @@
 <?php
-
 namespace net\authorize\api\contract\v1;
-
 /**
  * Class representing ProcessorType
  *
@@ -211,4 +209,3 @@ class ProcessorType implements \JsonSerializable
     }
     
 }
-

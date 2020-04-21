@@ -1,7 +1,5 @@
 <?php
-
 namespace net\authorize\api\contract\v1\TransactionResponseType\SplitTenderPaymentsAType;
-
 /**
  * Class representing SplitTenderPaymentAType
  */
@@ -336,4 +334,3 @@ class SplitTenderPaymentAType implements \JsonSerializable
     }
     
 }
-

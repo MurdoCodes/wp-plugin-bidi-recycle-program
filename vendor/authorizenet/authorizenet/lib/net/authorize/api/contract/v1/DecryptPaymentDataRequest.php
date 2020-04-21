@@ -1,7 +1,5 @@
 <?php
-
 namespace net\authorize\api\contract\v1;
-
 /**
  * Class representing DecryptPaymentDataRequest
  */
@@ -99,4 +97,3 @@ class DecryptPaymentDataRequest extends ANetApiRequestType
     }
     
 }
-

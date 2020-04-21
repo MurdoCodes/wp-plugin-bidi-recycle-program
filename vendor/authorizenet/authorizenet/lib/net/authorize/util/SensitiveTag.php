@@ -40,4 +40,3 @@ class SensitiveTag
         $this->disableMask = $disableMask;
     }
 }
-?>

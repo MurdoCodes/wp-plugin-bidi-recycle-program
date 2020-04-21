@@ -6,11 +6,13 @@ use Includes\Base\DBModel;
 require "../../vendor/autoload.php";
 require_once( dirname (dirname(dirname( dirname( dirname( dirname( __FILE__ ) ) ) ) ) ) . '/wp-load.php' );
 	
-$DBModel = new DBModel();
-$param = $_POST['data'];
-$recycleSearch = $DBModel->recycleSearch($param);
-showDetails($recycleSearch);
-
+if($_POST['data']){
+	$DBModel = new DBModel();
+	$param = $_POST['data'];
+	$recycleSearch = $DBModel->recycleSearch($param);
+	showDetails($recycleSearch);	
+}
+	
 function showDetails($param){
 	$output = '';
 	foreach ($param as $value) {

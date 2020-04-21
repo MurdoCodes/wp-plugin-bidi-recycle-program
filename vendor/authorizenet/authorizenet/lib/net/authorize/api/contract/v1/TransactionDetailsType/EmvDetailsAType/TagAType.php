@@ -1,5 +1,4 @@
 <?php
-
 namespace net\authorize\api\contract\v1\TransactionDetailsType\EmvDetailsAType;
 
 /**
@@ -147,4 +146,3 @@ class TagAType implements \JsonSerializable
     }
     
 }
-

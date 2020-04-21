@@ -69,5 +69,3 @@ use Symfony\Component\Yaml\Yaml as YamlLib;
 // 			echo "All Good!";
 // 		}
 // 	}
-
-?>

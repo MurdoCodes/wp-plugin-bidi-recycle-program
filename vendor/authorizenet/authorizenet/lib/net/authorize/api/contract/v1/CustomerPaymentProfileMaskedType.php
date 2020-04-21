@@ -1,7 +1,5 @@
 <?php
-
 namespace net\authorize\api\contract\v1;
-
 /**
  * Class representing CustomerPaymentProfileMaskedType
  *
@@ -320,4 +318,3 @@ class CustomerPaymentProfileMaskedType extends CustomerPaymentProfileBaseType im
     }
     
 }
-

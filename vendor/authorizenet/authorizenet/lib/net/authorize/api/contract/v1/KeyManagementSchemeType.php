@@ -1,7 +1,5 @@
 <?php
-
 namespace net\authorize\api\contract\v1;
-
 /**
  * Class representing KeyManagementSchemeType
  *
@@ -124,4 +122,3 @@ class KeyManagementSchemeType implements \JsonSerializable
     }
     
 }
-

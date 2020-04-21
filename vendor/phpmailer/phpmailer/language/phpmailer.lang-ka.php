@@ -4,7 +4,6 @@
  * @package PHPMailer
  * @author Avtandil Kikabidze aka LONGMAN <akalongman@gmail.com>
  */
-
 $PHPMAILER_LANG['authenticate']         = 'SMTP შეცდომა: ავტორიზაცია შეუძლებელია.';
 $PHPMAILER_LANG['connect_host']         = 'SMTP შეცდომა: SMTP სერვერთან დაკავშირება შეუძლებელია.';
 $PHPMAILER_LANG['data_not_accepted']    = 'SMTP შეცდომა: მონაცემები არ იქნა მიღებული.';

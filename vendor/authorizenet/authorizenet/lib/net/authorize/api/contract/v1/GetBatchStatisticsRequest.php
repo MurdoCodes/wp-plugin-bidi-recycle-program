@@ -1,7 +1,5 @@
 <?php
-
 namespace net\authorize\api\contract\v1;
-
 /**
  * Class representing GetBatchStatisticsRequest
  */
@@ -72,4 +70,3 @@ class GetBatchStatisticsRequest extends ANetApiRequestType
     }
     
 }
-

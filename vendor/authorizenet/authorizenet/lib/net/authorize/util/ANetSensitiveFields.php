@@ -1,8 +1,5 @@
 <?php
 namespace net\authorize\util;
-
-
-
 define("ANET_SENSITIVE_XMLTAGS_JSON_FILE","AuthorizedNetSensitiveTagsConfig.json");
 define("ANET_SENSITIVE_DATE_CONFIG_CLASS",'net\authorize\util\SensitiveDataConfigType');
 

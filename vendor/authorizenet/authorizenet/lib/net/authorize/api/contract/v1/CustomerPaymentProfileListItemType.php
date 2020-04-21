@@ -1,7 +1,5 @@
 <?php
-
 namespace net\authorize\api\contract\v1;
-
 /**
  * Class representing CustomerPaymentProfileListItemType
  *
@@ -231,4 +229,3 @@ class CustomerPaymentProfileListItemType implements \JsonSerializable
     }
     
 }
-

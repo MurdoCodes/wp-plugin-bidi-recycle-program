@@ -1,7 +1,5 @@
 <?php
-
 namespace net\authorize\api\contract\v1;
-
 /**
  * Class representing ARBGetSubscriptionListResponse
  */
@@ -148,4 +146,3 @@ class ARBGetSubscriptionListResponse extends ANetApiResponseType
     }
     
 }
-

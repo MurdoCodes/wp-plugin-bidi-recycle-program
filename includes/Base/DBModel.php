@@ -5,18 +5,16 @@
 namespace Includes\Base;
 
 class DBModel{
-
 	private $wpdb;
-
-	function register() {
-		
-	}
-
+	
 	public function __construct( ){
 		global $wpdb;
 		$this->wpdb = $wpdb;
 	}
 
+	function register() {
+			
+	}
 	// Insert return information to the database
 	function insertReturnInformation($total_prod_qty, $current_date, $return_status, $customer_id, $TrackingNumber){
 		$table = $this->wpdb->prefix . 'bidi_return_information';

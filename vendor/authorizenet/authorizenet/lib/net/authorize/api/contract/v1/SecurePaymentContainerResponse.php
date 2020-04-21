@@ -1,7 +1,5 @@
 <?php
-
 namespace net\authorize\api\contract\v1;
-
 /**
  * Class representing SecurePaymentContainerResponse
  */
@@ -85,4 +83,3 @@ class SecurePaymentContainerResponse extends ANetApiResponseType
     }
     
 }
-
