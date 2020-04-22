@@ -324,6 +324,7 @@ $(function() {
 		$('#recycle-search-input').keyup(function(){
 			$('#the-list2').hide();
 			var txt = $(this).val();
+			alert(txt);
 			// $('result').html('');
 			$.ajax({
 				url : pluginURL() + "templates/submit/search.template.php",

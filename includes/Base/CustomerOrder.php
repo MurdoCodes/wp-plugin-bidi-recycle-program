@@ -44,7 +44,7 @@ class CustomerOrder{
 			return($items);
 		}
 		function getOrderItemQty( $product_order_id, $product_item_id ){
-			wc_add_order_item_meta( $order_item_id, '_qty', 2, true );
+			wc_add_order_item_meta( $product_order_id, '_qty', 2, true );
 			$order = wc_get_order( $product_order_id );
 			foreach ( $order->get_items() as $item_id => $item ) {
 				if($item_id == $product_item_id){

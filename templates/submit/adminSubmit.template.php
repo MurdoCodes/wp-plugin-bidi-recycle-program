@@ -6,22 +6,23 @@ use Includes\Base\DBModel;
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
+use Includes\Base\Email;
 require "../../vendor/autoload.php";
 require_once( dirname (dirname(dirname( dirname( dirname( dirname( __FILE__ ) ) ) ) ) ) . '/wp-load.php' );
-
-
 
 if(isset($_POST)){
 	$DBModel = new DBModel();
 
 	if($_POST['transaction_status'] == 'wc-recycled'){
 		$customer_id = $_POST['customer_id'];
+		$customer_email = $_POST['customerEmail'];
 		$shipping_tracking_number = $_POST['shipping_tracking_number'];
 		$return_id = $_POST['return_id'];
 		$transaction_date = $_POST['transaction_date'];
 		$transaction_status = $_POST['transaction_status'];
 		$order_ids = $_POST['order_ids'];
 		$product_item_id = $_POST['product_item_id'];
+
 
 		$DBModel->saveAdminTransaction($transaction_date, $transaction_status, $return_id, $shipping_tracking_number);
 		$DBModel->updateReturnInformation($transaction_status, $shipping_tracking_number);
@@ -64,39 +65,45 @@ if(isset($_POST)){
 		update_post_meta( $new_coupon_id, 'free_shipping', 'no' );
 
 
-		$mail = new PHPMailer(true);
+		/** SEND EMAIL TO ADMIN **/
+		$Email = new Email();
+		$mailAdmin = new PHPMailer(true);
+		$mailAdmin->isSMTP();
 		$logoFileUrl = plugin_dir_path( dirname( __FILE__, 2 ) ) . "assets/img/adminHeader.jpg";
-			try {
-				// $senderEmail = 'quickfillkim@gmail.com';
-				// $senderPassword = 'kim123!@#';
-				
-				$senderEmail = 'quikfillrx@gmail.com';
-				$senderPassword = 'OnwardandUpward2021';
 
-				$receiverEmail = 'murdoc21daddie@gmail.com';
-			    //Server settings
-			    $mail->SMTPDebug = SMTP::DEBUG_SERVER;
-			    $mail->isSMTP();
-			    $mail->Host       = 'smtp.gmail.com';
-			    $mail->SMTPAuth   = true;
-			    $mail->Username   = $senderEmail;
-			    $mail->Password   = $senderPassword;
-			    $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
-			    $mail->Port       = 465;
+			try {
+				// GET SENDER EMAIL SETTING
+				$senderEmailSetting = $Email->senderEmailSetting();
+				$senderEmail = $senderEmailSetting['senderEmail'];
+				$senderPassword = $senderEmailSetting['senderPassword'];
+
+				// RECEIVER EMAIL
+				// $receiverEmail = 'murdoc21daddie@gmail.com';
+				$receiverEmail = $customer_email;
+				
+
+				// MAIL SETTINGS
+				$mailAdmin->SMTPDebug  = $senderEmailSetting['SMTPDebug'];	    
+			    $mailAdmin->Host       = $senderEmailSetting['Host'];
+			    $mailAdmin->SMTPAuth   = $senderEmailSetting['SMTPAuth'];
+			    $mailAdmin->Username   = $senderEmail;
+			    $mailAdmin->Password   = $senderPassword;
+			    $mailAdmin->SMTPSecure = $senderEmailSetting['SMTPSecure'];
+			    $mailAdmin->Port       = $senderEmailSetting['Port'];
 
 			    //Recipients
-			    $mail->setFrom($senderEmail, 'Bidi Vapor - Bidi Recycle');
-			    // $mail->addAddress($from_email, $customerFullName);
-			    $mail->addAddress($receiverEmail, $customerFullName);
-			    $mail->addEmbeddedImage($logoFileUrl, 'bidi_logo');
+			    $mailAdmin->setFrom($senderEmail, 'Bidi Vapor - Bidi Recycle');
+			    // $mailAdmin->addAddress($from_email, $customerFullName);
+			    $mailAdmin->addAddress($receiverEmail, $customerFullName);
+			    $mailAdmin->addEmbeddedImage($logoFileUrl, 'bidi_logo');
 			    // Attachments
 			    // $mail->addAttachment('/var/tmp/file.tar.gz');         // Add attachments
 			    // $mail->addAttachment('/tmp/image.jpg', 'new.jpg');    // Optional name
 
 			    // Content
-			    $mail->isHTML(true);
-			    $mail->Subject = 'Your Bidi Cares Recycling Coupon';
-			    $mail->Body = '<div style="width:50%;">
+			    $mailAdmin->isHTML(true);
+			    $mailAdmin->Subject = 'Your Bidi Cares Recycling Coupon';
+			    $mailAdmin->Body = '<div style="width:50%;">
 	    				<img style="width:100%;" src="cid:bidi_logo" alt="Bidi Cares">
 
 						<p>Hello, '.$customerFullName.'</p>
@@ -122,10 +129,10 @@ if(isset($_POST)){
 				</div>
 				';
 
-			    $mail->send();
+			    $mailAdmin->send();
 			    echo 'Message has been sent';
 			} catch (Exception $e) {
-			    echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+			    echo "Message could not be sent. Mailer Error: {$mailAdmin->ErrorInfo}";
 			}
 	}
 

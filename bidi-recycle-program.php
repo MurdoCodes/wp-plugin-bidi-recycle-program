@@ -46,7 +46,6 @@ function deactivate_bidi_recycle_plugin(){
 register_deactivation_hook( __FILE__, 'deactivate_bidi_recycle_plugin' );
 
 // Include the Init folder, Initialize all the core classes of the plugin
-var_dump(class_exists( 'Includes\\Init' ));
 if ( class_exists( 'Includes\\Init' ) ) {
     Includes\Init::register_services();
 }

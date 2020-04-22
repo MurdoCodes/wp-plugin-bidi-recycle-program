@@ -18,6 +18,7 @@ final class Init {
 			Base\Shortcode::class,
 			Base\CustomerOrder::class,
 			Base\DBModel::class,
+			Base\Email::class,
 			StampsAPI\StampService::class,
 			AuthorizeNet_API\AuthorizeNetService::class
 		];

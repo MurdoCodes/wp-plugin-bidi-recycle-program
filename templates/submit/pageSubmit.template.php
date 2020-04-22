@@ -11,6 +11,7 @@ use Includes\AuthorizeNet_API\AuthorizeNetService;
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
+use Includes\Base\Email;
 require "../../vendor/autoload.php";
 require_once( dirname (dirname(dirname( dirname( dirname( dirname( __FILE__ ) ) ) ) ) ) . '/wp-load.php' );
 
@@ -62,6 +63,7 @@ if(isset($_POST)){
 	$rate = $StampService->getRates($cleansedAddress->ZIPCode,0,$totalItemWeight,'US-FC', 'Thick Envelope');
 
 	$generateShippingLabel = $StampService->generateShippingLabel($cleansedAddress, $rate);
+
 	$TrackingNumber = $generateShippingLabel['TrackingNumber'];
 	$StampsTxID = $generateShippingLabel['StampsTxID'];
 	$postageURL = $generateShippingLabel['URL'];
@@ -84,13 +86,14 @@ if(isset($_POST)){
 	);
 
 	if($cardDetails){
-	$AuthorizeService->chargeCreditCard($cardDetails, $MaxAmount, $customer_id, $from_firstname, $from_lastName, $from_email, $from_phone_number, $from_address, $from_city, $from_state, $from_postcode, $from_country);
+		$AuthorizeService->chargeCreditCard($cardDetails, $MaxAmount, $customer_id, $from_firstname, $from_lastName, $from_email, $from_phone_number, $from_address, $from_city, $from_state, $from_postcode, $from_country);
 	}
 	// AUTHORIZE.NET END	
 	$count = count($product_order_id);
 	
 	// Insert Return Information Data from the form to wp_bidi_return_information table
 	$insertReturnInformation = $SubmitModel->insertReturnInformation($total_prod_qty, $current_date, $return_status, $customer_id, $TrackingNumber);
+
 	// Get Latest inserted ID from wp_bidi_return_information table
 	$return_id = $insertReturnInformation[0];
 
@@ -122,38 +125,39 @@ if(isset($_POST)){
 
 	}
 
-
+	/** START SEND EMAIL TO CUSTOMER **/
 	// Instantiation and passing `true` enables exceptions
+	$Email = new Email();
 	$mail = new PHPMailer(true);
+	$mail->isSMTP();
 	// Site logo
 	$logoFileUrl = plugin_dir_path( dirname( __FILE__, 2 ) ) . "assets/img/adminHeader.jpg";
 
 	try {
-		// $senderEmail = 'quickfillkim@gmail.com';
-		// $senderPassword = 'kim123!@#';
-		
-		$senderEmail = 'quikfillrx@gmail.com';
-		$senderPassword = 'OnwardandUpward2021';
+		// GET SENDER EMAIL SETTING
+		$senderEmailSetting = $Email->senderEmailSetting();
+		$senderEmail = $senderEmailSetting['senderEmail'];
+		$senderPassword = $senderEmailSetting['senderPassword'];
 
-		$receiverEmail = 'murdoc21daddie@gmail.com';
+		// RECEIVER EMAIL
+		// $receiverEmail = 'murdoc21daddie@gmail.com';
+		$receiverEmail = $from_email;		
 
-	    //Server settings
-	    $mail->SMTPDebug = SMTP::DEBUG_SERVER;
-	    $mail->isSMTP();
-	    $mail->Host       = 'smtp.gmail.com';
-	    $mail->SMTPAuth   = true;
+		// MAIL SETTINGS
+		$mail->SMTPDebug = $senderEmailSetting['SMTPDebug'];	    
+	    $mail->Host       = $senderEmailSetting['Host'];
+	    $mail->SMTPAuth   = $senderEmailSetting['SMTPAuth'];
 	    $mail->Username   = $senderEmail;
 	    $mail->Password   = $senderPassword;
-	    $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
-	    $mail->Port       = 465;
+	    $mail->SMTPSecure = $senderEmailSetting['SMTPSecure'];
+	    $mail->Port       = $senderEmailSetting['Port'];		
 
 	    //Sender
 	    $mail->setFrom($senderEmail, 'Bidi Vapor - Bidi Recycle');
 	    // Receiver
 	    $mail->addAddress($receiverEmail, $customerFullName);
-
-	    $mail->addEmbeddedImage($logoFileUrl, 'bidi_logo');
-	    
+	    // Embeded Header Image
+	    $mail->addEmbeddedImage($logoFileUrl, 'bidi_logo');	    
 	    // Attachments
 	    // $mail->addAttachment('/var/tmp/file.tar.gz');         // Add attachments
 	    // $mail->addAttachment('/tmp/image.jpg', 'new.jpg');    // Optional name
@@ -230,38 +234,39 @@ if(isset($_POST)){
 	} catch (Exception $e) {
 	    echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
 	}
-	
+	/** START SEND EMAIL TO CUSTOMER **/
+
+	/** START SEND EMAIL TO ADMIN **/
 	echo adminEmail($TrackingNumber, $from_firstname, $from_lastName, $from_email, $from_phone_number, $from_address, $from_city, $from_postcode, $from_state, $totalQty);
 }
-
+/** START SEND EMAIL TO ADMIN **/
 function adminEmail($TrackingNumber, $from_firstname, $from_lastName, $from_email, $from_phone_number, $from_address, $from_city, $from_postcode, $from_state, $totalQty){
-
-	// $senderEmail = get_option( 'admin_email' );
-	// $receiverEmail = 'quikfillrx@gmail.com'
-	// $senderEmail = 'quickfillkim@gmail.com';
-	// $senderPassword = 'kim123!@#';
-		
-	$senderEmail = 'quikfillrx@gmail.com';
-	$senderPassword = 'OnwardandUpward2021';
-
-	$receiverEmail = 'quikfillrx@gmail.com';
-
-	$blogname = 'Bidi Vapor Admin';
-	// Instantiation and passing `true` enables exceptions
+	$Email = new Email();
 	$mailAdmin = new PHPMailer(true);
+	$mailAdmin->isSMTP();
 	// Site logo
 	$logoFileUrl = plugin_dir_path( dirname( __FILE__, 2 ) ) . "assets/img/adminHeader.jpg";
+	try {		
 
-	try {
-	    //Server settings
-	    $mailAdmin->SMTPDebug = SMTP::DEBUG_SERVER;
-	    $mailAdmin->isSMTP();
-	    $mailAdmin->Host       = 'smtp.gmail.com';
-	    $mailAdmin->SMTPAuth   = true;
+		// GET SENDER EMAIL SETTING
+		$senderEmailSetting = $Email->senderEmailSetting();
+		$senderEmail = $senderEmailSetting['senderEmail'];
+		$senderPassword = $senderEmailSetting['senderPassword'];
+
+		// RECEIVER EMAIL
+		// $receiverEmail = 'quikfillrx@gmail.com';
+		// $receiverEmail = 'murdoc21daddie@gmail.com';
+		$receiverEmail = $senderEmailSetting['receiverEmail'];
+		
+
+		// MAIL SETTINGS
+		$mailAdmin->SMTPDebug = $senderEmailSetting['SMTPDebug'];	    
+	    $mailAdmin->Host       = $senderEmailSetting['Host'];
+	    $mailAdmin->SMTPAuth   = $senderEmailSetting['SMTPAuth'];
 	    $mailAdmin->Username   = $senderEmail;
 	    $mailAdmin->Password   = $senderPassword;
-	    $mailAdmin->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
-	    $mailAdmin->Port       = 465;
+	    $mailAdmin->SMTPSecure = $senderEmailSetting['SMTPSecure'];
+	    $mailAdmin->Port       = $senderEmailSetting['Port'];
 
 	    $customerFullName = $from_firstname . " " . $from_lastName;
 	    //Sender
@@ -269,8 +274,8 @@ function adminEmail($TrackingNumber, $from_firstname, $from_lastName, $from_emai
 	    // Receiver
 	    $mailAdmin->addAddress($receiverEmail, $blogname);
 
-	    $mailAdmin->addEmbeddedImage($logoFileUrl, 'bidi_logo');
-	    
+	    // Email Header Image
+	    $mailAdmin->addEmbeddedImage($logoFileUrl, 'bidi_logo');	    
 	    // Attachments
 	    // $mailAdmin->addAttachment('/var/tmp/file.tar.gz');         // Add attachments
 	    // $mailAdmin->addAttachment('/tmp/image.jpg', 'new.jpg');    // Optional name
@@ -315,3 +320,4 @@ function adminEmail($TrackingNumber, $from_firstname, $from_lastName, $from_emai
 	    echo "Message could not be sent. Mailer Error: {$mailAdmin->ErrorInfo}";
 	}
 }
+/** START SEND EMAIL TO ADMIN **/

@@ -6,7 +6,7 @@ use Includes\Base\DBModel;
 require "../../vendor/autoload.php";
 require_once( dirname (dirname(dirname( dirname( dirname( dirname( __FILE__ ) ) ) ) ) ) . '/wp-load.php' );
 	
-if($_POST['data']){
+if(isset($_POST['data'])){
 	$DBModel = new DBModel();
 	$param = $_POST['data'];
 	$recycleSearch = $DBModel->recycleSearch($param);

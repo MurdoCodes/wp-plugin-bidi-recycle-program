@@ -6,6 +6,7 @@ use Includes\Base\BaseController;
 use Includes\Base\CustomerOrder;
 use Includes\StampsAPI\StampService;
 use Includes\StampsAPI\Address;
+
 	// // Declare variable that contains current user details from wp_user table
 	if(wp_get_current_user()){
 	$customer = wp_get_current_user();
@@ -180,27 +181,27 @@ use Includes\StampsAPI\Address;
 							<div class="col-md-6">
 								<div class="form-group">
 									<label for="ShippingFullName">Full Name :</label>
-									<p>Eric Mosser</p>
+									<p>BIDICARES RETURNS</p>
 								</div>
 
 								<div class="form-group">
 									<label for="ShippingEmail">Email :</label>
-									<p>admin@kaivalbrands.com</p>
+									<p>support@bidivapor.com</p>
 								</div>
 
 								<div class="form-group">
 									<label for="ShippingPhone">Phone :</label>
-									<p>5035671167</p>
+									<p>(833) 367-2434</p>
 								</div>
 							</div>
 
 							<div class="col-md-6">
 								<div class="form-group">
 									<label for="ShippingStreetAddress">Address :</label>
-									<p>16300 SW Blackbird Street</p>
+									<p>8630 SW Scholls Ferry Rd Suite 3333</p>
 									<p>Beaverton</p>
 									<p>Oregon</p>
-									<p>97007</p>
+									<p>97008</p>
 								</div>
 							</div>
 

@@ -7,7 +7,7 @@ use Includes\Base\CustomerOrder;
 
 $DBModel = new DBModel();
 $CustomerOrder = new CustomerOrder();
-
+var_dump($getReturnProductData);
 if(isset($_GET['return_id'])){
 	$return_id = $_GET['return_id'];
 	$getReturnProductData = $DBModel->getReturnProductData($return_id);
@@ -72,12 +72,13 @@ if(isset($_GET['return_id'])){
 									</div>
 									<div class="form-group">
 										<label>Status:</label>
-										<!-- <form action="<?php //echo $this->plugin_url . 'templates/submit/adminSubmit.template.php'; ?>" method="POST"> -->
-										<form id="form-admin-recycle" method="POST">
+										<form action="<?php echo $this->plugin_url . 'templates/submit/adminSubmit.template.php'; ?>" method="POST">
+										<!-- <form id="form-admin-recycle" method="POST"> -->
 											<input type="hidden" name="customer_id" value="<?php echo $getReturnProductData[0]->customer_id; ?>">
 											<input type="hidden" name="shipping_tracking_number" value="<?php echo $getReturnProductData[0]->shipping_tracking_number; ?>">
 											<input type="hidden" name ="return_id" value="<?php echo $return_id; ?>">
 											<input type="hidden" name="transaction_date" value="<?php echo date("Y-m-d h:i:sa"); ?>">
+											<input type="hidden" name="customerEmail" value="<?php echo $getUserBillingShipping['billing_email']; ?>">
 											<?php
 												$count = count($getReturnProductData);
 												$counter = 0;
