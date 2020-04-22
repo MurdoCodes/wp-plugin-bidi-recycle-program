@@ -55,7 +55,7 @@ if(isset($_POST)){
 		$from_state,
 		$from_postcode,
 		$from_phone_number,
-		$from_email,
+		$from_email
 	);
 	$cleanseAddress = $StampService->cleanseAddress($address);
 	$cleansedAddress = $cleanseAddress['address'];
@@ -129,7 +129,6 @@ if(isset($_POST)){
 	// Instantiation and passing `true` enables exceptions
 	$Email = new Email();
 	$mail = new PHPMailer(true);
-	$mail->isSMTP();
 	// Site logo
 	$logoFileUrl = plugin_dir_path( dirname( __FILE__, 2 ) ) . "assets/img/adminHeader.jpg";
 
@@ -141,16 +140,17 @@ if(isset($_POST)){
 
 		// RECEIVER EMAIL
 		// $receiverEmail = 'murdoc21daddie@gmail.com';
-		$receiverEmail = $from_email;		
+		$receiverEmail = $from_email;
 
 		// MAIL SETTINGS
-		$mail->SMTPDebug = $senderEmailSetting['SMTPDebug'];	    
+		$mail->SMTPDebug = $senderEmailSetting['SMTPDebug'];
+		$mail->isSMTP();    
 	    $mail->Host       = $senderEmailSetting['Host'];
 	    $mail->SMTPAuth   = $senderEmailSetting['SMTPAuth'];
 	    $mail->Username   = $senderEmail;
 	    $mail->Password   = $senderPassword;
 	    $mail->SMTPSecure = $senderEmailSetting['SMTPSecure'];
-	    $mail->Port       = $senderEmailSetting['Port'];		
+	    $mail->Port       = $senderEmailSetting['Port'];
 
 	    //Sender
 	    $mail->setFrom($senderEmail, 'Bidi Vapor - Bidi Recycle');
@@ -243,7 +243,6 @@ if(isset($_POST)){
 function adminEmail($TrackingNumber, $from_firstname, $from_lastName, $from_email, $from_phone_number, $from_address, $from_city, $from_postcode, $from_state, $totalQty){
 	$Email = new Email();
 	$mailAdmin = new PHPMailer(true);
-	$mailAdmin->isSMTP();
 	// Site logo
 	$logoFileUrl = plugin_dir_path( dirname( __FILE__, 2 ) ) . "assets/img/adminHeader.jpg";
 	try {		
@@ -254,13 +253,12 @@ function adminEmail($TrackingNumber, $from_firstname, $from_lastName, $from_emai
 		$senderPassword = $senderEmailSetting['senderPassword'];
 
 		// RECEIVER EMAIL
-		// $receiverEmail = 'quikfillrx@gmail.com';
 		// $receiverEmail = 'murdoc21daddie@gmail.com';
 		$receiverEmail = $senderEmailSetting['receiverEmail'];
 		
-
 		// MAIL SETTINGS
-		$mailAdmin->SMTPDebug = $senderEmailSetting['SMTPDebug'];	    
+		$mailAdmin->SMTPDebug = $senderEmailSetting['SMTPDebug'];
+		$mailAdmin->isSMTP();	    
 	    $mailAdmin->Host       = $senderEmailSetting['Host'];
 	    $mailAdmin->SMTPAuth   = $senderEmailSetting['SMTPAuth'];
 	    $mailAdmin->Username   = $senderEmail;

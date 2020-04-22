@@ -68,7 +68,7 @@ if(isset($_POST)){
 		/** SEND EMAIL TO ADMIN **/
 		$Email = new Email();
 		$mailAdmin = new PHPMailer(true);
-		$mailAdmin->isSMTP();
+		
 		$logoFileUrl = plugin_dir_path( dirname( __FILE__, 2 ) ) . "assets/img/adminHeader.jpg";
 
 			try {
@@ -83,7 +83,8 @@ if(isset($_POST)){
 				
 
 				// MAIL SETTINGS
-				$mailAdmin->SMTPDebug  = $senderEmailSetting['SMTPDebug'];	    
+				$mailAdmin->SMTPDebug  = $senderEmailSetting['SMTPDebug'];
+				$mailAdmin->isSMTP();    
 			    $mailAdmin->Host       = $senderEmailSetting['Host'];
 			    $mailAdmin->SMTPAuth   = $senderEmailSetting['SMTPAuth'];
 			    $mailAdmin->Username   = $senderEmail;

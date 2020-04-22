@@ -7,14 +7,20 @@ use Includes\Base\CustomerOrder;
 use Includes\StampsAPI\StampService;
 use Includes\StampsAPI\Address;
 
-	// // Declare variable that contains current user details from wp_user table
+	/**
+	*	Declare variable that contains current user details from wp_user table
+	**/
 	if(wp_get_current_user()){
 	$customer = wp_get_current_user();
 
-	// Order count for a "loyal" customer
+	/**
+	*	Order count for a "loyal" customer
+	**/
     $loyal_count = 5;
 
-    // Get Customer Orders and its Details if post status is completed
+    /**
+	*	Get Customer Orders and its Details if post status is completed
+	**/ 
     $customerOrderDetails = get_posts( array(
 	        'numberposts' => -1,
 	        'meta_key'    => '_customer_user',
@@ -24,17 +30,20 @@ use Includes\StampsAPI\Address;
 	    ) );
     if($customerOrderDetails){
 
-    // Text for our "thanks for loyalty" message
+    /**
+	*	Text for our "thanks for loyalty" message
+	**/ 
     $notice_text = sprintf( 'Hey %1$s &#x1f600; We noticed you\'ve placed more than %2$s orders with us – thanks for being a loyal customer!', $customer->display_name, $loyal_count );
 
-	// Declare CustomerORder Object
+	/**
+	*	Declare CustomerORder Object
+	*	Set Customer Order Details
+	*	To Return all the detials of the customer
+	*	Generate Random Hash Code
+	**/ 
 	$CustomerOrderObj = new CustomerOrder();
-	// Set Customer Order Details
 	$CustomerOrderObj->setCustomerOrderDetails($customerOrderDetails);
-	// To Return all the detials of the customer
 	$orderDetails = $CustomerOrderObj->returnOrderDetails();
-
-	// Generate Random Hash Code
 	$random_hash = substr(md5(uniqid(rand(), true)), 16, 16);
 	
 ?>
@@ -85,48 +94,48 @@ use Includes\StampsAPI\Address;
 						
 							<div class="form-group">
 						    	<label for="firstName">First Name:</label>
-						    	<input type="text" class="form-control" name="from_firstname" value="<?php echo $orderDetails->get_shipping_first_name(); ?>" placeholder="<?php echo $orderDetails->get_shipping_first_name(); ?>" >
+						    	<input type="text" class="form-control" name="from_firstname" value="<?php echo $orderDetails->get_shipping_first_name(); ?>" placeholder="<?php echo $orderDetails->get_shipping_first_name(); ?>" readonly>
 						  	</div>
 
 						  	<div class="form-group">
 						    	<label for="lastName">Last Name:</label>
-						    	<input type="text" class="form-control" name="from_lastName" value="<?php echo $orderDetails->get_shipping_last_name(); ?>" placeholder="<?php echo $orderDetails->get_shipping_last_name(); ?>" >
+						    	<input type="text" class="form-control" name="from_lastName" value="<?php echo $orderDetails->get_shipping_last_name(); ?>" placeholder="<?php echo $orderDetails->get_shipping_last_name(); ?>" readonly>
 						  	</div>
 
 						  	<div class="form-group">
 						    	<label for="email">Email Address:</label>
-						    	<input type="email" class="form-control" name="from_email" value="<?php echo $orderDetails->get_billing_email(); ?>" placeholder="<?php echo $orderDetails->get_billing_email(); ?>">
+						    	<input type="email" class="form-control" name="from_email" value="<?php echo $orderDetails->get_billing_email(); ?>" placeholder="<?php echo $orderDetails->get_billing_email(); ?>" readonly>
 						  	</div>
 							
 							<div class="form-group">
 						    	<label for="email">Address:</label>
-						    	<input type="text" class="form-control" name="from_address" value="<?php echo $orderDetails->get_shipping_address_1(); ?>" placeholder="<?php echo $orderDetails->get_shipping_address_1(); ?>" >
+						    	<input type="text" class="form-control" name="from_address" value="<?php echo $orderDetails->get_shipping_address_1(); ?>" placeholder="<?php echo $orderDetails->get_shipping_address_1(); ?>" readonly>
 						  	</div>
 
 
 						  	<div class="form-group">
 						    	<label for="note">Phone :</label>
-						    	<input type="number" class="form-control" name="from_phone_number" value="<?php echo $orderDetails->get_billing_phone(); ?>" placeholder="<?php echo $orderDetails->get_billing_phone(); ?>" >
+						    	<input type="number" class="form-control" name="from_phone_number" value="<?php echo $orderDetails->get_billing_phone(); ?>" placeholder="<?php echo $orderDetails->get_billing_phone(); ?>" readonly>
 						  	</div>
 
 						  	<div class="form-group">
 						    	<label for="country">Country:</label>
-						    	<input type="text" class="form-control" name="from_country" value="<?php echo $orderDetails->get_shipping_country(); ?>" placeholder="<?php echo $orderDetails->get_shipping_country(); ?>" >
+						    	<input type="text" class="form-control" name="from_country" value="<?php echo $orderDetails->get_shipping_country(); ?>" placeholder="<?php echo $orderDetails->get_shipping_country(); ?>" readonly>
 						  	</div>
 
 						  	<div class="form-group">
 						    	<label for="postcode">Postcode:</label>
-						    	<input type="text" class="form-control" name="from_postcode" value="<?php echo $orderDetails->get_shipping_postcode(); ?>" placeholder="<?php echo $orderDetails->get_shipping_postcode(); ?>" >
+						    	<input type="text" class="form-control" name="from_postcode" value="<?php echo $orderDetails->get_shipping_postcode(); ?>" placeholder="<?php echo $orderDetails->get_shipping_postcode(); ?>" readonly>
 						  	</div>
 
 						  	<div class="form-group">
 						    	<label for="city">City:</label>
-						    	<input type="text" class="form-control" name="from_city" value="<?php echo $orderDetails->get_shipping_city(); ?>" placeholder="<?php echo $orderDetails->get_shipping_city(); ?>">
+						    	<input type="text" class="form-control" name="from_city" value="<?php echo $orderDetails->get_shipping_city(); ?>" placeholder="<?php echo $orderDetails->get_shipping_city(); ?>" readonly>
 						  	</div>
 
 						  	<div class="form-group">
 						    	<label for="state">State:</label>
-						    	<input type="text" class="form-control" name="from_state" value="<?php echo $orderDetails->get_shipping_state(); ?>" placeholder="<?php echo $orderDetails->get_shipping_state(); ?>">
+						    	<input type="text" class="form-control" name="from_state" value="<?php echo $orderDetails->get_shipping_state(); ?>" placeholder="<?php echo $orderDetails->get_shipping_state(); ?>" readonly>
 						  	</div>
 						
 					</div>
