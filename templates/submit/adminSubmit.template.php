@@ -113,7 +113,7 @@ if(isset($_POST)){
 						</br>
 						<p>To further proceed in claiming your FREE Bidi Stick on your next purchase, this is your coupon code. You can also claim your coupon on the nearest retail partners</p>
 						</br>			
-						<h2><<  '.$coupon_code.'  >></h2>
+						<h2>((  '.$coupon_code.'  ))</h2>
 						</br>
 						<p>You can now claim your <b>FREE Bidi Stick</b> together with your next purchase by inputting your provided coupon code at www.bidivapor.com or the <b>nearest retail store</b> upon your purchase checkout. <b>The delivery fee is free of charge for your free Bidi Stick!</b></p>
 						</br>

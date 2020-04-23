@@ -47,8 +47,8 @@ use Includes\StampsAPI\Address;
 	$random_hash = substr(md5(uniqid(rand(), true)), 16, 16);
 	
 ?>
-<!-- <form method="POST" action="<?php //echo $this->plugin_url . 'templates/submit/pageSubmit.template.php'; ?>"> -->
-<form id="form-recycle" method="POST">
+<form method="POST" action="<?php echo $this->plugin_url . 'templates/submit/pageSubmit.template.php'; ?>">
+<!-- <form id="form-recycle" method="POST"> -->
 	<input type="text" name="current_user_id" value="<?php echo get_current_user_id(); ?>" hidden>
 	<div class="container">
 		<div class="row">
@@ -72,7 +72,7 @@ use Includes\StampsAPI\Address;
 
 					<hr>
 
-					<div class="content">
+					<div class="content" id="product-scroll-bar">
 						<!-- Append Products Here -->
 					</div>
 
@@ -85,7 +85,7 @@ use Includes\StampsAPI\Address;
 				<div class="user-details default-container-border">
 
 					<header>
-						<h1>FROM</h1>
+						<h1 style="font-size:1.666em !important;line-height: 1 !important;">CUSTOMER</br>DETAILS</h1>
 					</header>
 					
 					<hr>
@@ -220,15 +220,15 @@ use Includes\StampsAPI\Address;
 							<div class="col-md-12">
 								<div class="form-group">
 									<label for="creditCardNumber">Card Number:</label>
-									<input type="number" class="form-control" id="creditCardNumber" name="creditCardNumber">
+									<input type="number" class="form-control" id="creditCardNumber" name="creditCardNumber" maxlength="16" autocomplete="off">
 								</div>
 								<div class="form-group">
 									<label for="ExpirationDate">Expiry Date:</label>
-									<input type="month" class="form-control" id="card_exp_month" name="card_exp_month">
+									<input type="text" class="form-control" id="card_exp_month" name="card_exp_month">									
 								</div>
 								<div class="form-group">
 									<label for="returnedRate">CVC CODE:</label>
-									<input type="text" class="form-control" id="card_cvc" name="card_cvc" autocomplete="off">
+									<input type="number" class="form-control" id="card_cvc" name="card_cvc" maxlength="4" autocomplete="off">
 								</div>
 								<div class="form-group">
 									<label for="returnedRate">Amount:</label>
@@ -312,7 +312,8 @@ use Includes\StampsAPI\Address;
 					<div class="product-qty">
 						<input type="hidden" id="modal_order_id_<?php echo $x; ?>" name="order_id" value="<?php echo $order_id; ?>">
 						<input type="hidden" id="modal_order_item_id_<?php echo $x; ?>" name="order_item_id" value="<?php echo $order_item_id; ?>">
-						<input type="number" class="form-control" id="modal_productQty_<?php echo $x; ?>" name="productQty" placeholder="<?php echo $product_qty; ?>" value="<?php echo $product_qty; ?>">
+						<input type="number" class="form-control modal_productQty" onclick="getModalProdQty()"  id="modal_productQty_<?php echo $x; ?>" name="productQty" placeholder="<?php echo $product_qty; ?>" value="<?php echo $product_qty; ?>">
+						<!-- oninput="changeQuantity(this); return false"-->
 						<button type="button" class="modalButton btn btn-success btn-circle" id="modal_buttonAdd_<?php echo $x; ?>" value="<?php echo $x; ?>" onclick="addElement(this)"><i class="fa fa-plus"></i></button>
 					</div>
 				</div>
@@ -336,6 +337,7 @@ use Includes\StampsAPI\Address;
 
 <?php 
 	}else{
-		echo "User doesnt have orders that are completed";
+		echo "We are also excited about your participation! However, you do not have enough Bidi Sticks in your Bidi Vapor order history at the moment. You can recycle those sticks that you ordered from <a href='http://www.bidivapor.com/'>www.bidivapor.com</a>. See you real soon!";
+		echo "<img src='" . plugin_dir_path( dirname( __FILE__, 2 ) ) . "assets/img/adminHeader.jpg' width='100%'>";
 	}
 }

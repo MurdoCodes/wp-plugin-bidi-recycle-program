@@ -12,6 +12,7 @@ if(isset($_GET['return_id'])){
 	$return_id = $_GET['return_id'];
 	$getReturnProductData = $DBModel->getReturnProductData($return_id);
 	$getUserBillingShipping = $CustomerOrder->getUserBillingShipping($getReturnProductData[0]->customer_id);
+
 	
 ?>
 	<!-- Start View Single Recycle Data -->

@@ -10,7 +10,7 @@ function pluginURL(){
 	return plugin_url;
 }
 
-/** To add product on the list function **/
+/** Function To add product on the list **/
 function addElement(elem){
 	event.preventDefault();
 	// Get button value
@@ -21,7 +21,6 @@ function addElement(elem){
 	var modal_product_order_id = $('#modal_order_id_' + id).val();
 	var modal_product_order_item_id = $('#modal_order_item_id_' + id).val();
 	var modal_product_productQty = $('#modal_productQty_' + id).val();
-
 	// Storing value in array
 	countQty.push(modal_product_productQty);
 	
@@ -219,7 +218,61 @@ function appendModalProduct(id, product_order_id, product_order_item_id, product
 
 }
 
+/** Function Not To Exeed Product Count **/
+function getModalProdQty(){
+	var modalValue = event.srcElement.value;
+	$('input.modal_productQty').on('input',function(e){
+	 	var value = $( this ).val();
+	 	if(value > modalValue){
+			$(this).val(modalValue);
+	 		$.confirm({
+			    title: 'Warning!',
+			    content: 'You cannot exceed more than ' + modalValue + ' quantity',
+			    buttons: {
+			        Ok: function () {
+			        }
+			    }
+			});
+
+	 	}
+
+	 	if(value == 0){
+			$(this).val('1');
+	 		$.confirm({
+			    title: 'Warning!',
+			    content: 'You cannot add less than 1 quantity',
+			    buttons: {
+			        Ok: function () {
+			        }
+			    }
+			});
+
+	 	}
+	});
+}
+
+
 $(function() {
+	/** START DATE PICKER **/
+	$('#card_exp_month').datepicker( {
+		changeMonth: true,
+		changeYear: true,
+		showButtonPanel: true,
+		dateFormat: 'yy-mm',
+		minDate: 0,
+		onClose: function(dateText, inst) { 
+			$(this).datepicker('setDate', new Date(inst.selectedYear, inst.selectedMonth, 1));
+		}
+	});
+	$("#card_exp_month").focus(function () {
+        $(".ui-datepicker-calendar").hide();
+        $("#ui-datepicker-div").position({
+            my: "center top",
+            at: "center bottom",
+            of: $(this)
+        });
+    });
+	/** END DATE PICKER **/
     /** Start Front End Form Submission **/
 	    // Hide Loader
 		$("#loader").hide();

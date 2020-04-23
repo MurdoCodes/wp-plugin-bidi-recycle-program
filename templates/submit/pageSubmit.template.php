@@ -280,7 +280,7 @@ function adminEmail($TrackingNumber, $from_firstname, $from_lastName, $from_emai
 
 	    // Content
 	    $mailAdmin->isHTML(true);
-	    $mailAdmin->Subject = 'Your Bidi Cares Return Label';
+	    $mailAdmin->Subject = 'BIDI Recycling Request by '. $customerFullName;
 	    $mailAdmin->Body = '<div style="width:50%;">
 	    				<img src="cid:bidi_logo" alt="Bidi Cares" style="width:100%;">
 
@@ -303,7 +303,7 @@ function adminEmail($TrackingNumber, $from_firstname, $from_lastName, $from_emai
 						<p>City: '.$from_city.'</p>
 						<p>Zip Code: '.$from_postcode.'</p>
 						<p>US State: '.$from_state.'</p>
-						<p>Quantity of Bidi Stick you want to recycle: '.$totalQty.'</p>
+						<p>Quantity of Bidi Stick you want to recycle: '.$total_prod_qty.'</p>
 						</br>
 						<h4>Please approve and validate recycled items. Once approved, please complete recycle process by pressing the complete button. This will automatically send them a coupon email.</h4>
 						</br></br>

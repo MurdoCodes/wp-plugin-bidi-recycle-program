@@ -9,9 +9,9 @@ header h1{margin:0 !important;font-size:7rem !important;}
 
 /* PRODUCT LIST */
 .product-list #buttonModal{height: 3em !important;margin-top: -1% !important;}
-.product-list, .user-details {max-height: 54em !important;height: 54em !important;}
+.product-list, .user-details {max-height: 58em !important;height: 58em !important;}
 .product-list header{padding:2% !important;display: flex !important;  justify-content: space-between !important;}
-.product-list .content{max-height: 45em !important;height: 45em !important;overflow: scroll !important;overflow-x: hidden !important;padding: 1em !important;}
+.product-list .content{max-height: 46em !important;height: 46em !important;overflow: scroll !important;overflow-x: hidden !important;padding: 1em !important;}
 .product-list .single-product{margin-bottom:.5em !important;}
 .product-list .flex{display: flex !important;justify-content: flex-start !important;}
 .product-list img{width: 25% !important;padding: .1em !important;border: .01em solid #ccc !important;}
@@ -21,7 +21,6 @@ header h1{margin:0 !important;font-size:7rem !important;}
 .product-list .product-qty{padding:1em !important;display: flex !important;justify-content: flex-end !important;}
 .product-list input{width: 35% !important;margin-right: 0.5em !important;padding: 7% !important;}
 .product-list .product-qty button{margin-top: 4% !important;}
-
 
 /* USER DETAILS */
 .user-details header{padding:2% !important;margin:0 !important;}
@@ -135,20 +134,12 @@ label {
 #recycle-submit {
     background-color:#5cb85c!important;
 }
-.product-list {
-    border-radius: 75px 0px 75px 0px!important;
-    max-height: 55em !important;
-    height: 55em !important;
-}
 .product-list #buttonModal {
     margin-top: 5px!important;
     width: 35%;
     max-width: 35%;
 }
-.user-details {
-    max-height: 55em !important;
-    height: 55em !important;
-}
+
 /*END FRONTEND */
 
 /*SORTING*/
@@ -158,4 +149,25 @@ label {
 .sortingIcon i:hover{
   cursor: pointer;
   color: #337ab7;
+}
+
+/*Scrollbar Styling*/
+#product-scroll-bar::-webkit-scrollbar {
+    width: 10px;
+}
+ 
+#product-scroll-bar::-webkit-scrollbar-track {
+    background-color: #ebebeb;
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+}
+
+#product-scroll-bar::-webkit-scrollbar-thumb {
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+    background: #6d6d6d; 
+}
+.user-details #customerDetailsTitle{
+  font-size:20px !important;
+  line-height: 1 !important;
 }
