@@ -312,8 +312,7 @@ use Includes\StampsAPI\Address;
 					<div class="product-qty">
 						<input type="hidden" id="modal_order_id_<?php echo $x; ?>" name="order_id" value="<?php echo $order_id; ?>">
 						<input type="hidden" id="modal_order_item_id_<?php echo $x; ?>" name="order_item_id" value="<?php echo $order_item_id; ?>">
-						<input type="number" class="form-control modal_productQty" onclick="getModalProdQty()"  id="modal_productQty_<?php echo $x; ?>" name="productQty" placeholder="<?php echo $product_qty; ?>" value="<?php echo $product_qty; ?>">
-						<!-- oninput="changeQuantity(this); return false"-->
+						<input type="number" class="form-control modal_productQty" onclick="getModalProdQty(this)"  id="modal_productQty_<?php echo $x; ?>" name="productQty" placeholder="<?php echo $product_qty; ?>" value="<?php echo $product_qty; ?>">
 						<button type="button" class="modalButton btn btn-success btn-circle" id="modal_buttonAdd_<?php echo $x; ?>" value="<?php echo $x; ?>" onclick="addElement(this)"><i class="fa fa-plus"></i></button>
 					</div>
 				</div>
@@ -337,7 +336,7 @@ use Includes\StampsAPI\Address;
 
 <?php 
 	}else{
-		echo "We are also excited about your participation! However, you do not have enough Bidi Sticks in your Bidi Vapor order history at the moment. You can recycle those sticks that you ordered from <a href='http://www.bidivapor.com/'>www.bidivapor.com</a>. See you real soon!";
-		echo "<img src='" . plugin_dir_path( dirname( __FILE__, 2 ) ) . "assets/img/adminHeader.jpg' width='100%'>";
+		echo "<h3 style='text-align:center;'>We are also excited about your participation! However, you do not have enough Bidi Sticks in your Bidi Vapor order history at the moment. You can recycle those sticks that you ordered from <a href='http://www.bidivapor.com/'>www.bidivapor.com</a>. See you real soon!</h3></br>";
+		echo "<img src='" . plugin_dir_url( dirname( __FILE__, 2 ) ) . "bidi-recycle-program/assets/img/adminHeader.jpg' width='100%'>";
 	}
 }

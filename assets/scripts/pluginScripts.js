@@ -218,11 +218,15 @@ function appendModalProduct(id, product_order_id, product_order_item_id, product
 
 }
 
+
 /** Function Not To Exeed Product Count **/
-function getModalProdQty(){
-	var modalValue = event.srcElement.value;
+function getModalProdQty(e){
+
+	var modalValue = parseInt(e.value);
 	$('input.modal_productQty').on('input',function(e){
-	 	var value = $( this ).val();
+		e.preventDefault();
+	 	var value = parseInt($( this ).val());
+
 	 	if(value > modalValue){
 			$(this).val(modalValue);
 	 		$.confirm({
@@ -249,6 +253,7 @@ function getModalProdQty(){
 
 	 	}
 	});
+	
 }
 
 
@@ -377,8 +382,6 @@ $(function() {
 		$('#recycle-search-input').keyup(function(){
 			$('#the-list2').hide();
 			var txt = $(this).val();
-			alert(txt);
-			// $('result').html('');
 			$.ajax({
 				url : pluginURL() + "templates/submit/search.template.php",
 				method: "POST",

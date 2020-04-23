@@ -36,7 +36,7 @@ header h1{margin:0 !important;font-size:7rem !important;}
 .modal .modal-product .product-details h4{font-size: 1em !important;margin: 0 !important;line-height: 1 !important;font-weight: bold !important;}
 .modal .modal-product .single-product p{font-size: 2rem !important;margin: 0 !important;}
 .modal .modal-product .product-qty{padding-top: 5% !important;display: flex !important;justify-content: flex-end !important;}
-.modal .modal-product input{width: 35% !important;margin-right: 0.5em !important;padding: 7% !important;}
+.modal .modal-product input{width: 40% !important;margin-right: 0.5em !important;padding: 7% !important;}
 .modal-body {height: 400px !important;overflow: scroll !important;overflow-x: hidden !important;}
 .modal-body .modalButton{margin-top: 4% !important;}
 
@@ -171,3 +171,16 @@ label {
   font-size:20px !important;
   line-height: 1 !important;
 }
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
