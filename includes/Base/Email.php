@@ -18,16 +18,16 @@ class Email{
 		/**
 		*	VPS Server settings
 		**/
-		// $senderEmail = 'support@bidicares.com';
-		// $senderPassword = '#BidiC123';
-		// $receiverEmail = 'support@bidicares.com';
-		// $mail->SMTPDebug = SMTP::DEBUG_SERVER;
-		// $mail->Host       = 'mail.vps49089.mylogin.co';
-		// $mail->SMTPAuth   = true;
-		// $mail->Username   = $senderEmail;
-		// $mail->Password   = $senderPassword;
-		// $mail->SMTPSecure = 'tls';
-		// $mail->Port       = 587;
+			// $senderEmail = 'support@bidicares.com';
+			// $senderPassword = '#BidiC123';
+			// $receiverEmail = 'support@bidicares.com';
+			// $mail->SMTPDebug = SMTP::DEBUG_SERVER;
+			// $mail->Host       = 'mail.vps49089.mylogin.co';
+			// $mail->SMTPAuth   = true;
+			// $mail->Username   = $senderEmail;
+			// $mail->Password   = $senderPassword;
+			// $mail->SMTPSecure = 'tls';
+			// $mail->Port       = 587;
 
 		/**
 		*	GMAIL Testing Account Server settings
@@ -42,18 +42,6 @@ class Email{
 		   // $mail->Password   = $senderPassword;
 		   // $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
 		   // $mail->Port       = 465;
-
-		/**
-		*	QUICKFILLRX GMAIL TESTING EMAIL SERVER
-		**/
-			// $senderEmail    = 'quikfillrx@gmail.com';
-			// $senderPassword = 'OnwardandUpward2021';		
-			// $receiverEmail  = 'support@bidicares.com';
-			// $SMTPDebug      = SMTP::DEBUG_SERVER;
-			// $Host           = 'mail.quikfillrx.org';
-			// $SMTPAuth       = true;
-			// $SMTPSecure     = 'tls';
-			// $Port           = 587;
 
 		/**
 		*	QUICKFILL RX SERVER TESTING EMAIL SERVER

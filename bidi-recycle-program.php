@@ -50,7 +50,6 @@ if ( class_exists( 'Includes\\Init' ) ) {
     Includes\Init::register_services();
 }
 
-
 // Register new status
 function register_recycle_order_status() {
     register_post_status( 'wc-recycled', array(
