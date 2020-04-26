@@ -107,19 +107,19 @@ if(isset($_POST)){
 
 		$currentProductQuantity = $CustomerOrderObj->getOrderItemQty( $product_order_id[$x], $product_item_id[$x] );
 
-		if($currentProductQuantity = $product_qty[$x]){
+		if($currentProductQuantity > $product_qty[$x]){
 
-			$zero = 0;
-			wc_update_order_item_meta( $product_item_id[$x], '_qty', '0' );
+			$total = $currentProductQuantity - $product_qty[$x];
+			wc_update_order_item_meta( $product_item_id[$x], '_qty', $total );
 
 		}else if($currentProductQuantity < $product_qty[$x]){
 
 			wc_update_order_item_meta( $product_item_id[$x], '_qty', $product_qty[$x] );
 
-		}else if($currentProductQuantity > $product_qty[$x]){
+		}else if($currentProductQuantity = $product_qty[$x]){
 
-			$total = $currentProductQuantity - $product_qty[$x];
-			wc_update_order_item_meta( $product_item_id[$x], '_qty', $total );
+			$zero = 0;
+			wc_update_order_item_meta( $product_item_id[$x], '_qty', '0' );
 
 		}
 

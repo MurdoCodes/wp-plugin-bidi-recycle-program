@@ -190,26 +190,26 @@ function returnStampsValue(totalItemQty){
 function appendModalProduct(id, product_order_id, product_order_item_id, product_imgSrc, product_name, product_productQty){
 
 	$("#selectProductModal .modal-body").append(
-		'<div class="row modal-product modal-product-'+id+'">'+
-			'<div class="col-md-8">'+
-				'<div class="product-info flex">'+
-					'<img src="'+product_imgSrc+'" alt="'+product_name+'" id="modal_product_image_'+id+'">'+
-						'<div class="product-details">'+
-							'<h4 id="modal_product_name_'+id+'">'+product_name+'</h4>'+
-						'</div>'+
-				'</div>'+
-			'</div>'+
-			'<div class="col-md-4">'+
-				'<div class="product-qty">'+
-					'<input type="hidden" id="modal_order_id_'+id+'" value="'+product_order_id+'">'+
-					'<input type="hidden" id="modal_order_item_id_'+id+'" value="'+product_order_item_id+'">'+
-					'<input type="number" class="form-control" id="modal_productQty_'+id+'" placeholder="'+product_productQty+'" value="'+product_productQty+'">'+
-					'<button type="button" class="modalButton btn btn-success btn-circle" id="modal_buttonAdd_'+id+'" value="'+id+'">'+
-						'<i class="fa fa-plus"></i>'+
-					'</button>'+
-				'</div>'+
-			'</div>'+
-		'</div>'
+		"<div class='row modal-product modal-product-"+id+"'>"+
+			"<div class='col-md-8'>"+
+				"<div class='product-info flex'>"+
+					"<img src='"+product_imgSrc+"' alt='"+product_name+"' id='modal_product_image_"+id+"'>"+
+						"<div class='product-details'>"+
+							"<h4 id='modal_product_name_"+id+"'>"+product_name+"</h4>"+
+						"</div>"+
+				"</div>"+
+			"</div>"+
+			"<div class='col-md-4'>"+
+				"<div class='product-qty'>"+
+					"<input type='hidden' id='modal_order_id_"+id+"' value='"+product_order_id+"'>"+
+					"<input type='hidden' id='modal_order_item_id_"+id+"' value='"+product_order_item_id+"'>"+
+					"<input type='number' class='form-control' id='modal_productQty_"+id+"' placeholder='"+product_productQty+"' value='"+product_productQty+"'>"+
+					"<button type='button' class='modalButton btn btn-success btn-circle' id='modal_buttonAdd_"+id+"' value='"+id+"' onclick='addElement(this)'>"+
+						"<i class='fa fa-plus'></i>"+
+					"</button>"+
+				"</div>"+
+			"</div>"+
+		"</div>"
 	);
 
 	$('.single-product-'+ id).fadeOut("fast", function() {

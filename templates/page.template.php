@@ -26,7 +26,7 @@ use Includes\StampsAPI\Address;
 	        'meta_key'    => '_customer_user',
 	        'meta_value'  => get_current_user_id(),
 	        'post_type'   => wc_get_order_types(),
-	        'post_status' => 'wc-completed',
+	        'post_status' => array( 'wc-completed', 'wc-recycled' ),
 	    ) );
     if($customerOrderDetails){
 
@@ -47,7 +47,7 @@ use Includes\StampsAPI\Address;
 	$random_hash = substr(md5(uniqid(rand(), true)), 16, 16);
 	
 ?>
-<!-- <form method="POST" action="<?php //echo $this->plugin_url . 'templates/submit/pageSubmit.template.php'; ?>"> -->
+<!--<form method="POST" action="<?php //echo $this->plugin_url . 'templates/submit/pageSubmit.template.php'; ?>">-->
 <form id="form-recycle" method="POST">
 	<input type="text" name="current_user_id" value="<?php echo get_current_user_id(); ?>" hidden>
 	<div class="container">
