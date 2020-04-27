@@ -15,8 +15,7 @@ class Shortcode extends BaseController{
 		if ( is_user_logged_in() ) {
 		   require_once $this->plugin_path . 'templates/page.template.php';	
 		} else {
-		   echo "<h1>Please Log In To Gain Access to the Bidi Return Program";
-		   
+		   echo "<h1>Please Log In To Gain Access to the Bidi Recycle Program";
 		}		
 	}
 }

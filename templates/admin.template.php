@@ -149,14 +149,24 @@ if(isset($_GET['return_id'])){
 									 ?>
 								    <tr>
 								      <th scope="row"><?php echo $counter; ?></th>
-								      <td>
-								      	<img width="100" height="100" src="<?php echo $value->product_image; ?>" class="attachment-thumbnail size-thumbnail" alt="<?php echo $value->product_name; ?>" title="<?php echo $value->product_name; ?>">
-								      	</td>
-								      <td><?php echo $value->product_name; ?></td>
-								      <td><?php echo $value->product_info_id; ?></td>
-								      <td><?php echo $value->product_order_id; ?></td>
-								      <td><?php echo $value->product_item_id; ?></td>
-								      <td><?php echo date('F, j Y h:i:sa',strtotime($value->product_return_date)); ?></td>
+										<td>
+											<img width="100" height="100" src="<?php echo $value->product_image; ?>" class="attachment-thumbnail size-thumbnail" alt="<?php echo $value->product_name; ?>" title="<?php echo $value->product_name; ?>">
+										</td>
+										<td>
+											<?php echo $value->product_name; ?>
+										</td>
+										<td>
+											<?php echo $value->product_info_id; ?>
+										</td>
+										<td>
+											<?php echo $value->product_order_id; ?>
+										</td>
+										<td>
+											<?php echo $value->product_item_id; ?>
+										</td>
+										<td>
+											<?php echo date('F, j Y h:i:sa',strtotime($value->product_return_date)); ?>
+										</td>
 								    </tr>
 								    <?php } ?>
 								  </tbody>
@@ -181,7 +191,7 @@ if(isset($_GET['return_id'])){
 }else if(empty($getReturnProductData)){
 ?>
 	
-	<div class="wrap">
+	<div class="wrap return-all-recycle">
 		<h1 class="wp-heading-inline">Bidi Recycle Program</h1>
 		<form id="posts-filter" method="get">
 
@@ -229,7 +239,7 @@ if(isset($_GET['return_id'])){
 				<tbody id="the-recycle-list">
 					<!-- show all the list of returns -->
 				</tbody>
-
+					
 				<tfoot>
 					<tr>
 						<td id="cb" class="manage-column column-cb check-column">
@@ -266,7 +276,38 @@ if(isset($_GET['return_id'])){
 				</tfoot>
 
 			</table>
-			
+			<div class="pagination">
+				<?php
+					$paginationResult = $DBModel->getAllData();
+					$number_of_results = count($paginationResult);
+					$results_per_page = 10;
+					$number_of_pages = ceil($number_of_results / $results_per_page);
+				?>
+				<div id="left">
+					<?php echo $number_of_results . " items"; ?>
+				</div>
+				<div id="right">
+					<nav aria-label="Page navigation example">
+					  <ul class="pagination">
+					    <li class="page-item">
+					    	<button type="button" class="btn btn-default color-blue RecyclePaginationBtn" id="previousRecyclePagination" value="1">
+				    			Previous
+				    		</button>
+					    </li>
+					    <li> </li>						    
+				    	<li class="page-item">
+				    		<span id="currentPage"><b id="CurrentPageNumber">1</b> of <?php echo $number_of_pages; ?></span> 
+				    	</li>
+				    	<li> </li>
+					    <li class="page-item">
+					    	<button type="button" class="btn btn-default color-blue RecyclePaginationBtn" id="nextRecyclePagination" value="1">
+				    			Next
+				    		</button>
+					    </li>
+					  </ul>
+					</nav>
+				</div>
+			</div>
 		</form>
 	</div>
 	<!-- End View Recycle Data List -->

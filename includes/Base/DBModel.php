@@ -31,6 +31,7 @@ class DBModel{
 
 	}
 
+	// Insert Shipping Information
 	function insertShippingInformation($TrackingNumber, $StampsTxID, $postageURL, $ShipDate, $DeliveryDate, $MaxAmount, $return_id){
 
 		$table = $this->wpdb->prefix . 'bidi_return_shipping_info';
@@ -98,13 +99,39 @@ class DBModel{
 	}
 
 	// Search Return Via Email
-	function recycleSearch($param){
+	function recycleSearch($param, $limit){
 		$bidi_return_information = $this->wpdb->prefix . 'bidi_return_information';
 		$users = $table = $this->wpdb->prefix . 'users';
 
 		$sql = "SELECT * FROM " . $bidi_return_information . " wp_bidi_return_information
 				INNER JOIN " . $users . " wp_users ON wp_bidi_return_information.customer_id = wp_users.ID
-				WHERE  wp_users.user_email LIKE '%" . $param . "%'";
+				WHERE  wp_users.user_email LIKE '%" . $param . "%' LIMIT ". $limit;
+        $result = $this->wpdb->get_results($sql);		
+        if($result){
+			return $result;
+		}
+	}
+
+	function pagination($pageResults, $resultsPerPage){
+		$bidi_return_information = $this->wpdb->prefix . 'bidi_return_information';
+		$users = $table = $this->wpdb->prefix . 'users';
+
+		$sql = "SELECT * FROM " . $bidi_return_information . " wp_bidi_return_information
+				INNER JOIN " . $users . " wp_users ON wp_bidi_return_information.customer_id = wp_users.ID 
+				LIMIT ". $pageResults . "," . $resultsPerPage;
+		
+        $result = $this->wpdb->get_results($sql);		
+        if($result){
+			return $result;
+		}
+	}
+
+	function getAllData(){
+		$bidi_return_information = $this->wpdb->prefix . 'bidi_return_information';
+		$users = $table = $this->wpdb->prefix . 'users';
+
+		$sql = "SELECT * FROM " . $bidi_return_information . " wp_bidi_return_information
+				INNER JOIN " . $users . " wp_users ON wp_bidi_return_information.customer_id = wp_users.ID";
         $result = $this->wpdb->get_results($sql);		
         if($result){
 			return $result;

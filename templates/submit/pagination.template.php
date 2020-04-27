@@ -5,15 +5,19 @@
 use Includes\Base\DBModel;
 require "../../vendor/autoload.php";
 require_once( dirname (dirname(dirname( dirname( dirname( dirname( __FILE__ ) ) ) ) ) ) . '/wp-load.php' );
-	
+
 if(isset($_POST['data'])){
 	$DBModel = new DBModel();
-	$param = $_POST['data'];
-	$limit = 10;
-	$recycleSearch = $DBModel->recycleSearch($param,$limit);
-	showDetails($recycleSearch);	
-}
+
+	$page_number = $_POST['data'];
+	$results_per_page = 10;
 	
+	$getAllData = $DBModel->getAllData();
+	$starting_limit_number = ($page_number - 1) * $results_per_page;
+	$pagination = $DBModel->pagination($starting_limit_number, $results_per_page);
+	showDetails($pagination);
+}
+
 function showDetails($param){
 	$output = '';
 	foreach ($param as $value) {

@@ -7,6 +7,15 @@ require plugin_dir_path( dirname( __FILE__, 2 ) ) . 'vendor/autoload.php';
 use net\authorize\api\contract\v1 as AnetAPI;
 use net\authorize\api\controller as AnetController;
 
+/**
+* Live Site Api Credentials
+*/
+// define("API_LOGIN_ID", '5j7YE3hd');
+// define("TRANSACTION_KEY", '8TLgv95XFy56j7vR');
+
+/*
+* Dev Site Api Credentials
+*/
 define("API_LOGIN_ID", '7E5Mu38fGrx4');
 define("TRANSACTION_KEY", '7UDc2e5CdL4Fe95D');
 

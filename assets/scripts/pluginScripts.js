@@ -395,6 +395,59 @@ $(function() {
 
 	/** End Admin Searching **/
 
+	/** Start Pagination **/
+
+
+		
+		$('#previousRecyclePagination').click(function(event) {
+			var buttonVal = $(this).attr("value");
+			var span = $('.pagination #currentPage #CurrentPageNumber').text();
+
+			if(buttonVal != span){
+				
+				var currentPage = parseInt(span) - 1;
+				$.ajax({
+					url : pluginURL() + "templates/submit/pagination.template.php",
+					method: "POST",
+					data: {data: currentPage},
+					dataType: "html",
+					success: function(data){
+						$('#the-recycle-list').html(data);
+						$(".pagination #currentPage #CurrentPageNumber").text(currentPage);
+					}
+				});
+			}else{
+				
+				event.preventDefault()
+			}
+			
+		});
+
+		$('#nextRecyclePagination').click(function(event) {
+			var buttonVal = $(this).attr("value");
+			var span = $('.pagination #currentPage #CurrentPageNumber').text();
+
+			if(buttonVal == span){
+				var currentPage = parseInt(span) + 1;
+				$.ajax({
+					url : pluginURL() + "templates/submit/pagination.template.php",
+					method: "POST",
+					data: {data: currentPage},
+					dataType: "html",
+					success: function(data){
+						$('#the-recycle-list').html(data);
+						$(".pagination #currentPage #CurrentPageNumber").text(currentPage);
+					}
+				});
+				
+			}else{
+				
+				event.preventDefault()
+			}
+			
+		});
+	/** End Pagination **/
+
 	/** Start Date Sorting **/
 		// By Date
 		$('.dateSorting').click(function(event) { 
