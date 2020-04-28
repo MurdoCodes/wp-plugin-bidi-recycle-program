@@ -427,7 +427,7 @@ $(function() {
 			var buttonVal = $(this).attr("value");
 			var span = $('.pagination #currentPage #CurrentPageNumber').text();
 
-			if(buttonVal == span){
+			if(buttonVal != span){
 				var currentPage = parseInt(span) + 1;
 				$.ajax({
 					url : pluginURL() + "templates/submit/pagination.template.php",

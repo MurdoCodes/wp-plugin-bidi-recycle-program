@@ -16,7 +16,7 @@ use Includes\StampsAPI\Address;
 	/**
 	*	Order count for a "loyal" customer
 	**/
-    $loyal_count = 5;
+    $loyal_count = 10;
 
     /**
 	*	Get Customer Orders and its Details if post status is completed
@@ -58,8 +58,10 @@ use Includes\StampsAPI\Address;
 						// Display our notice if the customer has at least 5 orders
 					    if ( count( $customerOrderDetails ) >= $loyal_count ) {
 					        wc_print_notice( $notice_text, 'notice' );
-					    } 
+					    }
     				?>
+    				<h2 style="text-align:center;">Thank You For Taking a Part in the Bidi Cares Movement</h2>
+    				<h4 style="text-align:center;">For every 10 Bidi Sticks, we are giving you a FREE Bidi Stick on your next purchase. This is our way of expressing our gratitude for your support with our recycling program. </br></br>Fill out this form to continue with your transaction. Please return your Bidi Sticks only. Do not include the whole packaging to avoid return label cost differences on actual shipment.</br></br></h4>
 				</div>
 			</div>
 			<div class="col-md-8">
