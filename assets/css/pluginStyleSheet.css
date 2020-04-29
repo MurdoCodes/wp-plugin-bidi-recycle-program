@@ -81,7 +81,7 @@
 .return-product-data .woocommerce-order-data__heading {font-size: 30px; color: #fff; font-weight: 700; text-align: center;}
 .return-product-data .customerDetails .details, label{color:#fff !important;}
 
-#posts-filter .pagination{display: flex !important;  justify-content: space-between !important;}
+.return-all-recycle .pagination{display: flex !important;  justify-content: space-between !important;}
 
 /*.thead-light, tfoot {background-color:#36B348;}*/
 /*.thead-light tr th, tfoot tr th {color:#fff!important;font-size:16px;}*/
@@ -128,8 +128,8 @@
   margin-left: 1em;
 }
 .sortingIcon i:hover{
-  cursor: pointer;
-  color: #337ab7;
+  cursor: pointer !important;
+  color: #337ab7 !important;
 }
 
 /*Scrollbar Styling*/

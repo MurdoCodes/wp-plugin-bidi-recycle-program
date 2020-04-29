@@ -126,7 +126,6 @@ function appendSingleProduct(id, modal_product_order_id, modal_product_order_ite
 }
 
 function returnStampsValue(totalItemQty){
-
 	var fixedItemWeight = 0.5;
     var totalItemWeight = totalItemQty * fixedItemWeight;
 
@@ -152,14 +151,12 @@ function returnStampsValue(totalItemQty){
 		totalItemWeight : totalItemWeight
 	};
 
-	console.log(data);
-
 	$.ajax({
 		url: pluginURL() + 'templates/submit/stampsSubmit.template.php',
 	    method: 'POST',	    
 	    data: data,
 	    dataType:"JSON",
-	    success: function(response) {       	
+	    success: function(response) {
 	       	$('input[name=ServiceType]').val(response.PackageType);
 	       	$('input[name=ServiceDescription]').val(response.ServiceDescription);
 	       	$(".serviceType").html(response.ServiceDescription + "/" + response.PackageType);
@@ -178,9 +175,11 @@ function returnStampsValue(totalItemQty){
 
 			$('input[name=ShipDate]').val(response.ShipDate);
 			$(".ShipDate").html(response.ShipDate);
-	       	
-	       	console.log(response);
-	    }
+	    },
+	     error: function(xhr, status, error){	     	
+	         var errorMessage = xhr.status + ': ' + xhr.statusText
+	         alert('Error - ' + errorMessage);
+	     }
 	});
 
 }
@@ -396,13 +395,11 @@ $(function() {
 	/** End Admin Searching **/
 
 	/** Start Pagination **/
-
-
 		
 		$('#previousRecyclePagination').click(function(event) {
 			var buttonVal = $(this).attr("value");
 			var span = $('.pagination #currentPage #CurrentPageNumber').text();
-
+			
 			if(buttonVal != span){
 				
 				var currentPage = parseInt(span) - 1;
@@ -427,7 +424,7 @@ $(function() {
 			var buttonVal = $(this).attr("value");
 			var span = $('.pagination #currentPage #CurrentPageNumber').text();
 
-			if(buttonVal != span){
+			if(span <= buttonVal){
 				var currentPage = parseInt(span) + 1;
 				$.ajax({
 					url : pluginURL() + "templates/submit/pagination.template.php",
@@ -437,10 +434,25 @@ $(function() {
 					success: function(data){
 						$('#the-recycle-list').html(data);
 						$(".pagination #currentPage #CurrentPageNumber").text(currentPage);
+						$(this).val(currentPage);
 					}
 				});
 				
-			}else{
+			}else if(span == buttonVal){
+				var currentPage = parseInt(span) + 1;
+				$.ajax({
+					url : pluginURL() + "templates/submit/pagination.template.php",
+					method: "POST",
+					data: {data: currentPage},
+					dataType: "html",
+					success: function(data){
+						$('#the-recycle-list').html(data);
+						$(".pagination #currentPage #CurrentPageNumber").text(currentPage);
+						$(this).val(currentPage);
+					}
+				});
+				
+			}else if(span >= buttonVal){
 				
 				event.preventDefault()
 			}
@@ -469,6 +481,7 @@ $(function() {
 		$('.statusSorting').click(function(event) { 
 		    event.preventDefault();
 		    var txt = $(this).data("id");
+		    alert(txt);
 		    $.ajax({
 		        url : pluginURL() + "templates/submit/sorting.template.php",
 				method: "POST",

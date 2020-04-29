@@ -9,6 +9,7 @@ class Admin extends BaseController {
 
 	public function register() {
 		add_action( 'admin_menu', array( $this, 'add_admin_pages' ) );
+		add_filter('autoptimize_filter_imgopt_do_css','__return_false');
 	}
 
 	public function add_admin_pages() {

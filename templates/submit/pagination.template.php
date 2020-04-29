@@ -10,7 +10,7 @@ if(isset($_POST['data'])){
 	$DBModel = new DBModel();
 
 	$page_number = $_POST['data'];
-	$results_per_page = 10;
+	$results_per_page = 20;
 	
 	$getAllData = $DBModel->getAllData();
 	$starting_limit_number = ($page_number - 1) * $results_per_page;
@@ -67,7 +67,7 @@ function showDetails($param){
 						'</td>';
 		$output .= '
 						<td class="order_status column-order_status" data-colname="Status">
-							<center><a href="' . $returnDetailsURL . '" ><span class="glyphicon glyphicon-eye-open"></span></a></center>
+							<center><a href="' . $returnDetailsURL . '" ><i class="fas fa-eye"></i></a></center>
 						</td>
 					</tr>';
 		

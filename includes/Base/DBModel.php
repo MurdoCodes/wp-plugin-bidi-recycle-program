@@ -139,13 +139,13 @@ class DBModel{
 	}
 
 	// Sort Table By Date
-	function recycleSortingByDate($param){
+	function recycleSortingByDate($param, $limit){
 		$bidi_return_information = $this->wpdb->prefix . 'bidi_return_information';
 		$users = $table = $this->wpdb->prefix . 'users';
 
 		$sql = "SELECT * FROM " . $bidi_return_information . " wp_bidi_return_information
 				INNER JOIN " . $users . " wp_users ON wp_bidi_return_information.customer_id = wp_users.ID
-				ORDER BY return_date " . $param;
+				ORDER BY return_date " . $param . " LIMIT " . $limit;
 
         $result = $this->wpdb->get_results($sql);		
         if($result){
@@ -154,15 +154,15 @@ class DBModel{
 	}
 
 	// Sort Table By Status
-	function recycleSortingStatus($param){
+	function recycleSortingStatus($param, $limit){
 		$bidi_return_information = $this->wpdb->prefix . 'bidi_return_information';
 		$users = $table = $this->wpdb->prefix . 'users';
 
 		$sql = "SELECT * FROM " . $bidi_return_information . " wp_bidi_return_information
 				INNER JOIN " . $users . " wp_users ON wp_bidi_return_information.customer_id = wp_users.ID
 				WHERE wp_bidi_return_information.return_item_status = '".$param."'
-				ORDER BY return_date DESC";
-        $result = $this->wpdb->get_results($sql);		
+				ORDER BY return_date DESC LIMIT " . $limit;
+        $result = $this->wpdb->get_results($sql);
         if($result){
 			return $result;
 		}

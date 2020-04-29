@@ -11,15 +11,16 @@ require_once( dirname (dirname(dirname( dirname( dirname( dirname( __FILE__ ) ) 
 if(isset($_POST['dateSorting'])){
 	$DBModel = new DBModel();
 	$param = $_POST['dateSorting'];
-	$sorting = $DBModel->recycleSortingByDate($param);
+	$limit = 20;
+	$sorting = $DBModel->recycleSortingByDate($param,$limit);
 	showDetails($sorting);
 
 }else if(isset($_POST['statusSorting'])){
 	$DBModel = new DBModel();
 	$param = $_POST['statusSorting'];
-	$sorting = $DBModel->recycleSortingStatus($param);
-	showDetails($sorting);
-	
+	$limit = 20;
+	$sorting = $DBModel->recycleSortingStatus($param,$limit);
+	showDetails($sorting);	
 }
 
 function showDetails($param){
@@ -71,7 +72,7 @@ function showDetails($param){
 						'</td>';
 		$output .= '
 						<td class="order_status column-order_status" data-colname="Status">
-							<center><a href="' . $returnDetailsURL . '" style="text-align:center;"><span class="glyphicon glyphicon-eye-open"></span></a></center>
+							<center><a href="' . $returnDetailsURL . '" style="text-align:center;"><i class="fas fa-eye"></i></a></center>
 						</td>
 					</tr>';
 		

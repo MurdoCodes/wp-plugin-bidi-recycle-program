@@ -9,7 +9,7 @@ require_once( dirname (dirname(dirname( dirname( dirname( dirname( __FILE__ ) ) 
 if(isset($_POST['data'])){
 	$DBModel = new DBModel();
 	$param = $_POST['data'];
-	$limit = 10;
+	$limit = 20;
 	$recycleSearch = $DBModel->recycleSearch($param,$limit);
 	showDetails($recycleSearch);	
 }
@@ -63,7 +63,7 @@ function showDetails($param){
 						'</td>';
 		$output .= '
 						<td class="order_status column-order_status" data-colname="Status">
-							<center><a href="' . $returnDetailsURL . '" ><span class="glyphicon glyphicon-eye-open"></span></a></center>
+							<center><a href="' . $returnDetailsURL . '" ><i class="fas fa-eye"></i></a></center>
 						</td>
 					</tr>';
 		

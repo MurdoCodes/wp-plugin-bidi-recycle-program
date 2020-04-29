@@ -193,7 +193,7 @@ if(isset($_GET['return_id'])){
 	
 	<div class="wrap return-all-recycle">
 		<h1 class="wp-heading-inline">Bidi Recycle Program</h1>
-		<form id="posts-filter" method="get">
+		<!-- <form id="posts-filter" method="get"> -->
 
 			<p class="search-box">
 				<label class="screen-reader-text" for="post-search-input">Search Returns:</label>
@@ -204,8 +204,7 @@ if(isset($_GET['return_id'])){
 				<thead>
 					<tr>
 						<td id="cb" class="manage-column column-cb check-column">
-							<label class="screen-reader-text" for="cb-select-all-1">Select All</label>
-							<input id="cb-select-all-1" type="checkbox">
+							
 						</td>
 
 						<th scope="col" class="manage-column column-order_number column-primary">							
@@ -243,8 +242,7 @@ if(isset($_GET['return_id'])){
 				<tfoot>
 					<tr>
 						<td id="cb" class="manage-column column-cb check-column">
-							<label class="screen-reader-text" for="cb-select-all-1">Select All</label>
-							<input id="cb-select-all-1" type="checkbox">
+							
 						</td>
 
 						<th scope="col" class="manage-column column-order_number column-primary">
@@ -280,7 +278,7 @@ if(isset($_GET['return_id'])){
 				<?php
 					$paginationResult = $DBModel->getAllData();
 					$number_of_results = count($paginationResult);
-					$results_per_page = 10;
+					$results_per_page = 20;
 					$number_of_pages = ceil($number_of_results / $results_per_page);
 				?>
 				<div id="left">
@@ -296,7 +294,10 @@ if(isset($_GET['return_id'])){
 					    </li>
 					    <li> </li>						    
 				    	<li class="page-item">
-				    		<span id="currentPage"><b id="CurrentPageNumber">1</b> of <?php echo $number_of_pages; ?></span> 
+				    		<span id="currentPage">
+				    			<b id="CurrentPageNumber">1</b> 
+				    			of <?php echo $number_of_pages; ?>
+				    		</span> 
 				    	</li>
 				    	<li> </li>
 					    <li class="page-item">
@@ -308,7 +309,7 @@ if(isset($_GET['return_id'])){
 					</nav>
 				</div>
 			</div>
-		</form>
+		<!-- </form> -->
 	</div>
 	<!-- End View Recycle Data List -->
 	<!-- Show no Data -->
